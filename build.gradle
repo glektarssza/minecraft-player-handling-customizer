@@ -90,7 +90,7 @@ test {
     useJUnitPlatform()
 }
 
-def mixinConfigRefMap = 'mixins.' + project.archives_base_name + '.refmap.json'
+def mixinConfigRefMap = 'mixins.' + project.archive_base_name + '.refmap.json'
 def mixinTmpDir = buildDir.path + File.separator + 'tmp' + File.separator + 'mixins'
 def refMap = "${mixinTmpDir}" + File.separator + mixinConfigRefMap
 def mixinSrg = "${mixinTmpDir}" + File.separator + "mixins.srg"
@@ -156,7 +156,7 @@ jar {
             }
         }
         if (project.use_access_transformer.toBoolean()) {
-            attribute_map['FMLAT'] = project.archives_base_name + '_at.cfg'
+            attribute_map['FMLAT'] = project.archive_base_name + '_at.cfg'
         }
         attributes(attribute_map)
     }
