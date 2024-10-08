@@ -121,6 +121,20 @@ if (project.use_access_transformer.toBoolean()) {
     }
 }
 
+sourceSets {
+    main {
+        java {
+            matching 'PlayerHandlingCustomizer.java' { fcd ->
+                fcd.expand(
+                    'mod_id': project.mod_id,
+                    'mod_name': project.mod_name,
+                    'mod_version': project.version
+                )
+            }
+        }
+    }
+}
+
 processResources {
     inputs.property 'mod_version', project.version
     inputs.property 'minecraft_version', project.minecraft.version
@@ -160,7 +174,6 @@ jar {
         }
         attributes(attribute_map)
     }
-    // Add all embedded dependencies into the jar
     setDuplicatesStrategy(DuplicatesStrategy.EXCLUDE)
     from(provider {
         configurations.embed.collect {
