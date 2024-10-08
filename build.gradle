@@ -42,7 +42,10 @@ minecraft {
 
     useDependencyAccessTransformers = true
 
-    injectedTags.put("VERSION", project.version)
+    injectedTags.put("MOD_ID", project.mod_id)
+    injectedTags.put("MOD_NAME", project.mod_name)
+    injectedTags.put("MOD_VERSION", project.mod_version)
+    injectedTags.put("MOD_DEPENDENCIES", '')
 }
 
 tasks.injectTags.configure {
@@ -117,20 +120,6 @@ if (project.use_access_transformer.toBoolean()) {
         if (at.name.toLowerCase().endsWith("_at.cfg")) {
             tasks.deobfuscateMergedJarToSrg.accessTransformerFiles.from(at)
             tasks.srgifyBinpatchedJar.accessTransformerFiles.from(at)
-        }
-    }
-}
-
-sourceSets {
-    main {
-        java {
-            matching 'PlayerHandlingCustomizer.java' { fcd ->
-                fcd.expand(
-                    'mod_id': project.mod_id,
-                    'mod_name': project.mod_name,
-                    'mod_version': project.version
-                )
-            }
         }
     }
 }
