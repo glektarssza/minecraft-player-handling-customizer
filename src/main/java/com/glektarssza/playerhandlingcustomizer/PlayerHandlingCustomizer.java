@@ -2,29 +2,15 @@ package com.glektarssza.playerhandlingcustomizer;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 import org.apache.logging.log4j.Logger;
 
 /**
  * The root mod class.
  */
-@Mod(modid = PlayerHandlingCustomizer.MOD_ID, name = PlayerHandlingCustomizer.MOD_NAME, version = PlayerHandlingCustomizer.MOD_VERSION, dependencies = PlayerHandlingCustomizer.MOD_DEPENDENCIES)
+@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.MOD_VERSION, dependencies = Tags.MOD_DEPENDENCIES)
 public class PlayerHandlingCustomizer {
-    /**
-     * The ID of the mod.
-     */
-    public static final String MOD_ID = "${mod_id}";
-
-    /**
-     * The human-readable name of the mod.
-     */
-    public static final String MOD_NAME = "${mod_name}";
-
-    /**
-     * The human-readable version of the mod.
-     */
-    public static final String MOD_VERSION = "${mod_version}";
-
     /**
      * The logger to use for the mod.
      */
@@ -37,14 +23,25 @@ public class PlayerHandlingCustomizer {
     public static PlayerHandlingCustomizer instance;
 
     /**
-     * Initialize the mod.
+     * Handle the Forge Mod Loader pre-initialization event.
      *
      * @param event The event to handle.
      */
     @Mod.EventHandler
-    public void Init(FMLPreInitializationEvent event) {
+    public void OnPreInit(FMLPreInitializationEvent event) {
         LOGGER = event.getModLog();
-        LOGGER.info("Initializing PlayerHandlingCustomizer...");
+        LOGGER.info("Pre-initializing PlayerHandlingCustomizer...");
+        // TODO
+    }
+
+    /**
+     * Handle the Forge Mod Loader post-initialization event.
+     *
+     * @param event The event to handle.
+     */
+    @Mod.EventHandler
+    public void OnPreInit(FMLPostInitializationEvent event) {
+        LOGGER.info("Post-initializing PlayerHandlingCustomizer...");
         // TODO
     }
 }
