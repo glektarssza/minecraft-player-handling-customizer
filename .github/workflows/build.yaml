@@ -36,7 +36,7 @@ jobs:
       - id: build
         name: Build
         run: ./gradlew build
-      - id: upload-forge-artifacts
+      - id: upload-artifacts
         name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
