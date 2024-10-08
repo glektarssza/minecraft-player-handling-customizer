@@ -15,7 +15,6 @@ pluginManagement {
     }
 }
 plugins {
-    // TODO: Re-enable this later once I figure out why it's breaking
-    // id("org.gradle.toolchains.foojay-resolver-convention") version "0.4.0"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.4.0"
 }
 rootProject.name = archive_base_name
