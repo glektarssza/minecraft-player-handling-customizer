@@ -75,7 +75,7 @@ dependencies {
         implementation 'com.cleanroommc:assetmover:2.0'
     }
     if (project.use_mixins.toBoolean()) {
-        implementation 'zone.rong:mixinbooter:7.0'
+        implementation 'zone.rong:mixinbooter:9.4'
     }
     if (project.use_mixins.toBoolean()) {
         api("org.spongepowered:mixin:0.8.7") { transitive = false }
