@@ -8,6 +8,10 @@
 !.vscode/launch.json
 !.vscode/tasks.json
 
+## Eclipse ##
+.project
+.settings/
+
 ## Vim ##
 ### Swap ###
 [._]*.s[a-v][a-z]
