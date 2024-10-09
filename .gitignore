@@ -10,7 +10,9 @@
 
 ## Eclipse ##
 .project
+.classpath
 .settings/
+
 
 ## Vim ##
 ### Swap ###
@@ -52,3 +54,4 @@ build/
 # Debugging #
 ## Gradle ##
 run/
+bin/
