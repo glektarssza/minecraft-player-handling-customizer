@@ -9,4 +9,5 @@ import net.minecraftforge.common.util.INBTSerializable;
  */
 public interface IImmunePlayerWorldCapability
     extends INBTSerializable<NBTTagCompound> {
+
 }

@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.INBTSerializable;
 /**
  * A definition of a damage immunity.
  */
-public interface IDamageImmunity extends INBTSerializable<NBTTagCompound> {
+public interface IImmunity extends INBTSerializable<NBTTagCompound> {
     /**
      * Whether this instance has a specific damage type attached to it.
      *

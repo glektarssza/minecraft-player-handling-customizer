@@ -53,12 +53,27 @@ public interface IPlayerImmunity extends INBTSerializable<NBTTagCompound> {
      *
      * @return The list of damage event-related immunities the player has.
      */
-    List<IPlayerImmunity> getDamageEventImmunities();
+    List<IImmunity> getDamageEventImmunities();
 
     /**
      * Get the list of damage event-related immunities the player has.
      *
      * @return The list of damage event-related immunities the player has.
      */
-    List<IPlayerImmunity> getHurtEventImmunities();
+    List<IImmunity> getHurtEventImmunities();
+
+    /**
+     * Get the list of damage event-related immunities the player has.
+     *
+     * @return The list of damage event-related immunities the player has.
+     */
+    List<IImmunity> getKnockbackEventImmunities();
+
+    /**
+     * Get the list of entities that the player is immune to being targeted by.
+     *
+     * @return The list of entities that the player is immune to being targeted
+     *         by.
+     */
+    List<String> getTargetingEventImmunities();
 }

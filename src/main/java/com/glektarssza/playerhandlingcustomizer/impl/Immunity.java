@@ -3,7 +3,7 @@ package com.glektarssza.playerhandlingcustomizer.impl;
 import javax.annotation.Nullable;
 
 import com.glektarssza.playerhandlingcustomizer.api.DamageDirection;
-import com.glektarssza.playerhandlingcustomizer.api.IDamageImmunity;
+import com.glektarssza.playerhandlingcustomizer.api.IImmunity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagString;
@@ -11,9 +11,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.Constants.NBT;
 
 /**
- * A concrete implementation of the {@link IDamageImmunity} interface.
+ * A concrete implementation of the {@link IImmunity} interface.
  */
-public class DamageImmunity implements IDamageImmunity {
+public class Immunity implements IImmunity {
     /**
      * The type of damage this instance represents immunity to.
      */
@@ -41,7 +41,7 @@ public class DamageImmunity implements IDamageImmunity {
      * @param damageDirection The type of damage (direct or indirect) the new
      *        instance will grant immunity from.
      */
-    public DamageImmunity(@Nullable String damageType,
+    public Immunity(@Nullable String damageType,
         @Nullable String entityType, DamageDirection damageDirection) {
         this.damageType = damageType;
         this.entityType = entityType;
