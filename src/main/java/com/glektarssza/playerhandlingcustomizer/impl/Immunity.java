@@ -5,6 +5,8 @@ import javax.annotation.Nullable;
 import com.glektarssza.playerhandlingcustomizer.api.DamageDirection;
 import com.glektarssza.playerhandlingcustomizer.api.IImmunity;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.DamageSource;
@@ -41,8 +43,8 @@ public class Immunity implements IImmunity {
      * @param damageDirection The type of damage (direct or indirect) the new
      *        instance will grant immunity from.
      */
-    public Immunity(@Nullable String damageType,
-        @Nullable String entityType, DamageDirection damageDirection) {
+    public Immunity(@Nullable String damageType, @Nullable String entityType,
+        DamageDirection damageDirection) {
         this.damageType = damageType;
         this.entityType = entityType;
         this.damageDirection = damageDirection;
@@ -115,7 +117,26 @@ public class Immunity implements IImmunity {
      */
     @Override
     public boolean matches(DamageSource damageSource) {
-        return false;
+        if (this.hasDamageType()
+            && this.getDamageType() != damageSource.getDamageType()) {
+            return false;
+        }
+        Entity source;
+        switch (this.getDamageDirection()) {
+            case Direct:
+                source = damageSource.getImmediateSource();
+                break;
+            case Indirect:
+                source = damageSource.getTrueSource();
+                break;
+            default:
+                return false;
+        }
+        if (this.hasEntityType() && source != null
+            && EntityList.getKey(source).toString() != this.getEntityType()) {
+            return false;
+        }
+        return true;
     }
 
     /**

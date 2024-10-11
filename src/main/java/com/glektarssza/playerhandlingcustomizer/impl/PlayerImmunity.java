@@ -1,5 +1,6 @@
 package com.glektarssza.playerhandlingcustomizer.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.glektarssza.playerhandlingcustomizer.api.DamageDirection;
@@ -54,14 +55,12 @@ public class PlayerImmunity implements IPlayerImmunity {
      * @param targetingImmunities The entities the player will be immune to
      *        being targeted by.
      */
-    public PlayerImmunity(IPlayerIdentifier playerIdentifier,
-        List<IImmunity> damageImmunities, List<IImmunity> hurtImmunities,
-        List<IImmunity> knockbackImmunities, List<String> targetingImmunities) {
-        this.playerIdentifier = playerIdentifier;
-        this.damageEventImmunities = damageImmunities;
-        this.hurtEventImmunities = hurtImmunities;
-        this.knockbackEventImmunities = knockbackImmunities;
-        this.entityTargetingImmunities = targetingImmunities;
+    public PlayerImmunity() {
+        this.playerIdentifier = new PlayerIdentifier();
+        this.damageEventImmunities = new ArrayList<IImmunity>();
+        this.hurtEventImmunities = new ArrayList<IImmunity>();
+        this.knockbackEventImmunities = new ArrayList<IImmunity>();
+        this.entityTargetingImmunities = new ArrayList<String>();
     }
 
     /**

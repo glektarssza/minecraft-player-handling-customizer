@@ -30,9 +30,9 @@ public class PlayerIdentifier implements IPlayerIdentifier {
      * @param uuid The UUID of the player.
      * @param name The name of the player.
      */
-    public PlayerIdentifier(@Nullable UUID uuid, String name) {
-        this.uuid = uuid;
-        this.name = name;
+    public PlayerIdentifier() {
+        this.uuid = null;
+        this.name = "";
     }
 
     /**
