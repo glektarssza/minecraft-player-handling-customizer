@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
@@ -37,4 +38,14 @@ public interface IPlayerIdentifier extends INBTSerializable<NBTTagCompound> {
      * @return The name of the player represented by this instance.
      */
     String getName();
+
+    /**
+     * Test if a player matches this instance.
+     *
+     * @param player The player to test against.
+     *
+     * @return {@code true} if this instance matches the player; {@code false}
+     *         otherwise.
+     */
+    boolean matches(EntityPlayer player);
 }

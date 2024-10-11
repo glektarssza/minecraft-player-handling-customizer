@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import com.glektarssza.playerhandlingcustomizer.api.IPlayerIdentifier;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants.NBT;
 
@@ -69,6 +70,23 @@ public class PlayerIdentifier implements IPlayerIdentifier {
     @Override
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Test if a player matches this instance.
+     *
+     * @param player The player to test against.
+     *
+     * @return {@code true} if this instance matches the player; {@code false}
+     *         otherwise.
+     */
+    @Override
+    public boolean matches(EntityPlayer player) {
+        if (this.hasUUID() && this.getUUID() == EntityPlayer
+            .getUUID(player.getGameProfile())) {
+            return true;
+        }
+        return this.getName() == player.getName();
     }
 
     /**
