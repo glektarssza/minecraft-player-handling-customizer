@@ -1,10 +1,11 @@
 package com.glektarssza.playerhandlingcustomizer;
 
+import org.apache.logging.log4j.Logger;
+
+import com.glektarssza.playerhandlingcustomizer.capability.ImmunePlayerWorldCapabilityHandler;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-
-import org.apache.logging.log4j.Logger;
 
 /**
  * The root mod class.
@@ -31,17 +32,6 @@ public class PlayerHandlingCustomizer {
     public void OnPreInit(FMLPreInitializationEvent event) {
         LOGGER = event.getModLog();
         LOGGER.info("Pre-initializing PlayerHandlingCustomizer...");
-        // TODO
-    }
-
-    /**
-     * Handle the Forge Mod Loader post-initialization event.
-     *
-     * @param event The event to handle.
-     */
-    @Mod.EventHandler
-    public void OnPreInit(FMLPostInitializationEvent event) {
-        LOGGER.info("Post-initializing PlayerHandlingCustomizer...");
-        // TODO
+        ImmunePlayerWorldCapabilityHandler.register();
     }
 }
