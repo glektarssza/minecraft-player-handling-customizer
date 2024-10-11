@@ -1,5 +1,7 @@
 package com.glektarssza.playerhandlingcustomizer.api;
 
+import java.util.List;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
@@ -45,4 +47,18 @@ public interface IPlayerImmunity extends INBTSerializable<NBTTagCompound> {
      *         events; {@code false} otherwise.
      */
     boolean hasAnyTargetingEventImmunities();
+
+    /**
+     * Get the list of damage event-related immunities the player has.
+     *
+     * @return The list of damage event-related immunities the player has.
+     */
+    List<IPlayerImmunity> getDamageEventImmunities();
+
+    /**
+     * Get the list of damage event-related immunities the player has.
+     *
+     * @return The list of damage event-related immunities the player has.
+     */
+    List<IPlayerImmunity> getHurtEventImmunities();
 }

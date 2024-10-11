@@ -12,6 +12,14 @@ import net.minecraftforge.common.util.INBTSerializable;
  */
 public interface IPlayerIdentifier extends INBTSerializable<NBTTagCompound> {
     /**
+     * Whether this instance has a UUID.
+     *
+     * @return {@code true} if this instance has a UUID; {@code false}
+     *         otherwise.
+     */
+    boolean hasUUID();
+
+    /**
      * Get the UUID of the player represented by this instance.
      *
      * This method may return {@code null} if the server/client/LAN world is
