@@ -2,9 +2,16 @@ package com.glektarssza.playerhandlingcustomizer.impl;
 
 import java.util.List;
 
+import com.glektarssza.playerhandlingcustomizer.api.DamageDirection;
 import com.glektarssza.playerhandlingcustomizer.api.IImmunity;
 import com.glektarssza.playerhandlingcustomizer.api.IPlayerIdentifier;
 import com.glektarssza.playerhandlingcustomizer.api.IPlayerImmunity;
+
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
+import net.minecraftforge.common.util.Constants.NBT;
 
 /**
  * A concrete implementation of the {@link IPlayerImmunity} interface.
@@ -150,5 +157,99 @@ public class PlayerImmunity implements IPlayerImmunity {
     @Override
     public List<String> getTargetingEventImmunities() {
         return this.entityTargetingImmunities;
+    }
+
+    /**
+     * Serialize this instance into NBT data.
+     *
+     * @return This instance as NBT data.
+     */
+    @Override
+    public NBTTagCompound serializeNBT() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setTag("player", this.playerIdentifier.serializeNBT());
+        NBTTagList damageImmunities = new NBTTagList();
+        for (IImmunity immunity : this.damageEventImmunities) {
+            damageImmunities.appendTag(immunity.serializeNBT());
+        }
+        nbt.setTag("damageImmunities", damageImmunities);
+        NBTTagList hurtImmunities = new NBTTagList();
+        for (IImmunity immunity : this.hurtEventImmunities) {
+            hurtImmunities.appendTag(immunity.serializeNBT());
+        }
+        nbt.setTag("hurtImmunities", hurtImmunities);
+        NBTTagList knockbackImmunities = new NBTTagList();
+        for (IImmunity immunity : this.knockbackEventImmunities) {
+            knockbackImmunities.appendTag(immunity.serializeNBT());
+        }
+        nbt.setTag("knockbackImmunities", knockbackImmunities);
+        NBTTagList targetingImmunities = new NBTTagList();
+        for (String immunity : this.entityTargetingImmunities) {
+            targetingImmunities.appendTag(new NBTTagString(immunity));
+        }
+        nbt.setTag("targetingImmunities", targetingImmunities);
+        return nbt;
+    }
+
+    /**
+     * Populate this instance from NBT data.
+     *
+     * @param nbt The NBT data to populate this instance from.
+     */
+    @Override
+    public void deserializeNBT(NBTTagCompound nbt) {
+        if (nbt == null) {
+            return;
+        }
+        if (!nbt.hasKey("player", NBT.TAG_COMPOUND)) {
+            return;
+        }
+        this.playerIdentifier.deserializeNBT(nbt.getCompoundTag("player"));
+        NBTTagList damageImmunities = nbt.getTagList("damageImmunities",
+            NBT.TAG_COMPOUND);
+        this.damageEventImmunities.clear();
+        for (NBTBase immunity : damageImmunities) {
+            if (immunity.getId() != NBT.TAG_COMPOUND) {
+                continue;
+            }
+            Immunity i = new Immunity("generic", "generic",
+                DamageDirection.Direct);
+            i.deserializeNBT((NBTTagCompound) immunity);
+            this.damageEventImmunities.add(i);
+        }
+        NBTTagList hurtImmunities = nbt.getTagList("hurtImmunities",
+            NBT.TAG_COMPOUND);
+        this.hurtEventImmunities.clear();
+        for (NBTBase immunity : hurtImmunities) {
+            if (immunity.getId() != NBT.TAG_COMPOUND) {
+                continue;
+            }
+            Immunity i = new Immunity("generic", "generic",
+                DamageDirection.Direct);
+            i.deserializeNBT((NBTTagCompound) immunity);
+            this.hurtEventImmunities.add(i);
+        }
+        NBTTagList knockbackImmunities = nbt.getTagList("knockbackImmunities",
+            NBT.TAG_COMPOUND);
+        this.knockbackEventImmunities.clear();
+        for (NBTBase immunity : knockbackImmunities) {
+            if (immunity.getId() != NBT.TAG_COMPOUND) {
+                continue;
+            }
+            Immunity i = new Immunity("generic", "generic",
+                DamageDirection.Direct);
+            i.deserializeNBT((NBTTagCompound) immunity);
+            this.knockbackEventImmunities.add(i);
+        }
+        NBTTagList targetingImmunities = nbt.getTagList("targetingImmunities",
+            NBT.TAG_STRING);
+        this.entityTargetingImmunities.clear();
+        for (NBTBase immunity : targetingImmunities) {
+            if (immunity.getId() != NBT.TAG_STRING) {
+                continue;
+            }
+            this.entityTargetingImmunities
+                .add(((NBTTagString) immunity).getString());
+        }
     }
 }
