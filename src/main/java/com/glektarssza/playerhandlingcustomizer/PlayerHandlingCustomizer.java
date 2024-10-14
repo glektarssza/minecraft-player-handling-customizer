@@ -2,8 +2,6 @@ package com.glektarssza.playerhandlingcustomizer;
 
 import org.apache.logging.log4j.Logger;
 
-import com.glektarssza.playerhandlingcustomizer.capability.ImmunePlayerWorldCapabilityHandler;
-
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -31,7 +29,8 @@ public class PlayerHandlingCustomizer {
     @Mod.EventHandler
     public void OnPreInit(FMLPreInitializationEvent event) {
         LOGGER = event.getModLog();
-        LOGGER.info("Pre-initializing PlayerHandlingCustomizer...");
-        ImmunePlayerWorldCapabilityHandler.register();
+        LOGGER.info("Pre-initializing {}...", Tags.MOD_NAME);
+        // TODO: Pre-initialization
+        LOGGER.info("Done pre-initializing {}!", Tags.MOD_NAME);
     }
 }
