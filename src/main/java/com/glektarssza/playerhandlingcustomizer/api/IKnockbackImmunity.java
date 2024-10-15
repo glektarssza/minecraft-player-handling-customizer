@@ -2,6 +2,9 @@ package com.glektarssza.playerhandlingcustomizer.api;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.Constants.NBT;
+
 /**
  * An interface that represents immunity from knockback events.
  */
@@ -23,4 +26,58 @@ public interface IKnockbackImmunity extends IImmunity {
      */
     @Nullable
     String getEntityType();
+
+    /**
+     * Set the entity type that this instance grants immunity to damage from.
+     *
+     * @param entityType The entity type that this instance grants immunity to
+     *        damage from.
+     */
+    void setEntityType(@Nullable String entityType);
+
+    /**
+     * Get the type of immunity represented by this instance.
+     *
+     * @return The type of immunity represented by this instance.
+     */
+    @Override
+    default ImmunityType getImmunityType() {
+        return ImmunityType.Hurt;
+    }
+
+    /**
+     * Serialize this instance into NBT data.
+     *
+     * @return NBT data representing this instance.
+     */
+    @Override
+    default NBTTagCompound serializeNBT() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        nbt.setString("immunityType", "knockback");
+        if (this.hasEntityType()) {
+            nbt.setString("entityType", this.getEntityType());
+        }
+        return nbt;
+    }
+
+    /**
+     * Deserialize NBT data into this instance.
+     *
+     * @param nbt The NBT data to deserialize into this instance.
+     */
+    @Override
+    default void deserializeNBT(NBTTagCompound nbt) {
+        if (!nbt.hasKey("immunityType", NBT.TAG_STRING)) {
+            return;
+        }
+        String immunityType = nbt.getString("immunityType");
+        if (immunityType != "knockback") {
+            return;
+        }
+        if (nbt.hasKey("entityType", NBT.TAG_STRING)) {
+            this.setEntityType(nbt.getString("entityType"));
+        } else {
+            this.setEntityType(null);
+        }
+    }
 }
