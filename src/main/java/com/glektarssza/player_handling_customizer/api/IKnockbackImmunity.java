@@ -3,6 +3,7 @@ package com.glektarssza.player_handling_customizer.api;
 import javax.annotation.Nullable;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.common.util.Constants.NBT;
 
 /**
@@ -81,7 +82,8 @@ public interface IKnockbackImmunity extends IImmunity {
     @Override
     default NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setString("immunityType", "knockback");
+        nbt.setTag("immunityType",
+            ImmunityType.toNBTString(this.getImmunityType()));
         if (this.hasEntityType()) {
             nbt.setString("entityType", this.getEntityType());
         }
@@ -100,8 +102,9 @@ public interface IKnockbackImmunity extends IImmunity {
         if (!nbt.hasKey("immunityType", NBT.TAG_STRING)) {
             return;
         }
-        String immunityType = nbt.getString("immunityType");
-        if (immunityType != "knockback") {
+        ImmunityType type = ImmunityType
+            .fromNBTString((NBTTagString) nbt.getTag("immunityType"));
+        if (type != ImmunityType.Knockback) {
             return;
         }
         if (nbt.hasKey("entityType", NBT.TAG_STRING)) {

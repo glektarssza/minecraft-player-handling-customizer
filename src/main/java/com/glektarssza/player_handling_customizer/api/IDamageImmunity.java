@@ -3,6 +3,7 @@ package com.glektarssza.player_handling_customizer.api;
 import javax.annotation.Nullable;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.common.util.Constants.NBT;
 
 /**
@@ -96,7 +97,8 @@ public interface IDamageImmunity extends IImmunity {
     @Override
     default NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setString("immunityType", "damage");
+        nbt.setTag("immunityType",
+            ImmunityType.toNBTString(this.getImmunityType()));
         nbt.setString("damageType", this.getDamageType());
         if (this.hasEntityType()) {
             nbt.setString("entityType", this.getEntityType());
@@ -116,8 +118,8 @@ public interface IDamageImmunity extends IImmunity {
         if (!nbt.hasKey("immunityType", NBT.TAG_STRING)) {
             return;
         }
-        String immunityType = nbt.getString("immunityType");
-        if (immunityType != "damage") {
+        ImmunityType type = ImmunityType.fromNBTString((NBTTagString)nbt.getTag("immunityType"))
+        if (type != ImmunityType.Damage) {
             return;
         }
         if (!nbt.hasKey("damageType", NBT.TAG_STRING)) {
