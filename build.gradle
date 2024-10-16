@@ -50,18 +50,21 @@ tasks.injectTags.configure {
 }
 
 repositories {
-    maven {
-        name = "Cleanroom Maven"
-        url = 'https://maven.cleanroommc.com'
+	exclusiveContent {
+		forRepository {
+    		maven {
+        		name = 'Cleanroom Maven'
+    	    	url = 'https://maven.cleanroommc.com'
+	    	}
+	    }
+	    filter {
+	    	includeGroup 'com.cleanroommc'
+	    }
     }
     maven {
-        name = "SpongePowered Maven"
-        url = "https://repo.spongepowered.org/maven"
-    }
-    maven {
-        name = 'blamejared Maven'
-        url = 'https://maven.blamejared.com'
-    }
+		name = 'SpongePowered Maven'
+		url = 'https://repo.spongepowered.org/maven'
+	}
     mavenLocal()
 }
 
