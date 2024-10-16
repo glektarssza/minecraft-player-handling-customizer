@@ -51,6 +51,44 @@ public interface IHurtImmunity extends IImmunity {
     void setEntityType(@Nullable String entityType);
 
     /**
+     * Get whether this instance applies to direct damage sources.
+     *
+     * @return Whether this instance applies to direct damage sources.
+     */
+    boolean getAppliesToDirectDamage();
+
+    /**
+     * Set whether this instance applies to direct damage sources.
+     *
+     * @param value Whether this instance applies to direct damage sources.
+     */
+    void setAppliesToDirectDamage(boolean value);
+
+    /**
+     * Get whether this instance applies to indirect damage sources.
+     *
+     * @return Whether this instance applies to indirect damage sources.
+     */
+    boolean getAppliesToIndirectDamage();
+
+    /**
+     * Set whether this instance applies to indirect damage sources.
+     *
+     * @param value Whether this instance applies to indirect damage sources.
+     */
+    void setAppliesToIndirectDamage(boolean value);
+
+    /**
+     * Get the type of immunity represented by this instance.
+     *
+     * @return The type of immunity represented by this instance.
+     */
+    @Override
+    default ImmunityType getImmunityType() {
+        return ImmunityType.Hurt;
+    }
+
+    /**
      * Serialize this instance into NBT data.
      *
      * @return NBT data representing this instance.
@@ -63,6 +101,8 @@ public interface IHurtImmunity extends IImmunity {
         if (this.hasEntityType()) {
             nbt.setString("entityType", this.getEntityType());
         }
+        nbt.setBoolean("appliesToDirect", this.getAppliesToDirectDamage());
+        nbt.setBoolean("appliesToIndirect", this.getAppliesToIndirectDamage());
         return nbt;
     }
 
@@ -88,6 +128,16 @@ public interface IHurtImmunity extends IImmunity {
             this.setEntityType(nbt.getString("entityType"));
         } else {
             this.setEntityType(null);
+        }
+        if (nbt.hasKey("appliesToDirect", NBT.TAG_ANY_NUMERIC)) {
+            this.setAppliesToDirectDamage(nbt.getBoolean("appliesToDirect"));
+        } else {
+            this.setAppliesToDirectDamage(false);
+        }
+        if (nbt.hasKey("appliesToIndirect", NBT.TAG_ANY_NUMERIC)) {
+            this.setAppliesToDirectDamage(nbt.getBoolean("appliesToIndirect"));
+        } else {
+            this.setAppliesToDirectDamage(false);
         }
     }
 }
