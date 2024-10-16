@@ -1,4 +1,4 @@
-package com.glektarssza.playerhandlingcustomizer.api;
+package com.glektarssza.player_handling_customizer.api;
 
 import javax.annotation.Nullable;
 
@@ -6,24 +6,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants.NBT;
 
 /**
- * An interface that represents immunity from hurt events.
+ * An interface that represents immunity from knockback events.
  */
-public interface IHurtImmunity extends IImmunity {
-    /**
-     * Get the type of damage this instance represents immunity from.
-     *
-     * @return The type of damage this instance represents immunity from.
-     */
-    String getDamageType();
-
-    /**
-     * Set the type of damage this instance represents immunity from.
-     *
-     * @param damageType The type of damage this instance represents immunity
-     *        from.
-     */
-    void setDamageType(String damageType);
-
+public interface IKnockbackImmunity extends IImmunity {
     /**
      * Get whether this instance has an entity type from which this instance
      * grants immunity from.
@@ -96,8 +81,7 @@ public interface IHurtImmunity extends IImmunity {
     @Override
     default NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setString("immunityType", "hurt");
-        nbt.setString("damageType", this.getDamageType());
+        nbt.setString("immunityType", "knockback");
         if (this.hasEntityType()) {
             nbt.setString("entityType", this.getEntityType());
         }
@@ -117,13 +101,9 @@ public interface IHurtImmunity extends IImmunity {
             return;
         }
         String immunityType = nbt.getString("immunityType");
-        if (immunityType != "hurt") {
+        if (immunityType != "knockback") {
             return;
         }
-        if (!nbt.hasKey("damageType", NBT.TAG_STRING)) {
-            return;
-        }
-        this.setDamageType(nbt.getString("damageType"));
         if (nbt.hasKey("entityType", NBT.TAG_STRING)) {
             this.setEntityType(nbt.getString("entityType"));
         } else {

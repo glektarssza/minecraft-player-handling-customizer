@@ -1,8 +1,8 @@
-package com.glektarssza.playerhandlingcustomizer.impl;
+package com.glektarssza.player_handling_customizer.impl;
 
 import javax.annotation.Nullable;
 
-import com.glektarssza.playerhandlingcustomizer.api.ITargetingImmunity;
+import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 
 /**
  * A concrete implementation of the {@link ITargetingImmunity} interface.

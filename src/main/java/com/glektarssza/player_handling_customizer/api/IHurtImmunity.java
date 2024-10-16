@@ -1,4 +1,4 @@
-package com.glektarssza.playerhandlingcustomizer.api;
+package com.glektarssza.player_handling_customizer.api;
 
 import javax.annotation.Nullable;
 
@@ -6,9 +6,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.Constants.NBT;
 
 /**
- * An interface that represents immunity from damage events.
+ * An interface that represents immunity from hurt events.
  */
-public interface IDamageImmunity extends IImmunity {
+public interface IHurtImmunity extends IImmunity {
     /**
      * Get the type of damage this instance represents immunity from.
      *
@@ -34,9 +34,9 @@ public interface IDamageImmunity extends IImmunity {
     boolean hasEntityType();
 
     /**
-     * Get the entity type that this instance grants immunity to damage from.
+     * Get the entity source that this instance grants immunity to damage from.
      *
-     * @return The entity type that this instance grants immunity to damage
+     * @return The entity source that this instance grants immunity to damage
      *         from.
      */
     @Nullable
@@ -85,7 +85,7 @@ public interface IDamageImmunity extends IImmunity {
      */
     @Override
     default ImmunityType getImmunityType() {
-        return ImmunityType.Damage;
+        return ImmunityType.Hurt;
     }
 
     /**
@@ -96,7 +96,7 @@ public interface IDamageImmunity extends IImmunity {
     @Override
     default NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setString("immunityType", "damage");
+        nbt.setString("immunityType", "hurt");
         nbt.setString("damageType", this.getDamageType());
         if (this.hasEntityType()) {
             nbt.setString("entityType", this.getEntityType());
@@ -117,7 +117,7 @@ public interface IDamageImmunity extends IImmunity {
             return;
         }
         String immunityType = nbt.getString("immunityType");
-        if (immunityType != "damage") {
+        if (immunityType != "hurt") {
             return;
         }
         if (!nbt.hasKey("damageType", NBT.TAG_STRING)) {

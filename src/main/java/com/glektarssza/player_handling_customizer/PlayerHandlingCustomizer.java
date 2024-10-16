@@ -1,4 +1,4 @@
-package com.glektarssza.playerhandlingcustomizer;
+package com.glektarssza.player_handling_customizer;
 
 import org.apache.logging.log4j.Logger;
 

@@ -1,32 +1,38 @@
-package com.glektarssza.playerhandlingcustomizer.impl;
+package com.glektarssza.player_handling_customizer.impl;
 
 import javax.annotation.Nullable;
 
-import com.glektarssza.playerhandlingcustomizer.api.IKnockbackImmunity;
+import com.glektarssza.player_handling_customizer.api.IHurtImmunity;
 
 /**
- * A concrete implementation of the {@link IKnockbackImmunity} interface.
+ * A concrete implementation of the {@link IHurtImmunity} interface.
  */
-public class KnockbackImmunity implements IKnockbackImmunity {
+public class HurtImmunity implements IHurtImmunity {
+    /**
+     * The type of damage this instance represents immunity from.
+     */
+    private String damageType;
+
     /**
      * The entity source that this instance grants immunity to damage from.
      */
     private String entityType;
 
     /**
-     * Whether this instance applies to direct knockback sources.
+     * Whether this instance applies to direct damage sources.
      */
     private boolean appliesToDirect;
 
     /**
-     * Whether this instance applies to indirect knockback sources.
+     * Whether this instance applies to indirect damage sources.
      */
     private boolean appliesToIndirect;
 
     /**
      * Create a new instance.
      */
-    public KnockbackImmunity() {
+    public HurtImmunity() {
+        this.damageType = "generic";
         this.entityType = null;
         this.appliesToDirect = false;
         this.appliesToIndirect = false;
@@ -35,9 +41,23 @@ public class KnockbackImmunity implements IKnockbackImmunity {
     /**
      * Create a new instance.
      *
+     * @param damageType The damage type to create the new instance with.
+     */
+    public HurtImmunity(String damageType) {
+        this.damageType = damageType;
+        this.entityType = null;
+        this.appliesToDirect = false;
+        this.appliesToIndirect = false;
+    }
+
+    /**
+     * Create a new instance.
+     *
+     * @param damageType The damage type to create the new instance with.
      * @param entityType The entity type to create the new instance with.
      */
-    public KnockbackImmunity(String entityType) {
+    public HurtImmunity(String damageType, String entityType) {
+        this.damageType = damageType;
         this.entityType = entityType;
         this.appliesToDirect = false;
         this.appliesToIndirect = false;
@@ -46,11 +66,14 @@ public class KnockbackImmunity implements IKnockbackImmunity {
     /**
      * Create a new instance.
      *
+     * @param damageType The damage type to create the new instance with.
      * @param entityType The entity type to create the new instance with.
-     * @param appliesToDirect Whether the new instances applies to direct damage
+     * @param appliesToDirect Whether the new instances applies to direct hurt
      *        sources.
      */
-    public KnockbackImmunity(String entityType, boolean appliesToDirect) {
+    public HurtImmunity(String damageType, String entityType,
+        boolean appliesToDirect) {
+        this.damageType = damageType;
         this.entityType = entityType;
         this.appliesToDirect = appliesToDirect;
         this.appliesToIndirect = false;
@@ -59,17 +82,40 @@ public class KnockbackImmunity implements IKnockbackImmunity {
     /**
      * Create a new instance.
      *
+     * @param damageType The damage type to create the new instance with.
      * @param entityType The entity type to create the new instance with.
-     * @param appliesToDirect Whether the new instances applies to direct
-     *        knockback sources.
+     * @param appliesToDirect Whether the new instances applies to direct hurt
+     *        sources.
      * @param appliesToIndirect Whether the new instances applies to indirect
-     *        knockback sources.
+     *        hurt sources.
      */
-    public KnockbackImmunity(String entityType, boolean appliesToDirect,
-        boolean appliesToIndirect) {
+    public HurtImmunity(String damageType, String entityType,
+        boolean appliesToDirect, boolean appliesToIndirect) {
+        this.damageType = damageType;
         this.entityType = entityType;
         this.appliesToDirect = appliesToDirect;
-        this.appliesToIndirect = false;
+        this.appliesToIndirect = appliesToIndirect;
+    }
+
+    /**
+     * Get the type of damage this instance represents immunity from.
+     *
+     * @return The type of damage this instance represents immunity from.
+     */
+    @Override
+    public String getDamageType() {
+        return this.damageType;
+    }
+
+    /**
+     * Set the type of damage this instance represents immunity from.
+     *
+     * @param damageType The type of damage this instance represents immunity
+     *        from.
+     */
+    @Override
+    public void setDamageType(String damageType) {
+        this.damageType = damageType;
     }
 
     /**

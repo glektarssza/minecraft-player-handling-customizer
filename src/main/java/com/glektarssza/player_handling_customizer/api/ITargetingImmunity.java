@@ -1,4 +1,4 @@
-package com.glektarssza.playerhandlingcustomizer.api;
+package com.glektarssza.player_handling_customizer.api;
 
 import javax.annotation.Nullable;
 
