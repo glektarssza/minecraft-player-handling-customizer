@@ -5,7 +5,5 @@
     "package": "com.glektarssza.playerhandlingcustomizer.mixins",
     "refmap": "mixins.player_handling_customizer.refmap.json",
     "compatibilityLevel": "JAVA_8",
-    "mixins": [
-        "TempMixin"
-    ]
+    "mixins": []
 }
