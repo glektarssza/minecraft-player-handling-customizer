@@ -1,7 +1,5 @@
 package com.glektarssza.player_handling_customizer.api;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.common.util.Constants.NBT;
@@ -9,61 +7,7 @@ import net.minecraftforge.common.util.Constants.NBT;
 /**
  * An interface that represents immunity from knockback events.
  */
-public interface IKnockbackImmunity extends IImmunity {
-    /**
-     * Get whether this instance has an entity type from which this instance
-     * grants immunity from.
-     *
-     * @return Whether this instance has an entity type from which this instance
-     *         grants immunity from.
-     */
-    boolean hasEntityType();
-
-    /**
-     * Get the entity source that this instance grants immunity to damage from.
-     *
-     * @return The entity source that this instance grants immunity to damage
-     *         from.
-     */
-    @Nullable
-    String getEntityType();
-
-    /**
-     * Set the entity type that this instance grants immunity to damage from.
-     *
-     * @param entityType The entity type that this instance grants immunity to
-     *        damage from.
-     */
-    void setEntityType(@Nullable String entityType);
-
-    /**
-     * Get whether this instance applies to direct damage sources.
-     *
-     * @return Whether this instance applies to direct damage sources.
-     */
-    boolean getAppliesToDirectDamage();
-
-    /**
-     * Set whether this instance applies to direct damage sources.
-     *
-     * @param value Whether this instance applies to direct damage sources.
-     */
-    void setAppliesToDirectDamage(boolean value);
-
-    /**
-     * Get whether this instance applies to indirect damage sources.
-     *
-     * @return Whether this instance applies to indirect damage sources.
-     */
-    boolean getAppliesToIndirectDamage();
-
-    /**
-     * Set whether this instance applies to indirect damage sources.
-     *
-     * @param value Whether this instance applies to indirect damage sources.
-     */
-    void setAppliesToIndirectDamage(boolean value);
-
+public interface IKnockbackImmunity extends IPhysicalImmunity {
     /**
      * Get the type of immunity represented by this instance.
      *
