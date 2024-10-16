@@ -3,7 +3,7 @@
     "target": "@env(DEFAULT)",
     "minVersion": "0.8",
     "package": "com.glektarssza.player_handling_customizer.mixins.vanilla",
-    "refmap": "mixins.player_handling_customizer.refmap.json",
+    "refmap": "mixins.player-handling-customizer.refmap.json",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
 		"GuiMainMenuMixin"
