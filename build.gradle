@@ -5,7 +5,7 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("eclipse")
-    id("com.gtnewhorizons.retrofuturagradle") version "1.3.9"
+    id("com.gtnewhorizons.retrofuturagradle") version "1.4.1"
 }
 
 version = project.mod_version
@@ -19,9 +19,38 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 configurations {
-    embed
-    implementation.extendsFrom(embed)
-    generatorImplementation.extendsFrom(implementation)
+	embed
+	implementation.extendsFrom(embed)
+    create("runtimeOnlyNonPublishable") {
+        description = "Runtime only dependencies that are not published alongside the jar"
+        canBeConsumed = false
+        canBeResolved = false
+    }
+
+    create("devOnlyNonPublishable") {
+        description = "Runtime and compiletime dependencies that are not published alongside the jar (compileOnly + runtimeOnlyNonPublishable)"
+        canBeConsumed = false
+        canBeResolved = false
+    }
+    compileOnly.extendsFrom(devOnlyNonPublishable)
+    runtimeOnlyNonPublishable.extendsFrom(devOnlyNonPublishable)
+    runtimeClasspath.extendsFrom(runtimeOnlyNonPublishable)
+    testRuntimeClasspath.extendsFrom(runtimeOnlyNonPublishable)
+    // A "bag-of-dependencies"-style configuration for backwards compatibility, gets put in "api"
+    create("compile") {
+        description = "Deprecated: use api or implementation instead, gets put in api"
+        canBeConsumed = false
+        canBeResolved = false
+        visible = false
+    }
+    create("testCompile") {
+        description = "Deprecated: use testImplementation instead"
+        canBeConsumed = false
+        canBeResolved = false
+        visible = false
+    }
+    api.extendsFrom(compile)
+    testImplementation.extendsFrom(testCompile)
 }
 
 minecraft {
@@ -73,15 +102,23 @@ dependencies {
         implementation 'com.cleanroommc:assetmover:2.0'
     }
     if (project.use_mixins.toBoolean()) {
-        implementation 'zone.rong:mixinbooter:7.0'
-    }
-    if (project.use_mixins.toBoolean()) {
-        api("org.spongepowered:mixin:0.8.3") { transitive = false }
-        annotationProcessor('org.ow2.asm:asm-debug-all:5.2')
+    	def refMapName = 'mixins.' + project.archive_base_name + 'refmap.json'
+    	def mixinProviderSpec = 'zone.rong:mixinbooter:9.2'
+
+    	// Common
+    	annotationProcessor('org.ow2.asm:asm-debug-all:5.2')
         annotationProcessor('com.google.guava:guava:24.1.1-jre')
         annotationProcessor('com.google.code.gson:gson:2.8.6')
-        annotationProcessor("org.spongepowered:mixin:0.8.3") { transitive = false }
+
+        // Mixins
+    	implementation(modUtils.enableMixins(mixinProviderSpec, refMapName))
+        api(mixinProviderSpec) { transitive = false }
+        annotationProcessor(mixinProviderSpec) { transitive = false }
     }
+
+    // Runtime-only mods
+
+    // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
