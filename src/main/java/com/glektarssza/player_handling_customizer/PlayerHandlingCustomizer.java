@@ -1,4 +1,4 @@
-package com.glektarssza.playerhandlingcustomizer;
+package com.glektarssza.player_handling_customizer;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
