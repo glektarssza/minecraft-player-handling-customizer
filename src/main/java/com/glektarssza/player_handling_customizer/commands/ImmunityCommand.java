@@ -4,15 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 
@@ -34,7 +29,7 @@ public class ImmunityCommand extends CommandBase {
 
     @Override
     public boolean isUsernameIndex(String[] args, int index) {
-        return index == 0;
+        return index == 1;
     }
 
     @Override
@@ -59,13 +54,7 @@ public class ImmunityCommand extends CommandBase {
     @Override
     public void execute(MinecraftServer server, ICommandSender sender,
         String[] args) throws CommandException {
-        Entity entity = sender.getCommandSenderEntity();
-        if (!(entity instanceof EntityPlayer)) {
-            throw new CommandException("Command sender is not a player!");
-        }
-        EntityPlayer player = (EntityPlayer) entity;
-        NBTTagCompound playerModData = PlayerUtils.getPlayerModData(player);
-        // TODO: Update player NBT data
-        throw new CommandException("Work in progress!");
+        throw new CommandException(
+            "player_handling_customizer.commands.error.work_in_progress");
     }
 }
