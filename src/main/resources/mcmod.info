@@ -11,7 +11,7 @@
             "${mod_author}"
         ],
         "credits": "",
-        "logoFile": "assets/playerhandlingcustomizer/textures/logo.png",
+        "logoFile": "assets/player_handling_customizer/textures/logo.png",
         "screenshots": [],
         "parent": "",
         "dependencies": []
