@@ -95,11 +95,11 @@ repositories {
 
 dependencies {
     if (project.use_assetmover.toBoolean()) {
-        implementation 'com.cleanroommc:assetmover:2.0'
+        implementation 'com.cleanroommc:assetmover:2.5'
     }
     if (project.use_mixins.toBoolean()) {
     	def refMapName = 'mixins.' + project.archive_base_name + 'refmap.json'
-    	def mixinProviderSpec = 'zone.rong:mixinbooter:9.2'
+    	def mixinProviderSpec = 'zone.rong:mixinbooter:9.4'
 
     	// Common
     	annotationProcessor('org.ow2.asm:asm-debug-all:5.2')
