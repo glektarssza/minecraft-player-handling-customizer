@@ -20,7 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 @Mixin(EntityAITarget.class)
 public class EntityAITargetMixin {
-    @Inject(method = "Lnet/minecraft/entity/ai/EntityAITarget;isSuitableTarget(Lnet/minecraft/entity/EntityLiving;Lnet/minecraft/entity/EntityLivingBase;ZZ)Z", at = @At("TAIL"))
+    @Inject(method = "Lnet/minecraft/entity/ai/EntityAITarget;isSuitableTarget(Lnet/minecraft/entity/EntityLiving;Lnet/minecraft/entity/EntityLivingBase;ZZ)Z", at = @At("TAIL"), cancellable = true)
     private static void isSuitableTarget(EntityLiving attacker,
         @Nullable EntityLivingBase target, boolean includeInvincibles,
         boolean checkSight, CallbackInfoReturnable<Boolean> cir) {
