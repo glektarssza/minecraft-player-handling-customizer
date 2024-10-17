@@ -60,7 +60,9 @@ public class PlayerHandlingCustomizer {
      */
     @SubscribeEvent
     public void onConfigChange(OnConfigChangedEvent event) {
-        LOGGER.info("Synchronizing confiugration for {}...", Tags.MOD_NAME);
-        ConfigManager.sync(Tags.MOD_ID, Type.INSTANCE);
+        if (event.getModID().equals(Tags.MOD_ID)) {
+            LOGGER.info("Synchronizing confiugration for {}...", Tags.MOD_NAME);
+            ConfigManager.sync(Tags.MOD_ID, Type.INSTANCE);
+        }
     }
 }
