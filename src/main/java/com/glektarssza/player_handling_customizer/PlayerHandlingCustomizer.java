@@ -2,9 +2,11 @@ package com.glektarssza.player_handling_customizer;
 
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.command.CommandReload;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -61,6 +63,19 @@ public class PlayerHandlingCustomizer {
     @SubscribeEvent
     public void onConfigChange(OnConfigChangedEvent event) {
         if (event.getModID().equals(Tags.MOD_ID)) {
+            LOGGER.info("Synchronizing confiugration for {}...", Tags.MOD_NAME);
+            ConfigManager.sync(Tags.MOD_ID, Type.INSTANCE);
+        }
+    }
+
+    /**
+     * An event handler for when a command is issued.
+     *
+     * @param event The event data.
+     */
+    @SubscribeEvent
+    public void onCommand(CommandEvent event) {
+        if (event.getCommand() instanceof CommandReload) {
             LOGGER.info("Synchronizing confiugration for {}...", Tags.MOD_NAME);
             ConfigManager.sync(Tags.MOD_ID, Type.INSTANCE);
         }
