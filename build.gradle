@@ -36,21 +36,6 @@ configurations {
     runtimeOnlyNonPublishable.extendsFrom(devOnlyNonPublishable)
     runtimeClasspath.extendsFrom(runtimeOnlyNonPublishable)
     testRuntimeClasspath.extendsFrom(runtimeOnlyNonPublishable)
-    // A "bag-of-dependencies"-style configuration for backwards compatibility, gets put in "api"
-    create("compile") {
-        description = "Deprecated: use api or implementation instead, gets put in api"
-        canBeConsumed = false
-        canBeResolved = false
-        visible = false
-    }
-    create("testCompile") {
-        description = "Deprecated: use testImplementation instead"
-        canBeConsumed = false
-        canBeResolved = false
-        visible = false
-    }
-    api.extendsFrom(compile)
-    testImplementation.extendsFrom(testCompile)
 }
 
 minecraft {

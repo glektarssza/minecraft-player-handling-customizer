@@ -37,6 +37,11 @@ tags
 ### Undo Persistence ###
 [._]*.un~
 
+## Eclipse ##
+.classpath
+.project
+.settings/
+
 # Logs #
 *.log*
 
@@ -48,6 +53,7 @@ user.properties
 
 # Artifacts #
 ## Gradle ##
+bin/
 build/
 .gradle/
 
