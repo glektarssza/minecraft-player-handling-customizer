@@ -31,7 +31,7 @@ public class EntityAITargetMixin {
         List<ITargetingImmunity> immunities = PlayerUtils
             .getPlayerTargetingImmunities(player);
         if (ImmunityUtils.entityMatchesAnyTargetingImmunity(attacker,
-            immunities)) {
+            immunities) || PlayerUtils.getIsPlayerGloballyImmune(player)) {
             cir.setReturnValue(false);
         }
     }
