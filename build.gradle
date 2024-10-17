@@ -94,7 +94,7 @@ repositories {
 
 dependencies {
     if (project.use_assetmover.toBoolean()) {
-        implementation 'com.cleanroommc:assetmover:2.0'
+        implementation 'com.cleanroommc:assetmover:2.5'
     }
     if (project.use_mixins.toBoolean()) {
     	def refMapName = 'mixins.' + project.archive_base_name + 'refmap.json'
