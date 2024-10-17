@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
+import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import zone.rong.mixinbooter.IEarlyMixinLoader;
 
 /**
  * The core mod plugin for the mod.
  */
+@MCVersion("1.12.2")
 public class CorePlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
     @Override
     public String getAccessTransformerClass() {
