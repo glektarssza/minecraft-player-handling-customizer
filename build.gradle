@@ -127,9 +127,14 @@ dependencies {
     }
 
     // Runtime-only mods (things we like for easier testing!)
-    runtimeOnlyNonPublishable rfg.deobf("curse.maven:had-enough-items-557549:5815590")
-    runtimeOnlyNonPublishable rfg.deobf("curse.maven:configanytime-870276:5212709")
-    runtimeOnlyNonPublishable rfg.deobf("curse.maven:universal-tweaks-705000:5529764")
+    runtimeOnlyNonPublishable rfg.deobf('curse.maven:had-enough-items-557549:5815590')
+    runtimeOnlyNonPublishable rfg.deobf('curse.maven:configanytime-870276:5212709')
+    runtimeOnlyNonPublishable rfg.deobf('curse.maven:universal-tweaks-705000:5529764')
+
+    // Runtime-only mods (for testing various mod compatibility)
+    if (project.hasProperty('use_advent_of_ascension') && project.use_advent_of_ascension.toBoolean()) {
+		devOnlyNonPublishable rfg.deobf('curse.maven:advent-of-ascension-nevermine-311054:3054253')
+    }
 
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.2'
