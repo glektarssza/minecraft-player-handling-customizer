@@ -14,22 +14,10 @@ public class KnockbackImmunity implements IKnockbackImmunity {
     private String entityType;
 
     /**
-     * Whether this instance applies to direct knockback sources.
-     */
-    private boolean appliesToDirect;
-
-    /**
-     * Whether this instance applies to indirect knockback sources.
-     */
-    private boolean appliesToIndirect;
-
-    /**
      * Create a new instance.
      */
     public KnockbackImmunity() {
         this.entityType = null;
-        this.appliesToDirect = false;
-        this.appliesToIndirect = false;
     }
 
     /**
@@ -39,37 +27,6 @@ public class KnockbackImmunity implements IKnockbackImmunity {
      */
     public KnockbackImmunity(String entityType) {
         this.entityType = entityType;
-        this.appliesToDirect = false;
-        this.appliesToIndirect = false;
-    }
-
-    /**
-     * Create a new instance.
-     *
-     * @param entityType The entity type to create the new instance with.
-     * @param appliesToDirect Whether the new instances applies to direct damage
-     *        sources.
-     */
-    public KnockbackImmunity(String entityType, boolean appliesToDirect) {
-        this.entityType = entityType;
-        this.appliesToDirect = appliesToDirect;
-        this.appliesToIndirect = false;
-    }
-
-    /**
-     * Create a new instance.
-     *
-     * @param entityType The entity type to create the new instance with.
-     * @param appliesToDirect Whether the new instances applies to direct
-     *        knockback sources.
-     * @param appliesToIndirect Whether the new instances applies to indirect
-     *        knockback sources.
-     */
-    public KnockbackImmunity(String entityType, boolean appliesToDirect,
-        boolean appliesToIndirect) {
-        this.entityType = entityType;
-        this.appliesToDirect = appliesToDirect;
-        this.appliesToIndirect = false;
     }
 
     /**
@@ -105,45 +62,5 @@ public class KnockbackImmunity implements IKnockbackImmunity {
     @Override
     public void setEntityType(@Nullable String entityType) {
         this.entityType = entityType;
-    }
-
-    /**
-     * Get whether this instance applies to direct damage sources.
-     *
-     * @return Whether this instance applies to direct damage sources.
-     */
-    @Override
-    public boolean getAppliesToDirectDamage() {
-        return this.appliesToDirect;
-    }
-
-    /**
-     * Set whether this instance applies to direct damage sources.
-     *
-     * @param value Whether this instance applies to direct damage sources.
-     */
-    @Override
-    public void setAppliesToDirectDamage(boolean value) {
-        this.appliesToDirect = value;
-    }
-
-    /**
-     * Get whether this instance applies to indirect damage sources.
-     *
-     * @return Whether this instance applies to indirect damage sources.
-     */
-    @Override
-    public boolean getAppliesToIndirectDamage() {
-        return this.appliesToIndirect;
-    }
-
-    /**
-     * Set whether this instance applies to indirect damage sources.
-     *
-     * @param value Whether this instance applies to indirect damage sources.
-     */
-    @Override
-    public void setAppliesToIndirectDamage(boolean value) {
-        this.appliesToIndirect = value;
     }
 }

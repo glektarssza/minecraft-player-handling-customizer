@@ -7,7 +7,7 @@ import net.minecraftforge.common.util.Constants.NBT;
 /**
  * An interface that represents immunity from knockback events.
  */
-public interface IKnockbackImmunity extends IPhysicalImmunity {
+public interface IKnockbackImmunity extends IImmunity {
     /**
      * Get the type of immunity represented by this instance.
      *
@@ -31,8 +31,6 @@ public interface IKnockbackImmunity extends IPhysicalImmunity {
         if (this.hasEntityType()) {
             nbt.setString("entityType", this.getEntityType());
         }
-        nbt.setBoolean("appliesToDirect", this.getAppliesToDirectDamage());
-        nbt.setBoolean("appliesToIndirect", this.getAppliesToIndirectDamage());
         return nbt;
     }
 
@@ -55,16 +53,6 @@ public interface IKnockbackImmunity extends IPhysicalImmunity {
             this.setEntityType(nbt.getString("entityType"));
         } else {
             this.setEntityType(null);
-        }
-        if (nbt.hasKey("appliesToDirect", NBT.TAG_ANY_NUMERIC)) {
-            this.setAppliesToDirectDamage(nbt.getBoolean("appliesToDirect"));
-        } else {
-            this.setAppliesToDirectDamage(false);
-        }
-        if (nbt.hasKey("appliesToIndirect", NBT.TAG_ANY_NUMERIC)) {
-            this.setAppliesToDirectDamage(nbt.getBoolean("appliesToIndirect"));
-        } else {
-            this.setAppliesToDirectDamage(false);
         }
     }
 }
