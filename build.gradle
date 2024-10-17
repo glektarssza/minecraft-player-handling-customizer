@@ -90,6 +90,16 @@ repositories {
 	    	includeGroup 'com.cleanroommc'
 	    }
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                url "https://cursemaven.com"
+            }
+        }
+        filter {
+            includeGroup "curse.maven"
+        }
+    }
     maven {
 		name = 'SpongePowered Maven'
 		url = 'https://repo.spongepowered.org/maven'
@@ -116,7 +126,10 @@ dependencies {
         annotationProcessor(mixinProviderSpec) { transitive = false }
     }
 
-    // Runtime-only mods
+    // Runtime-only mods (things we like for easier testing!)
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:had-enough-items-557549:5815590")
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:configanytime-870276:5212709")
+    runtimeOnlyNonPublishable rfg.deobf("curse.maven:universal-tweaks-705000:5529764")
 
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.2'
