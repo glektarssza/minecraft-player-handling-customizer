@@ -24,15 +24,16 @@ public class ImmunityUtils {
     public static boolean entityMatchesTargetingImmunity(
         EntityLivingBase entity, ITargetingImmunity immunity) {
         String immunityId = immunity.getEntityType();
-        String entityRL = EntityList.getKey(entity).toString().toLowerCase()
-        if (immunityId == "") {
+        String entityRL = EntityList.getKey(entity).toString().toLowerCase();
+        if (immunityId.equals("")) {
             return false;
         }
-        if (immunityId == "*") {
+        if (immunityId.equals("*")) {
             return true;
         }
         if (immunityId.contains("*")) {
-            return Pattern.matches(immunityId.replace("*", "[a-zA-Z0-9_-/]+"), entityRL);
+            return Pattern.matches(immunityId.replace("*", "[a-zA-Z0-9_-/]+"),
+                entityRL);
         }
         return entityRL == immunityId;
     }

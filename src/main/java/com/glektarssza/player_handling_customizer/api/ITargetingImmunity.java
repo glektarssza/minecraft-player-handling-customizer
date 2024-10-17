@@ -74,7 +74,7 @@ public interface ITargetingImmunity extends IImmunity {
         }
         ImmunityType type = ImmunityType
             .fromNBTString((NBTTagString) nbt.getTag("immunityType"));
-        if (type != "targeting") {
+        if (type != ImmunityType.Targeting) {
             return;
         }
         if (nbt.hasKey("entityType", NBT.TAG_STRING)) {

@@ -40,14 +40,14 @@ public class ImmunityCommand extends CommandBase {
     @Override
     public List<String> getTabCompletions(MinecraftServer server,
         ICommandSender sender, String[] args, BlockPos targetPos) {
-        if (args.length == 0) {
+        if (args.length == 1) {
             return Arrays.asList(server.getOnlinePlayerNames());
-        } else if (args.length == 1) {
-            return Arrays.asList("add", "remove", "list");
         } else if (args.length == 2) {
+            return Arrays.asList("add", "remove", "list");
+        } else if (args.length == 3) {
             return Arrays.asList("*", "damage", "hurt", "knockback",
                 "targeting");
-        } else if (args.length == 3) {
+        } else if (args.length == 4) {
             List<String> allOptions = EntityList.getEntityNameList().stream()
                 .map((rl) -> rl.toString()).collect(Collectors.toList());
             allOptions.add(0, "*");
@@ -66,5 +66,6 @@ public class ImmunityCommand extends CommandBase {
         EntityPlayer player = (EntityPlayer) entity;
         NBTTagCompound playerModData = PlayerUtils.getPlayerModData(player);
         // TODO: Update player NBT data
+        throw new CommandException("Work in progress!");
     }
 }
