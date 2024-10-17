@@ -1,8 +1,10 @@
 package com.glektarssza.player_handling_customizer.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.glektarssza.player_handling_customizer.Tags;
@@ -12,10 +14,12 @@ import com.glektarssza.player_handling_customizer.api.IImmunity;
 import com.glektarssza.player_handling_customizer.api.IKnockbackImmunity;
 import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 import com.glektarssza.player_handling_customizer.api.ImmunityType;
+import com.glektarssza.player_handling_customizer.config.PlayerHandlingCustomizerConfig;
 import com.glektarssza.player_handling_customizer.impl.DamageImmunity;
 import com.glektarssza.player_handling_customizer.impl.HurtImmunity;
 import com.glektarssza.player_handling_customizer.impl.KnockbackImmunity;
 import com.glektarssza.player_handling_customizer.impl.TargetingImmunity;
+import com.mojang.authlib.GameProfile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
@@ -28,6 +32,25 @@ import net.minecraftforge.common.util.Constants.NBT;
  * A collection of player-related utility methods.
  */
 public class PlayerUtils {
+    /**
+     * Check if a player is globally immune to being targeted.
+     *
+     * @param player The player to check.
+     *
+     * @return {@code true} if the player is globally immune; {@code false}
+     *         otherwise.
+     */
+    public static boolean getIsPlayerGloballyImmune(EntityPlayer player) {
+        GameProfile playerProfile = player.getGameProfile();
+        UUID playerUUID = playerProfile == null ? null
+            : EntityPlayer.getUUID(playerProfile);
+        return Arrays.asList(PlayerHandlingCustomizerConfig.immunePlayers)
+            .stream()
+            .anyMatch((item) -> playerUUID != null
+                && item.equalsIgnoreCase(playerUUID.toString())
+                || item.equalsIgnoreCase(player.getName()));
+    }
+
     /**
      * Get the NBT data from a player for the mod.
      *
