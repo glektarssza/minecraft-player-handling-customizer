@@ -2,8 +2,11 @@ package com.glektarssza.player_handling_customizer;
 
 import org.apache.logging.log4j.Logger;
 
+import com.glektarssza.player_handling_customizer.commands.ImmunityList;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 /**
  * The root mod class.
@@ -27,10 +30,22 @@ public class PlayerHandlingCustomizer {
      * @param event The event to handle.
      */
     @Mod.EventHandler
-    public void OnPreInit(FMLPreInitializationEvent event) {
+    public void onPreInit(FMLPreInitializationEvent event) {
         LOGGER = event.getModLog();
         LOGGER.info("Pre-initializing {}...", Tags.MOD_NAME);
         // TODO: Pre-initialization
         LOGGER.info("Done pre-initializing {}!", Tags.MOD_NAME);
+    }
+
+    /**
+     * Handle the Forge Mod Loader pre-server start event.
+     *
+     * @param event The event to handle.
+     */
+    @Mod.EventHandler
+    public void onServerStarting(FMLServerStartingEvent event) {
+        LOGGER.info("Registering commands for {}...", Tags.MOD_NAME);
+        event.registerServerCommand(new ImmunityList());
+        LOGGER.info("Done registering commands for {}...", Tags.MOD_NAME);
     }
 }

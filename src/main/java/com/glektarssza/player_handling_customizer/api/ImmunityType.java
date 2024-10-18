@@ -29,6 +29,30 @@ public enum ImmunityType {
     Targeting;
 
     /**
+     * Parse a string into an enumeration value.
+     *
+     * @param value The string to parse.
+     *
+     * @return An enumeration value that matches the string; {@code null} if
+     *         none match.
+     */
+    @Nullable
+    public static ImmunityType fromString(String value) {
+        switch (value.toLowerCase()) {
+            case "damage":
+                return Damage;
+            case "hurt":
+                return Hurt;
+            case "knockback":
+                return Knockback;
+            case "targeting":
+                return Targeting;
+            default:
+                return null;
+        }
+    }
+
+    /**
      * Parse a NBT string tag into an enumeration value.
      *
      * @param value The NBT string tag to parse.
