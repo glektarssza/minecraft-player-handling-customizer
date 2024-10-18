@@ -1,5 +1,6 @@
 player_handling_customizer.words.player.upper=Player
 player_handling_customizer.words.player.lower=player
+player_handling_customizer.words.entityType.lower=entityType
 player_handling_customizer.immunityTypes.direct.upper=Direct
 player_handling_customizer.immunityTypes.direct.lower=direct
 player_handling_customizer.immunityTypes.indirect.upper=Indirect
@@ -19,6 +20,10 @@ player_handling_customizer.commands.immunityList.response.item.directional=%s %s
 player_handling_customizer.commands.immunityList.response.item.non_directional=%s %s immunity from %s
 player_handling_customizer.commands.immunityList.response.limited=Only showing the first 100 items
 player_handling_customizer.commands.immunityList.response.no_items=None
+player_handling_customizer.commands.immunityAdd=immunityAdd
+player_handling_customizer.commands.immunityAdd.usage=/%s <%s> [%s|%s|%s|%s|*] [%s|*] [%s|%s|*]
+player_handling_customizer.commands.immunityAdd.response.success=Added immunity to player "%s"
+player_handling_customizer.commands.immunityAdd.response.already_immune=Player "%s" already has that immunity
 player_handling_customizer.commands.errors.work_in_progress=Still a work in progress!
 player_handling_customizer.commands.errors.player_not_found=Player not found (are they online?)
 player_handling_customizer.commands.errors.syntax.missing_command=Unknown command
