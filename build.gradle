@@ -98,7 +98,7 @@ dependencies {
     }
     if (project.use_mixins.toBoolean()) {
     	def refMapName = 'mixins.' + project.archive_base_name + 'refmap.json'
-    	def mixinProviderSpec = 'zone.rong:mixinbooter:9.4'
+    	def mixinProviderSpec = 'zone.rong:mixinbooter:10.1'
 
     	// Common
     	annotationProcessor('org.ow2.asm:asm-debug-all:5.2')
