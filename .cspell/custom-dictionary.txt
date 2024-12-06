@@ -1,1 +1,6 @@
 # Custom Dictionary Words
+customizer
+assetmover
+coremod
+futura
+jvmargs
