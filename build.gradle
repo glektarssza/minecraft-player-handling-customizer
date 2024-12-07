@@ -115,6 +115,7 @@ dependencies {
 
     // Runtime-only mods (things we like for easier testing!)
     runtimeOnlyNonPublishable rfg.deobf('curse.maven:had-enough-items-557549:5815590')
+    runtimeOnlyNonPublishable rfg.deobf('curse.maven:jei-utilities-616190:4318448')
     runtimeOnlyNonPublishable rfg.deobf('curse.maven:configanytime-870276:5212709')
     runtimeOnlyNonPublishable rfg.deobf('curse.maven:universal-tweaks-705000:5529764')
     runtimeOnlyNonPublishable rfg.deobf('curse.maven:in-game-account-switcher-232676:3993185')
