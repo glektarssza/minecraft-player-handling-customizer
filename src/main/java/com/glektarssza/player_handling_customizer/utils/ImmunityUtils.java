@@ -7,6 +7,7 @@ import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * A collection of utilities for working with immunities.
@@ -15,17 +16,20 @@ public class ImmunityUtils {
     /**
      * Check if an entity matches against an immunity from being targeted.
      *
-     * @param entity The entity to compared against the targeting immunity.
+     * @param entity   The entity to compared against the targeting immunity.
      * @param immunity The immunity to check against.
      *
      * @return {@code true} if the immunity makes the subject immune to being
      *         targeted by the entity; {@code false} otherwise.
      */
     public static boolean entityMatchesTargetingImmunity(
-        EntityLivingBase entity, ITargetingImmunity immunity) {
+            EntityLivingBase entity, ITargetingImmunity immunity) {
         String immunityId = immunity.getEntityType();
-        String entityRL = EntityList.getKey(entity).toString().toLowerCase();
-        if (immunityId.equals("")) {
+        ResourceLocation entityRL = EntityList.getKey(entity);
+        if (entityRL == null) {
+            return false;
+        }
+        if (immunityId == null || immunityId.equals("")) {
             return false;
         }
         if (immunityId.equals("*")) {
@@ -33,7 +37,7 @@ public class ImmunityUtils {
         }
         if (immunityId.contains("*")) {
             return Pattern.matches(immunityId.replace("*", "[a-zA-Z0-9_-/]+"),
-                entityRL);
+                    entityRL.toString().toLowerCase());
         }
         return entityRL.equals(immunityId);
     }
@@ -42,15 +46,15 @@ public class ImmunityUtils {
      * Check if an entity matches against any of a list of immunities from being
      * targeted.
      *
-     * @param entity The entity to compared against the targeting immunities.
+     * @param entity       The entity to compared against the targeting immunities.
      * @param immunityList The list of immunities to check against.
      *
      * @return {@code true} if at least one of the immunities makes the subject
      *         immune to being targeted by the entity; {@code false} otherwise.
      */
     public static boolean entityMatchesAnyTargetingImmunity(
-        EntityLivingBase entity, List<ITargetingImmunity> immunityList) {
+            EntityLivingBase entity, List<ITargetingImmunity> immunityList) {
         return immunityList.stream().anyMatch((immunity) -> ImmunityUtils
-            .entityMatchesTargetingImmunity(entity, immunity));
+                .entityMatchesTargetingImmunity(entity, immunity));
     }
 }
