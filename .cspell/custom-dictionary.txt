@@ -2,7 +2,9 @@
 assetmover
 coremod
 customizer
+divinerpg
 enderman
 futura
 Invincibles
 jvmargs
+refmap
