@@ -123,6 +123,9 @@ dependencies {
     if (project.hasProperty('use_advent_of_ascension') && project.use_advent_of_ascension.toBoolean()) {
 		devOnlyNonPublishable rfg.deobf('curse.maven:advent-of-ascension-nevermine-311054:3054253')
     }
+    if (project.hasProperty('use_divine_rpg') && project.use_divine_rpg.toBoolean()) {
+		devOnlyNonPublishable rfg.deobf('curse.maven:official-divinerpg-363543:3081433')
+    }
 
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.3'
