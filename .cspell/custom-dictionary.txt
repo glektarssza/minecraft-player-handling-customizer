@@ -4,3 +4,4 @@ assetmover
 coremod
 futura
 jvmargs
+enderman
