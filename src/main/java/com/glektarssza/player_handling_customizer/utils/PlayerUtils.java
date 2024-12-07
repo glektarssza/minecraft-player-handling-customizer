@@ -19,13 +19,14 @@ import com.glektarssza.player_handling_customizer.impl.DamageImmunity;
 import com.glektarssza.player_handling_customizer.impl.HurtImmunity;
 import com.glektarssza.player_handling_customizer.impl.KnockbackImmunity;
 import com.glektarssza.player_handling_customizer.impl.TargetingImmunity;
-import com.mojang.authlib.GameProfile;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import com.mojang.authlib.GameProfile;
+
 import net.minecraftforge.common.util.Constants.NBT;
 
 /**
@@ -43,12 +44,12 @@ public class PlayerUtils {
     public static boolean getIsPlayerGloballyImmune(EntityPlayer player) {
         GameProfile playerProfile = player.getGameProfile();
         UUID playerUUID = playerProfile == null ? null
-            : EntityPlayer.getUUID(playerProfile);
+                : EntityPlayer.getUUID(playerProfile);
         return Arrays.asList(PlayerHandlingCustomizerConfig.immunePlayers)
-            .stream()
-            .anyMatch((item) -> playerUUID != null
-                && item.equalsIgnoreCase(playerUUID.toString())
-                || item.equalsIgnoreCase(player.getName()));
+                .stream()
+                .anyMatch((item) -> playerUUID != null
+                        && item.equalsIgnoreCase(playerUUID.toString())
+                        || item.equalsIgnoreCase(player.getName()));
     }
 
     /**
@@ -80,7 +81,7 @@ public class PlayerUtils {
             return Collections.emptyList();
         }
         NBTTagList nbtImmunityList = playerData.getTagList("immunities",
-            NBT.TAG_COMPOUND);
+                NBT.TAG_COMPOUND);
         if (nbtImmunityList.isEmpty()) {
             return Collections.emptyList();
         }
@@ -94,7 +95,10 @@ public class PlayerUtils {
                 continue;
             }
             ImmunityType type = ImmunityType
-                .fromNBTString((NBTTagString) nbtItem.getTag("immunityType"));
+                    .fromNBTString((NBTTagString) nbtItem.getTag("immunityType"));
+            if (type == null) {
+                continue;
+            }
             IImmunity item;
             switch (type) {
                 case Damage:
@@ -122,61 +126,61 @@ public class PlayerUtils {
      * Get a list of damage immunities attached to a player.
      *
      * @param player The player to get the associated list of damage immunities
-     *        from.
+     *               from.
      *
      * @return The list of damage immunities associated with the player.
      */
     public static List<IDamageImmunity> getPlayerDamageImmunities(
-        EntityPlayer player) {
+            EntityPlayer player) {
         return PlayerUtils.getPlayerImmunities(player).stream()
-            .filter((item) -> item.getImmunityType() == ImmunityType.Damage)
-            .map((item) -> (IDamageImmunity) item).collect(Collectors.toList());
+                .filter((item) -> item.getImmunityType() == ImmunityType.Damage)
+                .map((item) -> (IDamageImmunity) item).collect(Collectors.toList());
     }
 
     /**
      * Get a list of hurt immunities attached to a player.
      *
      * @param player The player to get the associated list of hurt immunities
-     *        from.
+     *               from.
      *
      * @return The list of hurt immunities associated with the player.
      */
     public static List<IHurtImmunity> getPlayerHurtImmunities(
-        EntityPlayer player) {
+            EntityPlayer player) {
         return PlayerUtils.getPlayerImmunities(player).stream()
-            .filter((item) -> item.getImmunityType() == ImmunityType.Hurt)
-            .map((item) -> (IHurtImmunity) item).collect(Collectors.toList());
+                .filter((item) -> item.getImmunityType() == ImmunityType.Hurt)
+                .map((item) -> (IHurtImmunity) item).collect(Collectors.toList());
     }
 
     /**
      * Get a list of knockback immunities attached to a player.
      *
      * @param player The player to get the associated list of knockback
-     *        immunities from.
+     *               immunities from.
      *
      * @return The list of knockback immunities associated with the player.
      */
     public static List<IKnockbackImmunity> getPlayerKnockbackImmunities(
-        EntityPlayer player) {
+            EntityPlayer player) {
         return PlayerUtils.getPlayerImmunities(player).stream()
-            .filter((item) -> item.getImmunityType() == ImmunityType.Knockback)
-            .map((item) -> (IKnockbackImmunity) item)
-            .collect(Collectors.toList());
+                .filter((item) -> item.getImmunityType() == ImmunityType.Knockback)
+                .map((item) -> (IKnockbackImmunity) item)
+                .collect(Collectors.toList());
     }
 
     /**
      * Get a list of targeting immunities attached to a player.
      *
      * @param player The player to get the associated list of targeting
-     *        immunities from.
+     *               immunities from.
      *
      * @return The list of targeting immunities associated with the player.
      */
     public static List<ITargetingImmunity> getPlayerTargetingImmunities(
-        EntityPlayer player) {
+            EntityPlayer player) {
         return PlayerUtils.getPlayerImmunities(player).stream()
-            .filter((item) -> item.getImmunityType() == ImmunityType.Targeting)
-            .map((item) -> (ITargetingImmunity) item)
-            .collect(Collectors.toList());
+                .filter((item) -> item.getImmunityType() == ImmunityType.Targeting)
+                .map((item) -> (ITargetingImmunity) item)
+                .collect(Collectors.toList());
     }
 }
