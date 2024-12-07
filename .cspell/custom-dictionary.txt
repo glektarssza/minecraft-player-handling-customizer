@@ -1,7 +1,8 @@
 # Custom Dictionary Words
-customizer
 assetmover
 coremod
-futura
-jvmargs
+customizer
 enderman
+futura
+Invincibles
+jvmargs
