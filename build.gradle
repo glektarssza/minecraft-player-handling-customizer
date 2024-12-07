@@ -99,7 +99,7 @@ dependencies {
     }
     if (project.use_mixins.toBoolean()) {
     	def refMapName = 'mixins.' + project.archive_base_name + 'refmap.json'
-    	def mixinProviderSpec = 'zone.rong:mixinbooter:9.4'
+    	def mixinProviderSpec = 'zone.rong:mixinbooter:10.2'
 
     	// Common
     	annotationProcessor('org.ow2.asm:asm-debug-all:5.2')
@@ -123,9 +123,9 @@ dependencies {
     }
 
     // Testing
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
 }
 
 test {
