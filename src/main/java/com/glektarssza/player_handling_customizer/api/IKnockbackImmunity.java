@@ -26,10 +26,18 @@ public interface IKnockbackImmunity extends IImmunity {
     @Override
     default NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setTag("immunityType",
-            ImmunityType.toNBTString(this.getImmunityType()));
+        NBTTagString immunityType = ImmunityType.toNBTString(this.getImmunityType());
+        String entityType = null;
+        if (immunityType == null) {
+            return nbt;
+        }
         if (this.hasEntityType()) {
-            nbt.setString("entityType", this.getEntityType());
+            entityType = this.getEntityType();
+        }
+        nbt.setTag("immunityType",
+                immunityType);
+        if (entityType != null) {
+            nbt.setString("entityType", entityType);
         }
         return nbt;
     }
@@ -45,7 +53,7 @@ public interface IKnockbackImmunity extends IImmunity {
             return;
         }
         ImmunityType type = ImmunityType
-            .fromNBTString((NBTTagString) nbt.getTag("immunityType"));
+                .fromNBTString((NBTTagString) nbt.getTag("immunityType"));
         if (type != ImmunityType.Knockback) {
             return;
         }

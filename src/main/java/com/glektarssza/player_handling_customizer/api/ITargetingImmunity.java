@@ -17,6 +17,7 @@ public interface ITargetingImmunity extends IImmunity {
      * @return Whether this instance has an entity type from which this instance
      *         grants immunity from.
      */
+    @Override
     boolean hasEntityType();
 
     /**
@@ -25,6 +26,7 @@ public interface ITargetingImmunity extends IImmunity {
      * @return The entity source that this instance grants immunity to damage
      *         from.
      */
+    @Override
     @Nullable
     String getEntityType();
 
@@ -32,8 +34,9 @@ public interface ITargetingImmunity extends IImmunity {
      * Set the entity type that this instance grants immunity to damage from.
      *
      * @param entityType The entity type that this instance grants immunity to
-     *        damage from.
+     *                   damage from.
      */
+    @Override
     void setEntityType(@Nullable String entityType);
 
     /**
@@ -54,10 +57,18 @@ public interface ITargetingImmunity extends IImmunity {
     @Override
     default NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setTag("immunityType",
-            ImmunityType.toNBTString(this.getImmunityType()));
+        NBTTagString immunityType = ImmunityType.toNBTString(this.getImmunityType());
+        String entityType = null;
+        if (immunityType == null) {
+            return nbt;
+        }
         if (this.hasEntityType()) {
-            nbt.setString("entityType", this.getEntityType());
+            entityType = this.getEntityType();
+        }
+        nbt.setTag("immunityType",
+                immunityType);
+        if (entityType != null) {
+            nbt.setString("entityType", entityType);
         }
         return nbt;
     }
@@ -73,7 +84,7 @@ public interface ITargetingImmunity extends IImmunity {
             return;
         }
         ImmunityType type = ImmunityType
-            .fromNBTString((NBTTagString) nbt.getTag("immunityType"));
+                .fromNBTString((NBTTagString) nbt.getTag("immunityType"));
         if (type != ImmunityType.Targeting) {
             return;
         }

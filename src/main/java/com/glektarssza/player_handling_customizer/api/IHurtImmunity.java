@@ -26,11 +26,19 @@ public interface IHurtImmunity extends IPhysicalImmunity {
     @Override
     default NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setTag("immunityType",
-            ImmunityType.toNBTString(this.getImmunityType()));
-        nbt.setString("damageType", this.getDamageType());
+        NBTTagString immunityType = ImmunityType.toNBTString(this.getImmunityType());
+        String entityType = null;
+        if (immunityType == null) {
+            return nbt;
+        }
         if (this.hasEntityType()) {
-            nbt.setString("entityType", this.getEntityType());
+            entityType = this.getEntityType();
+        }
+        nbt.setTag("immunityType",
+                immunityType);
+        nbt.setString("damageType", this.getDamageType());
+        if (entityType != null) {
+            nbt.setString("entityType", entityType);
         }
         nbt.setBoolean("appliesToDirect", this.getAppliesToDirectDamage());
         nbt.setBoolean("appliesToIndirect", this.getAppliesToIndirectDamage());
@@ -48,7 +56,7 @@ public interface IHurtImmunity extends IPhysicalImmunity {
             return;
         }
         ImmunityType type = ImmunityType
-            .fromNBTString((NBTTagString) nbt.getTag("immunityType"));
+                .fromNBTString((NBTTagString) nbt.getTag("immunityType"));
         if (type != ImmunityType.Hurt) {
             return;
         }

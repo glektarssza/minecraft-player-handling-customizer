@@ -1,5 +1,6 @@
 package com.glektarssza.player_handling_customizer.api;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.nbt.NBTTagString;
@@ -37,7 +38,7 @@ public enum ImmunityType {
      *         {@code null} if none match.
      */
     @Nullable
-    public static ImmunityType fromNBTString(NBTTagString value) {
+    public static ImmunityType fromNBTString(@Nonnull NBTTagString value) {
         switch (value.getString().toLowerCase()) {
             case "damage":
                 return Damage;
@@ -61,7 +62,7 @@ public enum ImmunityType {
      *         {@code null} otherwise.
      */
     @Nullable
-    public static NBTTagString toNBTString(ImmunityType value) {
+    public static NBTTagString toNBTString(@Nonnull ImmunityType value) {
         switch (value) {
             case Damage:
                 return new NBTTagString("damage");
