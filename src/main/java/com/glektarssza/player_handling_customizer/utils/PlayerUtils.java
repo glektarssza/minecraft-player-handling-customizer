@@ -7,6 +7,14 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
+
+import net.minecraftforge.common.util.Constants.NBT;
+
 import com.glektarssza.player_handling_customizer.Tags;
 import com.glektarssza.player_handling_customizer.api.IDamageImmunity;
 import com.glektarssza.player_handling_customizer.api.IHurtImmunity;
@@ -65,7 +73,7 @@ public class PlayerUtils {
         if (!playerData.hasKey(Tags.MOD_ID, NBT.TAG_COMPOUND)) {
             return new NBTTagCompound();
         }
-        return (NBTTagCompound) playerData.getTag(Tags.MOD_ID);
+        return (NBTTagCompound)playerData.getTag(Tags.MOD_ID);
     }
 
     /**
@@ -90,7 +98,7 @@ public class PlayerUtils {
             if (!(nbtBaseItem instanceof NBTTagCompound)) {
                 continue;
             }
-            NBTTagCompound nbtItem = (NBTTagCompound) nbtBaseItem;
+            NBTTagCompound nbtItem = (NBTTagCompound)nbtBaseItem;
             if (!nbtItem.hasKey("immunityType", NBT.TAG_STRING)) {
                 continue;
             }

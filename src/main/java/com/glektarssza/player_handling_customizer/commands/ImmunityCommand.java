@@ -25,6 +25,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
+
 /**
  * A command handler to add an immunity to a player.
  */
