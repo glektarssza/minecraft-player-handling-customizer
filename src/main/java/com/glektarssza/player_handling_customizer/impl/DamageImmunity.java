@@ -71,8 +71,9 @@ public class DamageImmunity implements IDamageImmunity {
      * @param appliesToDirect Whether the new instances applies to direct damage
      *        sources.
      */
-    public DamageImmunity(String damageType, String entityType,
-        boolean appliesToDirect) {
+    public DamageImmunity(
+        String damageType, String entityType, boolean appliesToDirect
+    ) {
         this.damageType = damageType;
         this.entityType = entityType;
         this.appliesToDirect = appliesToDirect;
@@ -89,8 +90,12 @@ public class DamageImmunity implements IDamageImmunity {
      * @param appliesToIndirect Whether the new instances applies to indirect
      *        damage sources.
      */
-    public DamageImmunity(String damageType, String entityType,
-        boolean appliesToDirect, boolean appliesToIndirect) {
+    public DamageImmunity(
+        String damageType,
+        String entityType,
+        boolean appliesToDirect,
+        boolean appliesToIndirect
+    ) {
         this.damageType = damageType;
         this.entityType = entityType;
         this.appliesToDirect = appliesToDirect;
