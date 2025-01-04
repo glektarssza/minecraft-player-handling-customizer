@@ -23,7 +23,8 @@ public class ImmunityUtils {
      *         targeted by the entity; {@code false} otherwise.
      */
     public static boolean entityMatchesTargetingImmunity(
-            EntityLivingBase entity, ITargetingImmunity immunity) {
+        EntityLivingBase entity, ITargetingImmunity immunity
+    ) {
         String immunityId = immunity.getEntityType();
         ResourceLocation entityRL = EntityList.getKey(entity);
         if (entityRL == null) {
@@ -36,8 +37,10 @@ public class ImmunityUtils {
             return true;
         }
         if (immunityId.contains("*")) {
-            return Pattern.matches(immunityId.replace("*", "[a-zA-Z0-9_-/]+"),
-                    entityRL.toString().toLowerCase());
+            return Pattern.matches(
+                immunityId.replace("*", "[a-zA-Z0-9_-/]+"),
+                entityRL.toString().toLowerCase()
+            );
         }
         return entityRL.equals(immunityId);
     }
@@ -46,15 +49,19 @@ public class ImmunityUtils {
      * Check if an entity matches against any of a list of immunities from being
      * targeted.
      *
-     * @param entity       The entity to compared against the targeting immunities.
+     * @param entity       The entity to compared against the targeting
+     *     immunities.
      * @param immunityList The list of immunities to check against.
      *
      * @return {@code true} if at least one of the immunities makes the subject
      *         immune to being targeted by the entity; {@code false} otherwise.
      */
     public static boolean entityMatchesAnyTargetingImmunity(
-            EntityLivingBase entity, List<ITargetingImmunity> immunityList) {
-        return immunityList.stream().anyMatch((immunity) -> ImmunityUtils
-                .entityMatchesTargetingImmunity(entity, immunity));
+        EntityLivingBase entity, List<ITargetingImmunity> immunityList
+    ) {
+        return immunityList.stream().anyMatch(
+            (immunity
+            ) -> ImmunityUtils.entityMatchesTargetingImmunity(entity, immunity)
+        );
     }
 }

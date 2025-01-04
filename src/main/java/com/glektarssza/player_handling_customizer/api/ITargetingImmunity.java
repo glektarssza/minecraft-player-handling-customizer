@@ -58,7 +58,8 @@ public interface ITargetingImmunity extends IImmunity {
     @Override
     default NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        NBTTagString immunityType = ImmunityType.toNBTString(this.getImmunityType());
+        NBTTagString immunityType =
+            ImmunityType.toNBTString(this.getImmunityType());
         String entityType = null;
         if (immunityType == null) {
             return nbt;
@@ -66,8 +67,7 @@ public interface ITargetingImmunity extends IImmunity {
         if (this.hasEntityType()) {
             entityType = this.getEntityType();
         }
-        nbt.setTag("immunityType",
-                immunityType);
+        nbt.setTag("immunityType", immunityType);
         if (entityType != null) {
             nbt.setString("entityType", entityType);
         }
@@ -84,8 +84,8 @@ public interface ITargetingImmunity extends IImmunity {
         if (!nbt.hasKey("immunityType", NBT.TAG_STRING)) {
             return;
         }
-        ImmunityType type = ImmunityType
-                .fromNBTString((NBTTagString) nbt.getTag("immunityType"));
+        ImmunityType type = ImmunityType.fromNBTString((NBTTagString
+        )nbt.getTag("immunityType"));
         if (type != ImmunityType.Targeting) {
             return;
         }

@@ -3,6 +3,7 @@ package com.glektarssza.player_handling_customizer;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.command.CommandReload;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.common.config.ConfigManager;
@@ -16,7 +17,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 /**
  * The root mod class.
  */
-@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.MOD_VERSION, dependencies = Tags.MOD_DEPENDENCIES, acceptableRemoteVersions = "*")
+@Mod(
+    modid = Tags.MOD_ID,
+    name = Tags.MOD_NAME,
+    version = Tags.MOD_VERSION,
+    dependencies = Tags.MOD_DEPENDENCIES,
+    acceptableRemoteVersions = "*"
+)
 public class PlayerHandlingCustomizer {
     /**
      * The logger to use for the mod.
