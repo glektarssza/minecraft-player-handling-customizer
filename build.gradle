@@ -128,6 +128,9 @@ dependencies {
     if (project.hasProperty('use_divine_rpg') && project.use_divine_rpg.toBoolean()) {
 		devOnlyNonPublishable rfg.deobf('curse.maven:official-divinerpg-363543:3081433')
     }
+    if (project.hasProperty('use_divine_rpg') && project.use_divine_rpg.toBoolean()) {
+	    devOnlyNonPublishable rfg.deobf('curse.maven:aether-255308:5035622')
+    }
 
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
