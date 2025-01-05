@@ -25,6 +25,8 @@ import com.glektarssza.player_handling_customizer.api.IPhysicalImmunity;
 import com.glektarssza.player_handling_customizer.api.ImmunityType;
 import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
+import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
+
 /**
  * A command handler to add an immunity to a player.
  */
