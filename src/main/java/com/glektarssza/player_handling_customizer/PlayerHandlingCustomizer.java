@@ -3,6 +3,7 @@ package com.glektarssza.player_handling_customizer;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.command.CommandReload;
+
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config.Type;
 import net.minecraftforge.common.config.ConfigManager;

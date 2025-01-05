@@ -2,6 +2,7 @@ package com.glektarssza.player_handling_customizer.api;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagString;
+
 import net.minecraftforge.common.util.Constants.NBT;
 
 /**
@@ -26,7 +27,8 @@ public interface IHurtImmunity extends IPhysicalImmunity {
     @Override
     default NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        NBTTagString immunityType = ImmunityType.toNBTString(this.getImmunityType());
+        NBTTagString immunityType = ImmunityType
+            .toNBTString(this.getImmunityType());
         String entityType = null;
         if (immunityType == null) {
             return nbt;
@@ -35,7 +37,7 @@ public interface IHurtImmunity extends IPhysicalImmunity {
             entityType = this.getEntityType();
         }
         nbt.setTag("immunityType",
-                immunityType);
+            immunityType);
         nbt.setString("damageType", this.getDamageType());
         if (entityType != null) {
             nbt.setString("entityType", entityType);

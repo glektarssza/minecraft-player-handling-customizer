@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagString;
+
 import net.minecraftforge.common.util.Constants.NBT;
 
 /**
@@ -34,7 +35,7 @@ public interface ITargetingImmunity extends IImmunity {
      * Set the entity type that this instance grants immunity to damage from.
      *
      * @param entityType The entity type that this instance grants immunity to
-     *                   damage from.
+     *        damage from.
      */
     @Override
     void setEntityType(@Nullable String entityType);
@@ -57,7 +58,8 @@ public interface ITargetingImmunity extends IImmunity {
     @Override
     default NBTTagCompound serializeNBT() {
         NBTTagCompound nbt = new NBTTagCompound();
-        NBTTagString immunityType = ImmunityType.toNBTString(this.getImmunityType());
+        NBTTagString immunityType = ImmunityType
+            .toNBTString(this.getImmunityType());
         String entityType = null;
         if (immunityType == null) {
             return nbt;
@@ -66,7 +68,7 @@ public interface ITargetingImmunity extends IImmunity {
             entityType = this.getEntityType();
         }
         nbt.setTag("immunityType",
-                immunityType);
+            immunityType);
         if (entityType != null) {
             nbt.setString("entityType", entityType);
         }

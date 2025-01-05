@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraftforge.fml.common.Loader;
+
 import zone.rong.mixinbooter.ILateMixinLoader;
 
 /**
@@ -14,7 +15,8 @@ public class LateMixinInitializer implements ILateMixinLoader {
     public List<String> getMixinConfigs() {
         List<String> mixinConfigs = new ArrayList<String>();
         if (Loader.isModLoaded("divinerpg")) {
-            mixinConfigs.add("mixins.player-handling-customizer.divinerpg.json");
+            mixinConfigs
+                .add("mixins.player-handling-customizer.divinerpg.json");
         }
         return mixinConfigs;
     }

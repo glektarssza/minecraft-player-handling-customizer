@@ -16,7 +16,7 @@ public class ImmunityUtils {
     /**
      * Check if an entity matches against an immunity from being targeted.
      *
-     * @param entity   The entity to compared against the targeting immunity.
+     * @param entity The entity to compared against the targeting immunity.
      * @param immunity The immunity to check against.
      *
      * @return {@code true} if the immunity makes the subject immune to being
@@ -37,7 +37,7 @@ public class ImmunityUtils {
         }
         if (immunityId.contains("*")) {
             return Pattern.matches(immunityId.replace("*", "[a-zA-Z0-9_-/]+"),
-                    entityRL.toString().toLowerCase());
+                entityRL.toString().toLowerCase());
         }
         return entityRL.equals(immunityId);
     }
@@ -46,7 +46,7 @@ public class ImmunityUtils {
      * Check if an entity matches against any of a list of immunities from being
      * targeted.
      *
-     * @param entity       The entity to compared against the targeting immunities.
+     * @param entity The entity to compared against the targeting immunities.
      * @param immunityList The list of immunities to check against.
      *
      * @return {@code true} if at least one of the immunities makes the subject

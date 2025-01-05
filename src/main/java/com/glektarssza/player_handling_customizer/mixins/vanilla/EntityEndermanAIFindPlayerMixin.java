@@ -2,6 +2,10 @@ package com.glektarssza.player_handling_customizer.mixins.vanilla;
 
 import java.util.List;
 
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.monster.EntityEnderman.AIFindPlayer;
+import net.minecraft.entity.player.EntityPlayer;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -10,10 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 import com.glektarssza.player_handling_customizer.utils.ImmunityUtils;
 import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
-
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityEnderman.AIFindPlayer;
-import net.minecraft.entity.player.EntityPlayer;
 
 @Mixin(AIFindPlayer.class)
 public class EntityEndermanAIFindPlayerMixin {
@@ -26,9 +26,9 @@ public class EntityEndermanAIFindPlayerMixin {
             return;
         }
         List<ITargetingImmunity> immunities = PlayerUtils
-                .getPlayerTargetingImmunities(player);
+            .getPlayerTargetingImmunities(player);
         if (ImmunityUtils.entityMatchesAnyTargetingImmunity(attacker,
-                immunities) || PlayerUtils.getIsPlayerGloballyImmune(player)) {
+            immunities) || PlayerUtils.getIsPlayerGloballyImmune(player)) {
             cir.setReturnValue(false);
         }
     }

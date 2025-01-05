@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.mojang.authlib.GameProfile;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,13 +30,6 @@ import com.glektarssza.player_handling_customizer.impl.HurtImmunity;
 import com.glektarssza.player_handling_customizer.impl.KnockbackImmunity;
 import com.glektarssza.player_handling_customizer.impl.TargetingImmunity;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraftforge.common.util.Constants.NBT;
-
 /**
  * A collection of player-related utility methods.
  */
@@ -50,12 +45,12 @@ public class PlayerUtils {
     public static boolean getIsPlayerGloballyImmune(EntityPlayer player) {
         GameProfile playerProfile = player.getGameProfile();
         UUID playerUUID = playerProfile == null ? null
-                : EntityPlayer.getUUID(playerProfile);
+            : EntityPlayer.getUUID(playerProfile);
         return Arrays.asList(PlayerHandlingCustomizerConfig.immunePlayers)
-                .stream()
-                .anyMatch((item) -> playerUUID != null
-                        && item.equalsIgnoreCase(playerUUID.toString())
-                        || item.equalsIgnoreCase(player.getName()));
+            .stream()
+            .anyMatch((item) -> playerUUID != null
+                && item.equalsIgnoreCase(playerUUID.toString())
+                || item.equalsIgnoreCase(player.getName()));
     }
 
     /**
@@ -101,7 +96,7 @@ public class PlayerUtils {
                 continue;
             }
             ImmunityType type = ImmunityType
-                    .fromNBTString((NBTTagString) nbtItem.getTag("immunityType"));
+                .fromNBTString((NBTTagString) nbtItem.getTag("immunityType"));
             if (type == null) {
                 continue;
             }
@@ -132,7 +127,7 @@ public class PlayerUtils {
      * Get a list of damage immunities attached to a player.
      *
      * @param player The player to get the associated list of damage immunities
-     *               from.
+     *        from.
      *
      * @return The list of damage immunities associated with the player.
      */
@@ -147,7 +142,7 @@ public class PlayerUtils {
      * Get a list of hurt immunities attached to a player.
      *
      * @param player The player to get the associated list of hurt immunities
-     *               from.
+     *        from.
      *
      * @return The list of hurt immunities associated with the player.
      */
@@ -162,7 +157,7 @@ public class PlayerUtils {
      * Get a list of knockback immunities attached to a player.
      *
      * @param player The player to get the associated list of knockback
-     *               immunities from.
+     *        immunities from.
      *
      * @return The list of knockback immunities associated with the player.
      */
@@ -178,7 +173,7 @@ public class PlayerUtils {
      * Get a list of targeting immunities attached to a player.
      *
      * @param player The player to get the associated list of targeting
-     *               immunities from.
+     *        immunities from.
      *
      * @return The list of targeting immunities associated with the player.
      */
