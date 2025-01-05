@@ -3,7 +3,6 @@ package com.glektarssza.player_handling_customizer;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 /**

@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagString;
+
 import net.minecraftforge.common.util.Constants.NBT;
 
 /**

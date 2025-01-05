@@ -3,10 +3,10 @@ package com.glektarssza.player_handling_customizer.utils;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
-
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
+
+import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 
 /**
  * A collection of utilities for working with immunities.

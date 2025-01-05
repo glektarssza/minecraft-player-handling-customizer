@@ -5,6 +5,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
+
+import net.minecraftforge.common.util.Constants.NBT;
+
 import com.glektarssza.player_handling_customizer.Tags;
 import com.glektarssza.player_handling_customizer.api.IDamageImmunity;
 import com.glektarssza.player_handling_customizer.api.IHurtImmunity;
@@ -16,13 +24,6 @@ import com.glektarssza.player_handling_customizer.impl.DamageImmunity;
 import com.glektarssza.player_handling_customizer.impl.HurtImmunity;
 import com.glektarssza.player_handling_customizer.impl.KnockbackImmunity;
 import com.glektarssza.player_handling_customizer.impl.TargetingImmunity;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraftforge.common.util.Constants.NBT;
 
 /**
  * A collection of player-related utility methods.
