@@ -18,6 +18,10 @@ public class LateMixinInitializer implements ILateMixinLoader {
             mixinConfigs
                 .add("mixins.player-handling-customizer.divinerpg.json");
         }
+        if (Loader.isModLoaded("Aether")) {
+            mixinConfigs
+                .add("mixins.player-handling-customizer.aether.json");
+        }
         return mixinConfigs;
     }
 }
