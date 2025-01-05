@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import com.mojang.authlib.GameProfile;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -51,16 +49,13 @@ public class PlayerUtils {
      */
     public static boolean getIsPlayerGloballyImmune(EntityPlayer player) {
         GameProfile playerProfile = player.getGameProfile();
-        UUID playerUUID =
-            playerProfile == null ? null : EntityPlayer.getUUID(playerProfile);
+        UUID playerUUID = playerProfile == null ? null
+                : EntityPlayer.getUUID(playerProfile);
         return Arrays.asList(PlayerHandlingCustomizerConfig.immunePlayers)
-            .stream()
-            .anyMatch(
-                (item)
-                    -> playerUUID != null &&
-                               item.equalsIgnoreCase(playerUUID.toString()) ||
-                           item.equalsIgnoreCase(player.getName())
-            );
+                .stream()
+                .anyMatch((item) -> playerUUID != null
+                        && item.equalsIgnoreCase(playerUUID.toString())
+                        || item.equalsIgnoreCase(player.getName()));
     }
 
     /**
@@ -105,8 +100,8 @@ public class PlayerUtils {
             if (!nbtItem.hasKey("immunityType", NBT.TAG_STRING)) {
                 continue;
             }
-            ImmunityType type = ImmunityType.fromNBTString((NBTTagString
-            )nbtItem.getTag("immunityType"));
+            ImmunityType type = ImmunityType
+                    .fromNBTString((NBTTagString) nbtItem.getTag("immunityType"));
             if (type == null) {
                 continue;
             }

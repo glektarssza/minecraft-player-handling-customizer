@@ -6,7 +6,6 @@ import java.util.Map;
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.MCVersion;
-
 import zone.rong.mixinbooter.IEarlyMixinLoader;
 
 /**
