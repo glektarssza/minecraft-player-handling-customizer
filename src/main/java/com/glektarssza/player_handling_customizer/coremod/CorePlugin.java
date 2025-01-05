@@ -41,8 +41,7 @@ public class CorePlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public List<String> getMixinConfigs() {
-        return Collections.singletonList(
-            "mixins.player-handling-customizer.vanilla.json"
-        );
+        return Collections
+            .singletonList("mixins.player-handling-customizer.vanilla.json");
     }
 }

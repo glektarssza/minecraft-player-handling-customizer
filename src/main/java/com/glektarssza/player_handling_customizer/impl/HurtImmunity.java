@@ -71,9 +71,8 @@ public class HurtImmunity implements IHurtImmunity {
      * @param appliesToDirect Whether the new instances applies to direct hurt
      *        sources.
      */
-    public HurtImmunity(
-        String damageType, String entityType, boolean appliesToDirect
-    ) {
+    public HurtImmunity(String damageType, String entityType,
+        boolean appliesToDirect) {
         this.damageType = damageType;
         this.entityType = entityType;
         this.appliesToDirect = appliesToDirect;
@@ -90,12 +89,8 @@ public class HurtImmunity implements IHurtImmunity {
      * @param appliesToIndirect Whether the new instances applies to indirect
      *        hurt sources.
      */
-    public HurtImmunity(
-        String damageType,
-        String entityType,
-        boolean appliesToDirect,
-        boolean appliesToIndirect
-    ) {
+    public HurtImmunity(String damageType, String entityType,
+        boolean appliesToDirect, boolean appliesToIndirect) {
         this.damageType = damageType;
         this.entityType = entityType;
         this.appliesToDirect = appliesToDirect;

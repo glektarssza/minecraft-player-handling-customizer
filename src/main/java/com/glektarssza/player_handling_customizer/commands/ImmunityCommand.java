@@ -59,14 +59,11 @@ public class ImmunityCommand extends CommandBase {
         } else if (args.length == 2) {
             return Arrays.asList("add", "remove", "list");
         } else if (args.length == 3) {
-            return Arrays.asList(
-                "*", "damage", "hurt", "knockback", "targeting"
-            );
+            return Arrays.asList("*", "damage", "hurt", "knockback",
+                "targeting");
         } else if (args.length == 4) {
-            List<String> allOptions = EntityList.getEntityNameList()
-                                          .stream()
-                                          .map((rl) -> rl.toString())
-                                          .collect(Collectors.toList());
+            List<String> allOptions = EntityList.getEntityNameList().stream()
+                .map((rl) -> rl.toString()).collect(Collectors.toList());
             allOptions.add(0, "*");
             return allOptions;
         } else if (args.length == 5 && (args[3].equalsIgnoreCase("damage") ||

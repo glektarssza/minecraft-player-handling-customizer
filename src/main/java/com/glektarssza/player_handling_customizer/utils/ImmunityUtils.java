@@ -3,11 +3,11 @@ package com.glektarssza.player_handling_customizer.utils;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
+
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-
-import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 
 /**
  * A collection of utilities for working with immunities.
@@ -23,8 +23,7 @@ public class ImmunityUtils {
      *         targeted by the entity; {@code false} otherwise.
      */
     public static boolean entityMatchesTargetingImmunity(
-        EntityLivingBase entity, ITargetingImmunity immunity
-    ) {
+        EntityLivingBase entity, ITargetingImmunity immunity) {
         String immunityId = immunity.getEntityType();
         ResourceLocation entityRL = EntityList.getKey(entity);
         if (entityRL == null) {
@@ -57,11 +56,8 @@ public class ImmunityUtils {
      *         immune to being targeted by the entity; {@code false} otherwise.
      */
     public static boolean entityMatchesAnyTargetingImmunity(
-        EntityLivingBase entity, List<ITargetingImmunity> immunityList
-    ) {
-        return immunityList.stream().anyMatch(
-            (immunity
-            ) -> ImmunityUtils.entityMatchesTargetingImmunity(entity, immunity)
-        );
+        EntityLivingBase entity, List<ITargetingImmunity> immunityList) {
+        return immunityList.stream().anyMatch((immunity) -> ImmunityUtils
+            .entityMatchesTargetingImmunity(entity, immunity));
     }
 }
