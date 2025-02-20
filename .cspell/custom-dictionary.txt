@@ -3,6 +3,7 @@ adoptium
 aout
 areobf
 assetmover
+autobuild
 binpatched
 cleanroom
 cleanroommc
