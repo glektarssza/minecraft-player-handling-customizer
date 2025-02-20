@@ -16,6 +16,7 @@ dfml
 divinerpg
 dmixin
 enderman
+factorypath
 fmlat
 futura
 gson
