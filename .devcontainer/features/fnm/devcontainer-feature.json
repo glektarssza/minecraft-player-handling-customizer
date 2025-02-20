@@ -32,5 +32,8 @@
             "description": "A space-separated list of NodeJS semver versions to install alongside fnm.",
             "default": ""
         }
-    }
+    },
+    "installsAfter": [
+        "./features/fnm"
+    ]
 }

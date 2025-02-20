@@ -15,5 +15,8 @@
     ],
     "dependsOn": {
         "./features/apt-python3-full": {}
-    }
+    },
+    "installsAfter": [
+        "./features/pre-commit"
+    ]
 }

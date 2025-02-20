@@ -19,5 +19,8 @@
             "description": "The plugins to enable (as a space-separated list).",
             "default": "git"
         }
-    }
+    },
+    "installsAfter": [
+        "./features/create-user"
+    ]
 }
