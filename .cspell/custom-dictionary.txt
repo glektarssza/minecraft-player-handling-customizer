@@ -19,6 +19,7 @@ futura
 gson
 gtnewhorizons
 jvmargs
+knockback
 mcmeta
 mcmod
 mcversion
