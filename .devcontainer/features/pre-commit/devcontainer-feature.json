@@ -17,6 +17,7 @@
         "./features/apt-python3-full": {}
     },
     "installsAfter": [
-        "./features/pre-commit"
+        "./features/apt-zsh",
+        "./features/custom-user"
     ]
 }
