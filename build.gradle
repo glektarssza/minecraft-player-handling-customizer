@@ -107,9 +107,9 @@ dependencies {
         annotationProcessor('com.google.code.gson:gson:2.12.1')
 
         // Mixins
-    	implementation(mixinBooter)
-        api(mixinBooter) { transitive = false }
-        annotationProcessor(mixinBooter) { transitive = false }
+    	implementation(mixinProviderSpec)
+        api(mixinProviderSpec) { transitive = false }
+        annotationProcessor(mixinProviderSpec) { transitive = false }
     }
 
     // Runtime-only mods (things we like for easier testing!)
