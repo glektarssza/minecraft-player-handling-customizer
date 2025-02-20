@@ -39,7 +39,7 @@ public class ImmunityUtils {
             return Pattern.matches(immunityId.replace("*", "[a-zA-Z0-9_-/]+"),
                 entityRL.toString().toLowerCase());
         }
-        return entityRL.equals(immunityId);
+        return entityRL.toString().toLowerCase().equals(immunityId);
     }
 
     /**
