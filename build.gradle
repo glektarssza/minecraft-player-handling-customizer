@@ -98,14 +98,13 @@ dependencies {
         implementation 'com.cleanroommc:assetmover:2.5'
     }
     if (project.use_mixins.toBoolean()) {
-    	def refMapName = 'mixins.' + project.archive_base_name + '.refmap.json'
-        def mixinProviderSpec = 'zone.rong:mixinbooter:10.2'
-        def mixinBooter = modUtils.enableMixins(mixinProviderSpec, refMapName)
+    	def refMapName = 'mixins.' + project.archive_base_name + 'refmap.json'
+    	def mixinProviderSpec = 'zone.rong:mixinbooter:10.5'
 
     	// Common
     	annotationProcessor('org.ow2.asm:asm-debug-all:5.2')
         annotationProcessor('com.google.guava:guava:33.4.0-jre')
-        annotationProcessor('com.google.code.gson:gson:2.11.0')
+        annotationProcessor('com.google.code.gson:gson:2.12.1')
 
         // Mixins
     	implementation(mixinBooter)
