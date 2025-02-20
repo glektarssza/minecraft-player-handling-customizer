@@ -1,13 +1,11 @@
 {
-    "id": "apt-wget",
+    "id": "apt-jq",
     "version": "0.0.1",
-    "name": "apt-wget",
-    "description": "Install the wget package using apt.",
+    "name": "apt-jq",
+    "description": "Install the jq package using apt.",
     "keywords": [
-        "wget",
-        "download",
-        "downloader",
-        "fetcher",
+        "jq",
+        "json",
         "apt",
         "debian",
         "ubuntu",

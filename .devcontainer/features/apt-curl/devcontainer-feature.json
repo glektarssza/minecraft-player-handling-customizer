@@ -1,10 +1,10 @@
 {
-    "id": "apt-wget",
+    "id": "apt-curl",
     "version": "0.0.1",
-    "name": "apt-wget",
-    "description": "Install the wget package using apt.",
+    "name": "apt-curl",
+    "description": "Install the curl package using apt.",
     "keywords": [
-        "wget",
+        "curl",
         "download",
         "downloader",
         "fetcher",
