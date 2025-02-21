@@ -1,12 +1,12 @@
 package com.glektarssza.player_handling_customizer.mixins.divinerpg;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAITasks.EntityAITaskEntry;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -91,14 +91,17 @@ public class EntityFrostMixin {
          * @throws IllegalAccessException Thrown if the wrapped
          *         {@link EntityFrost} cannot be accessed.
          */
-        private EntityFrost getEntityFrost() throws IllegalAccessException {
+        private EntityFrost getEntityFrost()
+            throws NoSuchFieldException, IllegalAccessException {
             Class<?> clazz = this.wrapped.getClass();
-            Field field = Arrays.stream(clazz.getFields())
-                .filter((f) -> {
-                    return EntityFrost.class.isAssignableFrom(f.getType());
-                }).findFirst().get();
-            field.setAccessible(true);
-            return (EntityFrost) field.get(this.wrapped);
+            for (Field field : clazz.getDeclaredFields()) {
+                if (!field.getType().isAssignableFrom(EntityFrost.class)) {
+                    continue;
+                }
+                field.setAccessible(true);
+                return (EntityFrost) field.get(this.wrapped);
+            }
+            throw new NoSuchFieldException();
         }
     }
 
@@ -192,14 +195,16 @@ public class EntityFrostMixin {
         try {
             Class<?> clazz = Class.forName(
                 "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack");
-            entityFrost.tasks.taskEntries.stream()
-                .filter((task) -> clazz.isInstance(task.action))
-                .forEach((task) -> {
-                    AIFrostShotAttackShim shimmed = new AIFrostShotAttackShim(
-                        task.action);
-                    entityFrost.tasks.removeTask(task.action);
-                    entityFrost.tasks.addTask(task.priority, shimmed);
-                });
+            for (EntityAITaskEntry task : entityFrost.tasks.taskEntries) {
+                if (!clazz.isInstance(task.action)) {
+                    continue;
+                }
+                AIFrostShotAttackShim shimmed = new AIFrostShotAttackShim(
+                    task.action);
+                entityFrost.tasks.removeTask(task.action);
+                entityFrost.tasks.addTask(task.priority, shimmed);
+                return;
+            }
         } catch (ClassNotFoundException ex) {
             if (PlayerHandlingCustomizer
                 .shouldEmitWarning(
