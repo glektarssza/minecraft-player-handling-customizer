@@ -98,7 +98,7 @@ dependencies {
         implementation 'com.cleanroommc:assetmover:2.5'
     }
     if (project.use_mixins.toBoolean()) {
-    	def refMapName = 'mixins.' + project.archive_base_name + 'refmap.json'
+    	def refMapName = 'mixins.' + project.archive_base_name + '.refmap.json'
     	def mixinProviderSpec = 'zone.rong:mixinbooter:10.5'
 
     	// Common

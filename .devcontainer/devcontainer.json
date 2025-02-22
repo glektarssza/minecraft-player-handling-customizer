@@ -15,13 +15,18 @@
         "storage": "32gb"
     },
     "features": {
+        "./features/apt-locales": {
+            "default_locale": "en_CA.UTF-8"
+        },
+        "./features/apt-libarchive-tools": {},
         "./features/create-user": {
             "username": "vscode"
         },
         "./features/apt-zsh": {},
+        "./features/pre-commit": {},
         "./features/oh-my-zsh": {
             "theme": "blinks_custom",
-            "plugins": "debian git git-lfs"
+            "plugins": "debian git git-lfs gradle"
         },
         "./features/apt-git": {},
         "./features/apt-git-lfs": {},
@@ -29,9 +34,5 @@
         "./features/apt-adoptium": {
             "packages": "temurin-8-jdk temurin-21-jdk"
         }
-    },
-    "overrideFeatureInstallOrder": [
-        "./features/create-user",
-        "./features/oh-my-zsh"
-    ]
+    }
 }
