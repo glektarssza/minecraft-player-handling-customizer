@@ -17,15 +17,17 @@ public class LateMixinInitializer implements ILateMixinLoader {
 
     @Override
     public List<String> getMixins(Set<String> loadedMods) {
-        List<String> mixinConfigs = new ArrayList<String>();
+        List<String> mixins = new ArrayList<String>();
         if (loadedMods.contains("divinerpg")) {
-            mixinConfigs
-                .add("mixins.player-handling-customizer.divinerpg.json");
+            mixins
+                .add("divinerpg.AIDivineFireballAttackMixin");
+            mixins
+                .add("divinerpg.EntityFroshMixin");
         }
         if (loadedMods.contains("Aether")) {
-            mixinConfigs
-                .add("mixins.player-handling-customizer.aether.json");
+            mixins
+                .add("aether.ZephyrAIShootTargetMixin");
         }
-        return mixinConfigs;
+        return mixins;
     }
 }

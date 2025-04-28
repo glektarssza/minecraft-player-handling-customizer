@@ -1,5 +1,6 @@
 package com.glektarssza.player_handling_customizer.coremod;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 /**
  * The core mod plugin for the mod.
  */
-@MCVersion("1.12.2")
+@MCVersion("1.7.10")
 public class CorePlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
     @Override
     public String getAccessTransformerClass() {
@@ -47,7 +48,8 @@ public class CorePlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
-        return Collections
-            .singletonList("mixins.player-handling-customizer.vanilla.json");
+        List<String> mixins = new ArrayList<String>();
+        // TODO: Define mixins here
+        return mixins;
     }
 }
