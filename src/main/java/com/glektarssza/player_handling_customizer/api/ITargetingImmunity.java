@@ -1,7 +1,5 @@
 package com.glektarssza.player_handling_customizer.api;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagString;
 
@@ -10,7 +8,7 @@ import net.minecraftforge.common.util.Constants.NBT;
 /**
  * An interface that represents immunity from being targeting by entities.
  */
-public interface ITargetingImmunity extends IImmunity {
+public interface ITargetingImmunity extends IImmunity<NBTTagCompound> {
     /**
      * Get whether this instance has an entity type from which this instance
      * grants immunity from.
@@ -28,7 +26,6 @@ public interface ITargetingImmunity extends IImmunity {
      *         from.
      */
     @Override
-    @Nullable
     String getEntityType();
 
     /**
@@ -38,7 +35,7 @@ public interface ITargetingImmunity extends IImmunity {
      *        damage from.
      */
     @Override
-    void setEntityType(@Nullable String entityType);
+    void setEntityType(String entityType);
 
     /**
      * Get the type of immunity represented by this instance.

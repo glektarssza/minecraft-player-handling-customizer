@@ -18,6 +18,7 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.common.util.Constants.NBT;
 
 import com.glektarssza.player_handling_customizer.Tags;
+import com.glektarssza.player_handling_customizer.PlayerHandlingCustomizer;
 import com.glektarssza.player_handling_customizer.api.IDamageImmunity;
 import com.glektarssza.player_handling_customizer.api.IHurtImmunity;
 import com.glektarssza.player_handling_customizer.api.IImmunity;
@@ -45,12 +46,14 @@ public class PlayerUtils {
     public static boolean getIsPlayerGloballyImmune(EntityPlayer player) {
         GameProfile playerProfile = player.getGameProfile();
         UUID playerUUID = playerProfile == null ? null
-            : EntityPlayer.getUUID(playerProfile);
-        return Arrays.asList(PlayerHandlingCustomizerConfig.immunePlayers)
+            : EntityPlayer.func_146094_a(playerProfile);
+        return Arrays
+            .asList(
+                PlayerHandlingCustomizer.CONFIG.immunePlayers.getStringList())
             .stream()
             .anyMatch((item) -> playerUUID != null
                 && item.equalsIgnoreCase(playerUUID.toString())
-                || item.equalsIgnoreCase(player.getName()));
+                || item.equalsIgnoreCase(player.getDisplayName()));
     }
 
     /**
@@ -76,18 +79,20 @@ public class PlayerUtils {
      *
      * @return The list of immunities associated with the player.
      */
-    public static List<IImmunity> getPlayerImmunities(EntityPlayer player) {
+    public static List<IImmunity<NBTTagCompound>> getPlayerImmunities(
+        EntityPlayer player) {
         NBTTagCompound playerData = PlayerUtils.getPlayerModData(player);
         if (!playerData.hasKey("immunities", NBT.TAG_LIST)) {
             return Collections.emptyList();
         }
         NBTTagList nbtImmunityList = playerData.getTagList("immunities",
             NBT.TAG_COMPOUND);
-        if (nbtImmunityList.isEmpty()) {
+        if (nbtImmunityList.tagCount() <= 0) {
             return Collections.emptyList();
         }
-        List<IImmunity> results = new ArrayList<IImmunity>();
-        for (NBTBase nbtBaseItem : nbtImmunityList) {
+        List<IImmunity<NBTTagCompound>> results = new ArrayList<IImmunity<NBTTagCompound>>();
+        for (int i = 0; i < nbtImmunityList.tagCount(); i++) {
+            NBTTagCompound nbtBaseItem = nbtImmunityList.getCompoundTagAt(i);
             if (!(nbtBaseItem instanceof NBTTagCompound)) {
                 continue;
             }
@@ -100,7 +105,7 @@ public class PlayerUtils {
             if (type == null) {
                 continue;
             }
-            IImmunity item;
+            IImmunity<NBTTagCompound> item;
             switch (type) {
                 case Damage:
                     item = new DamageImmunity();

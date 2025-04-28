@@ -25,10 +25,11 @@ public class ImmunityUtils {
     public static boolean entityMatchesTargetingImmunity(
         EntityLivingBase entity, ITargetingImmunity immunity) {
         String immunityId = immunity.getEntityType();
-        ResourceLocation entityRL = EntityList.getKey(entity);
-        if (entityRL == null) {
+        String rl = EntityList.getEntityString(entity);
+        if (rl == null) {
             return false;
         }
+        ResourceLocation entityRL = new ResourceLocation(rl);
         if (immunityId == null || immunityId.equals("")) {
             return false;
         }

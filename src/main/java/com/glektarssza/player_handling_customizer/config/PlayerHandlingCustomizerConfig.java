@@ -1,24 +1,40 @@
 package com.glektarssza.player_handling_customizer.config;
 
-import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.Config.Comment;
-import net.minecraftforge.common.config.Config.LangKey;
-import net.minecraftforge.common.config.Config.Type;
+import java.nio.file.Paths;
 
-import com.glektarssza.player_handling_customizer.Tags;
+import net.minecraft.client.Minecraft;
+
+import net.minecraftforge.common.config.ConfigCategory;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.config.Property;
 
 /**
  * The main configuration for the mod.
  */
-@Config(modid = Tags.MOD_ID, name = Tags.MOD_ID, type = Type.INSTANCE)
-public class PlayerHandlingCustomizerConfig {
-    /**
-     * A list of players, by UUID of username, who are immune to being targeted.
-     */
-    @LangKey("player_handling_customizer.config.immune_players")
-    @Comment({
-        "A list of players who are immune to being targeted.",
-        "This can be either the username or UUID of the player."
-    })
-    public static String[] immunePlayers = {};
+public class PlayerHandlingCustomizerConfig extends Configuration {
+    private ConfigCategory basicCategory;
+    public Property immunePlayers;
+
+    public PlayerHandlingCustomizerConfig() {
+        super(Paths.get(Minecraft.getMinecraft().mcDataDir.getAbsolutePath(),
+            "config", "player_handling_customizer.cfg").toFile(), "1.0");
+        this.basicCategory = this.getCategory("basic");
+        this.basicCategory.setComment("The basic configuration options.");
+        this.basicCategory.setLanguageKey(
+            "player_handling_customizer.config.basic_category");
+        this.basicCategory.setRequiresWorldRestart(false);
+        this.immunePlayers = this.get("basic", "immune_players", new String[0]);
+        this.immunePlayers.comment = "A list of player names or UUIDs who are considered always immune.";
+        this.immunePlayers
+            .setLanguageKey("player_handling_customizer.config.immune_players");
+        this.immunePlayers.setRequiresMcRestart(false);
+    }
+
+    public void sync() {
+        try {
+            this.load();
+        } catch (Exception _ex) {
+            this.save();
+        }
+    }
 }

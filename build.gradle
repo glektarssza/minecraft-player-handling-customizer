@@ -79,17 +79,27 @@ repositories {
     exclusiveContent {
         forRepository {
             maven {
-                url "https://cursemaven.com"
+                url 'https://cursemaven.com'
             }
         }
         filter {
-            includeGroup "curse.maven"
+            includeGroup 'curse.maven'
         }
     }
     maven {
 		name = 'SpongePowered Maven'
 		url = 'https://repo.spongepowered.org/maven'
 	}
+    exclusiveContent {
+        forRepository {
+            maven {
+                url 'https://jitpack.io'
+            }
+        }
+        filter {
+            includeGroup 'com.github.LegacyModdingMC.UniMixins'
+        }
+    }
     mavenLocal()
 }
 
@@ -98,8 +108,9 @@ dependencies {
         implementation 'com.cleanroommc:assetmover:2.5'
     }
     if (project.use_mixins.toBoolean()) {
+        def unimixinsVersion = '0.1.19'
     	def refMapName = 'mixins.' + project.archive_base_name + '.refmap.json'
-    	def mixinProviderSpec = 'zone.rong:mixinbooter:10.5'
+    	def mixinProviderSpec = "com.github.LegacyModdingMC.UniMixins:unimixins-all-1.7.10:${unimixinsVersion}:dev"
 
     	// Common
     	annotationProcessor('org.ow2.asm:asm-debug-all:5.2')
@@ -110,6 +121,13 @@ dependencies {
     	implementation(modUtils.enableMixins(mixinProviderSpec, refMapName))
         api(mixinProviderSpec) { transitive = false }
         annotationProcessor(mixinProviderSpec) { transitive = false }
+
+        // Specific mixin modules from UniMixins
+        implementation("com.github.LegacyModdingMC.UniMixins:unimixins-compat-1.7.10:$unimixinsVersion:dev")
+        implementation("com.github.LegacyModdingMC.UniMixins:unimixins-spongemixins-1.7.10:$unimixinsVersion:dev")
+        implementation("com.github.LegacyModdingMC.UniMixins:unimixins-mixinbooterlegacy-1.7.10:$unimixinsVersion:dev")
+        implementation("com.github.LegacyModdingMC.UniMixins:unimixins-mixinextras-1.7.10:$unimixinsVersion:dev")
+        implementation("com.github.LegacyModdingMC.UniMixins:unimixins-gtnhmixins-1.7.10:$unimixinsVersion:dev")
     }
 
     // Runtime-only mods (things we like for easier testing!)
@@ -127,7 +145,7 @@ dependencies {
     if (project.hasProperty('use_divine_rpg') && project.use_divine_rpg.toBoolean()) {
 		devOnlyNonPublishable rfg.deobf('curse.maven:official-divinerpg-363543:3081433')
     }
-    if (project.hasProperty('use_divine_rpg') && project.use_divine_rpg.toBoolean()) {
+    if (project.hasProperty('use_aether') && project.use_aether.toBoolean()) {
 	    devOnlyNonPublishable rfg.deobf('curse.maven:aether-255308:5035622')
     }
 
@@ -135,6 +153,30 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.11.4'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
+}
+
+// Exclude conflicting transitive dependencies if using mixins
+configurations.compileOnly.dependencies.each {
+    if (it instanceof ExternalModuleDependency && project.use_mixins.toBoolean()) {
+        it.exclude module: 'SpongeMixins'
+        it.exclude module: 'SpongePoweredMixin'
+        it.exclude module: '00gasstation-mc1.7.10'
+        it.exclude module: 'gtnhmixins'
+    }
+}
+
+// Tweak client run settings if using mixins
+runClient {
+    if (project.use_mixins.toBoolean()) {
+        args('--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker')
+    }
+}
+
+// Tweak server run settings if using mixins
+runServer {
+    if (project.use_mixins.toBoolean()) {
+        args('--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker')
+    }
 }
 
 test {
@@ -199,6 +241,9 @@ processResources {
 jar {
     manifest {
         def attribute_map = [:]
+        if (project.use_mixins.toBoolean()) {
+            attribute_map['TweakClass'] = 'org.spongepowered.asm.launch.MixinTweaker'
+        }
         if (project.use_coremod.toBoolean()) {
             attribute_map['FMLCorePlugin'] = project.coremod_plugin_class_name
             if (project.include_mod.toBoolean()) {
@@ -229,6 +274,20 @@ sourceSets {
     generator {
         java {
             srcDir 'src/generator/java'
+        }
+    }
+    if (!project.use_divine_rpg.toBoolean()) {
+        main {
+            java {
+                exclude('**/player_handling_customizer/mixins/divinerpg/**')
+            }
+        }
+    }
+    if (!project.use_aether.toBoolean()) {
+        main {
+            java {
+                exclude('**/player_handling_customizer/mixins/aether/**')
+            }
         }
     }
     api {

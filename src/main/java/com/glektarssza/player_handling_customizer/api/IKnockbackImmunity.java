@@ -8,7 +8,7 @@ import net.minecraftforge.common.util.Constants.NBT;
 /**
  * An interface that represents immunity from knockback events.
  */
-public interface IKnockbackImmunity extends IImmunity {
+public interface IKnockbackImmunity extends IImmunity<NBTTagCompound> {
     /**
      * Get the type of immunity represented by this instance.
      *

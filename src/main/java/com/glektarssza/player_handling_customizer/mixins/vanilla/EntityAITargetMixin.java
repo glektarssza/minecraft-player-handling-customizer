@@ -2,8 +2,6 @@ package com.glektarssza.player_handling_customizer.mixins.vanilla;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAITarget;
@@ -20,10 +18,10 @@ import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
 @Mixin(EntityAITarget.class)
 public class EntityAITargetMixin {
-    @Inject(method = "Lnet/minecraft/entity/ai/EntityAITarget;isSuitableTarget(Lnet/minecraft/entity/EntityLiving;Lnet/minecraft/entity/EntityLivingBase;ZZ)Z", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "net/minecraft/entity/ai/EntityAITarget/isSuitableTarget (Lnet/minecraft/entity/EntityLivingBase;Z)Z", at = @At("TAIL"), cancellable = true)
     private static void isSuitableTarget(EntityLiving attacker,
-        @Nullable EntityLivingBase target, boolean includeInvincibles,
-        boolean checkSight, CallbackInfoReturnable<Boolean> cir) {
+        EntityLivingBase target, boolean includeInvincibles,
+        CallbackInfoReturnable<Boolean> cir) {
         if (!(target instanceof EntityPlayer)) {
             return;
         }

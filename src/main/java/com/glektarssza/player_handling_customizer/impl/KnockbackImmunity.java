@@ -1,7 +1,5 @@
 package com.glektarssza.player_handling_customizer.impl;
 
-import javax.annotation.Nullable;
-
 import com.glektarssza.player_handling_customizer.api.IKnockbackImmunity;
 
 /**
@@ -48,7 +46,6 @@ public class KnockbackImmunity implements IKnockbackImmunity {
      *         from.
      */
     @Override
-    @Nullable
     public String getEntityType() {
         return this.entityType;
     }
@@ -60,7 +57,7 @@ public class KnockbackImmunity implements IKnockbackImmunity {
      *        damage from.
      */
     @Override
-    public void setEntityType(@Nullable String entityType) {
+    public void setEntityType(String entityType) {
         this.entityType = entityType;
     }
 }

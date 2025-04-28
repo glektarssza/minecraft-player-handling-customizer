@@ -5,17 +5,16 @@ import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.command.CommandReload;
-
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Config.Type;
-import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.CommandEvent;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import com.glektarssza.player_handling_customizer.config.PlayerHandlingCustomizerConfig;
+
+import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * The root mod class.
@@ -26,6 +25,11 @@ public class PlayerHandlingCustomizer {
      * The logger to use for the mod.
      */
     public static Logger LOGGER;
+
+    /**
+     * The main mod configuration.
+     */
+    public static PlayerHandlingCustomizerConfig CONFIG;
 
     /**
      * The maximum number of times to emit a warning before silencing it.
@@ -65,7 +69,7 @@ public class PlayerHandlingCustomizer {
         WARNING_LIMIT_TRACKER.putIfAbsent(category, WARNING_EMIT_LIMIT);
         int limit = WARNING_LIMIT_TRACKER.compute(category, (_k, v) -> v - 1);
         if (limit <= 0) {
-            PlayerHandlingCustomizer.LOGGER
+            LOGGER
                 .warn(
                     String.format(
                         "Too many identical warnings logged for category \"%s\"! Silencing further warnings on this issue!",
@@ -94,8 +98,9 @@ public class PlayerHandlingCustomizer {
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         LOGGER.info("Initializing {}...", Tags.MOD_NAME);
+        CONFIG = new PlayerHandlingCustomizerConfig();
         LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
-        ConfigManager.sync(Tags.MOD_ID, Type.INSTANCE);
+        CONFIG.sync();
         LOGGER.info("Done Initializing {}!", Tags.MOD_NAME);
     }
 
@@ -106,9 +111,9 @@ public class PlayerHandlingCustomizer {
      */
     @SubscribeEvent
     public void onConfigChange(OnConfigChangedEvent event) {
-        if (event.getModID().equals(Tags.MOD_ID)) {
+        if (event.modID.equals(Tags.MOD_ID)) {
             LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
-            ConfigManager.sync(Tags.MOD_ID, Type.INSTANCE);
+            CONFIG.sync();
         }
     }
 
@@ -119,9 +124,9 @@ public class PlayerHandlingCustomizer {
      */
     @SubscribeEvent
     public void onCommand(CommandEvent event) {
-        if (event.getCommand() instanceof CommandReload) {
+        if (event.command.getCommandName().equals("reload")) {
             LOGGER.info("Synchronizing confiugration for {}...", Tags.MOD_NAME);
-            ConfigManager.sync(Tags.MOD_ID, Type.INSTANCE);
+            CONFIG.sync();
         }
     }
 }

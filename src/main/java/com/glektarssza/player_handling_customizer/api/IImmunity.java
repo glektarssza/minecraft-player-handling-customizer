@@ -1,15 +1,11 @@
 package com.glektarssza.player_handling_customizer.api;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.nbt.NBTTagCompound;
-
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraft.nbt.NBTBase;
 
 /**
  * An interface that defines an immunity of some kind.
  */
-public interface IImmunity extends INBTSerializable<NBTTagCompound> {
+public interface IImmunity<T extends NBTBase> {
     /**
      * Get the type of immunity represented by this instance.
      *
@@ -32,7 +28,6 @@ public interface IImmunity extends INBTSerializable<NBTTagCompound> {
      * @return The entity type that this instance grants immunity to damage
      *         from.
      */
-    @Nullable
     String getEntityType();
 
     /**
@@ -41,5 +36,9 @@ public interface IImmunity extends INBTSerializable<NBTTagCompound> {
      * @param entityType The entity type that this instance grants immunity to
      *        damage from.
      */
-    void setEntityType(@Nullable String entityType);
+    void setEntityType(String entityType);
+
+    T serializeNBT();
+
+    void deserializeNBT(T nbtData);
 }

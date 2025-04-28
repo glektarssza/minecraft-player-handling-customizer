@@ -18,8 +18,11 @@ dmixin
 factorypath
 fmlat
 futura
+gasstation
 gson
 gtnewhorizons
+gtnhmixins
+ifml
 invincibles
 jvmargs
 knockback
@@ -27,6 +30,8 @@ mcmeta
 mcmod
 mcversion
 mixinbooter
+mixinbooterlegacy
+mixinextras
 mkdirs
 modid
 nevermine
@@ -35,5 +40,9 @@ reobf
 reobfuscated
 retrofuturagradle
 rong
+spongemixins
+spongepowered
 srgify
 temurin
+Tweaker
+unimixins

@@ -1,7 +1,5 @@
 package com.glektarssza.player_handling_customizer.impl;
 
-import javax.annotation.Nullable;
-
 import com.glektarssza.player_handling_customizer.api.IDamageImmunity;
 
 /**
@@ -137,7 +135,6 @@ public class DamageImmunity implements IDamageImmunity {
      *         from.
      */
     @Override
-    @Nullable
     public String getEntityType() {
         return this.entityType;
     }
@@ -149,7 +146,7 @@ public class DamageImmunity implements IDamageImmunity {
      *        damage from.
      */
     @Override
-    public void setEntityType(@Nullable String entityType) {
+    public void setEntityType(String entityType) {
         this.entityType = entityType;
     }
 

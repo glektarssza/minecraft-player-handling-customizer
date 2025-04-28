@@ -1,9 +1,11 @@
 package com.glektarssza.player_handling_customizer.api;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 /**
  * An interface that represents immunity from physical events.
  */
-public interface IPhysicalImmunity extends IImmunity {
+public interface IPhysicalImmunity extends IImmunity<NBTTagCompound> {
     /**
      * Get the type of damage this instance represents immunity from.
      *

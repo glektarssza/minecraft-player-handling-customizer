@@ -3,11 +3,12 @@ package com.glektarssza.player_handling_customizer.coremod;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.MCVersion;
+import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
 
-import zone.rong.mixinbooter.IEarlyMixinLoader;
+import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
+import cpw.mods.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 
 /**
  * The core mod plugin for the mod.
@@ -40,7 +41,12 @@ public class CorePlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
     }
 
     @Override
-    public List<String> getMixinConfigs() {
+    public String getMixinConfig() {
+        return "mixins.player-handling-customizer.early.json";
+    }
+
+    @Override
+    public List<String> getMixins(Set<String> loadedCoreMods) {
         return Collections
             .singletonList("mixins.player-handling-customizer.vanilla.json");
     }
