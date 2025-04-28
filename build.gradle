@@ -279,14 +279,14 @@ sourceSets {
     if (!project.use_divine_rpg.toBoolean()) {
         main {
             java {
-                exclude('**/player_handling_customizer/mixins/divinerpg/**')
+                exclude('**/player_handling_customizer/mixins/**/divinerpg/**')
             }
         }
     }
     if (!project.use_aether.toBoolean()) {
         main {
             java {
-                exclude('**/player_handling_customizer/mixins/aether/**')
+                exclude('**/player_handling_customizer/mixins/**/aether/**')
             }
         }
     }

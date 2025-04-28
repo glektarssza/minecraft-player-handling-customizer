@@ -1,4 +1,4 @@
-package com.glektarssza.player_handling_customizer.mixins.aether;
+package com.glektarssza.player_handling_customizer.mixins.late.divinerpg;
 
 import java.util.List;
 
@@ -12,22 +12,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.gildedgames.the_aether.entities.ai.zephyr.ZephyrAIShootTarget;
-import com.gildedgames.the_aether.entities.hostile.EntityZephyr;
+import divinerpg.objects.entities.ai.AIDivineFireballAttack;
 
 import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 import com.glektarssza.player_handling_customizer.utils.ImmunityUtils;
 import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
-@Mixin(ZephyrAIShootTarget.class)
-public class ZephyrAIShootTargetMixin {
+@Mixin(AIDivineFireballAttack.class)
+public class AIDivineFireballAttackMixin {
     @Shadow(remap = false)
-    private EntityZephyr zephyr;
+    private EntityLiving parentEntity;
 
-    @Inject(method = "shouldExecute", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "shouldExecute", at = @At("TAIL"), cancellable = true)
     public void shouldExecute(CallbackInfoReturnable<Boolean> cir) {
-        EntityLiving attacker = (EntityLiving) this.zephyr;
-        EntityLivingBase target = (EntityLivingBase) this.zephyr
+        EntityLiving attacker = this.parentEntity;
+        EntityLivingBase target = (EntityLivingBase) this.parentEntity
             .getAttackTarget();
         if (!(target instanceof EntityPlayer)) {
             return;
