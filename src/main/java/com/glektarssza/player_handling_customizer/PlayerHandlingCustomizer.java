@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CommandEvent;
 
-import com.glektarssza.player_handling_customizer.config.PlayerHandlingCustomizerConfig;
+import com.glektarssza.player_handling_customizer.config.Config;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.Mod;
