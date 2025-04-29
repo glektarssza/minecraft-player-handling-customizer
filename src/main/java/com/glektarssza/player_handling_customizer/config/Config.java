@@ -24,7 +24,7 @@ public class Config {
     /**
      * The general configuration category.
      */
-    public static final String CATEGORY_GENERAL = "general";
+    private static final String CATEGORY_GENERAL = "general";
 
     /**
      * A list of players who are globally immune.
