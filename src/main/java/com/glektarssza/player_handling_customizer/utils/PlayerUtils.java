@@ -17,7 +17,6 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.common.util.Constants.NBT;
 
 import com.glektarssza.player_handling_customizer.Tags;
-import com.glektarssza.player_handling_customizer.PlayerHandlingCustomizer;
 import com.glektarssza.player_handling_customizer.api.IDamageImmunity;
 import com.glektarssza.player_handling_customizer.api.IHurtImmunity;
 import com.glektarssza.player_handling_customizer.api.IImmunity;
