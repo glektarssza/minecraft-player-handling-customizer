@@ -1,9 +1,11 @@
 package com.glektarssza.player_handling_customizer.config;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 import com.glektarssza.player_handling_customizer.PlayerHandlingCustomizer;
 
@@ -29,7 +31,35 @@ public class Config {
     /**
      * A list of players who are globally immune.
      */
-    public static String[] immunePlayers = new String[0];
+    private static List<String> immunePlayers = new ArrayList<String>();
+
+    /**
+     * Get the globally immune players.
+     *
+     * @return The globally immune players.
+     */
+    public static String[] getImmunePlayers() {
+        String[] ret = new String[immunePlayers.size()];
+        immunePlayers.toArray(ret);
+        return ret;
+    }
+
+    /**
+     * Set the globally immune players.
+     *
+     * @param players A list of player UUIDs or names to set as globally immune.
+     */
+    public static void setImmunePlayers(String[] players) {
+        clearImmunePlayers();
+        immunePlayers.addAll(Arrays.asList(players));
+    }
+
+    /**
+     * Clear the globally immune players.
+     */
+    public static void clearImmunePlayers() {
+        immunePlayers.clear();
+    }
 
     /**
      * Initialize the configuration.
