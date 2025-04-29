@@ -22,7 +22,7 @@ import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 @Mixin(EntityEnderman.class)
 public class EntityEndermanMixin {
     /**
-     * Mixin for the {@code shouldExecute} method.
+     * Mixin for the {@code findPlayerToAttack} method.
      */
     @Inject(method = "findPlayerToAttack", at = @At("TAIL"), cancellable = true)
     public void findPlayerToAttack(CallbackInfoReturnable<Entity> cir) {
@@ -41,6 +41,25 @@ public class EntityEndermanMixin {
         if (ImmunityUtils.entityMatchesAnyTargetingImmunity(attacker,
             immunities) || PlayerUtils.getIsPlayerGloballyImmune(player)) {
             cir.setReturnValue(null);
+        }
+    }
+
+    /**
+     * Mixin for the {@code shouldAttackPlayer} method.
+     */
+    @Inject(method = "shouldAttackPlayer", at = @At("TAIL"), cancellable = true)
+    public void shouldAttackPlayer(EntityPlayer player,
+        CallbackInfoReturnable<Boolean> cir) {
+        EntityEnderman self = (EntityEnderman) (Object) this;
+        EntityLiving attacker = (EntityLiving) self;
+        if (player == null) {
+            return;
+        }
+        List<ITargetingImmunity> immunities = PlayerUtils
+            .getPlayerTargetingImmunities(player);
+        if (ImmunityUtils.entityMatchesAnyTargetingImmunity(attacker,
+            immunities) || PlayerUtils.getIsPlayerGloballyImmune(player)) {
+            cir.setReturnValue(false);
         }
     }
 }
