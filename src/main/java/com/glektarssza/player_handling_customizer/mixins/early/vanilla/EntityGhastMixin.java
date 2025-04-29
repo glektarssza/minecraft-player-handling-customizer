@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 import com.glektarssza.player_handling_customizer.utils.ImmunityUtils;
@@ -22,7 +23,7 @@ public class EntityGhastMixin {
     private Entity targetedEntity;
 
     @Inject(method = "updateEntityActionState", at = @At(value = "INVOKE_ASSIGN", target = "net.minecraft.world.World.getClosestVulnerablePlayerToEntity(Lnet/minecraft/entity/Entity;D)Lnet/minecraft/entity/player/EntityPlayer;"), cancellable = false)
-    public void overrideTargetedEntity() {
+    public void overrideTargetedEntity(CallbackInfo ci) {
         EntityGhast self = (EntityGhast) (Object) this;
         EntityLiving attacker = self;
         Entity target = this.targetedEntity;
