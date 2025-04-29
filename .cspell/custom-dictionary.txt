@@ -17,13 +17,17 @@ divinerpg
 dmixin
 factorypath
 fmlat
+foojay
 futura
 gasstation
 gson
 gtnewhorizons
+gtnh
 gtnhmixins
+gtnhsettingsconvention
 ifml
 invincibles
+jitpack
 jvmargs
 knockback
 mcmeta
@@ -46,5 +50,5 @@ spongepowered
 srgify
 temurin
 thaumcraft
-Tweaker
+tweaker
 unimixins

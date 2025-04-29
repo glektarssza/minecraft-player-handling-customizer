@@ -64,18 +64,6 @@ tasks.injectTags.configure {
 }
 
 repositories {
-	exclusiveContent {
-		forRepository {
-    		maven {
-        		name = 'Cleanroom Maven'
-    	    	url = 'https://maven.cleanroommc.com'
-	    	}
-	    }
-	    filter {
-	    	includeGroup 'com.cleanroommc'
-	    	includeGroup 'zone.rong'
-	    }
-    }
     exclusiveContent {
         forRepository {
             maven {
@@ -99,6 +87,10 @@ repositories {
         filter {
             includeGroup 'com.github.LegacyModdingMC.UniMixins'
         }
+    }
+    maven {
+        name = 'Jitpack'
+        url = 'https://jitpack.io'
     }
     mavenLocal()
 }
@@ -131,12 +123,11 @@ dependencies {
     }
 
     // Runtime-only mods (things we like for easier testing!)
-    runtimeOnlyNonPublishable rfg.deobf('curse.maven:had-enough-items-557549:5815590')
-    runtimeOnlyNonPublishable rfg.deobf('curse.maven:jei-utilities-616190:4318448')
-    runtimeOnlyNonPublishable rfg.deobf('curse.maven:configanytime-870276:5212709')
-    runtimeOnlyNonPublishable rfg.deobf('curse.maven:universal-tweaks-705000:5529764')
-    runtimeOnlyNonPublishable rfg.deobf('curse.maven:in-game-account-switcher-232676:3993185')
-    runtimeOnlyNonPublishable rfg.deobf('curse.maven:the-one-probe-245211:2667280')
+    if (project.hasProperty('use_convenience_mods') && project.use_convenience_mods.toBoolean()) {
+        runtimeOnlyNonPublishable rfg.deobf('com.github.GTNewHorizons:NotEnoughItems:2.7.40-GTNH:dev')
+        runtimeOnlyNonPublishable rfg.deobf('com.github.GTNewHorizons:waila:1.8.2:dev')
+        runtimeOnlyNonPublishable rfg.deobf('curse.maven:in-game-account-switcher-232676:3993185')
+    }
 
     // Runtime-only mods (for testing various mod compatibility)
     if (project.hasProperty('use_advent_of_ascension') && project.use_advent_of_ascension.toBoolean()) {
@@ -149,7 +140,7 @@ dependencies {
 	    devOnlyNonPublishable rfg.deobf('curse.maven:aether-255308:5875775')
     }
     if (project.hasProperty('use_thaumcraft') && project.use_thaumcraft.toBoolean()) {
-	    devOnlyNonPublishable rfg.deobf('curse.maven:thaumcraft-223628:2227552')
+	    devOnlyNonPublishable rfg.deobf('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
     }
 
     // Testing
