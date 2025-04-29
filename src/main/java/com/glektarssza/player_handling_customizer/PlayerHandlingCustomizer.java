@@ -87,8 +87,7 @@ public class PlayerHandlingCustomizer {
         LOGGER.info("Pre-initializing {}...", Tags.MOD_NAME);
         configDir = event.getModConfigurationDirectory();
         LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
-        PlayerHandlingCustomizerConfig.synchronizeConfig(
-            configDir, String.format("%s.cfg", Tags.MOD_ID));
+        Config.init(configDir, String.format("%s.cfg", Tags.MOD_ID));
         MinecraftForge.EVENT_BUS.register(this);
         LOGGER.info("Done pre-initializing {}!", Tags.MOD_NAME);
     }
@@ -113,8 +112,7 @@ public class PlayerHandlingCustomizer {
     public void onConfigChange(OnConfigChangedEvent event) {
         if (event.modID.equals(Tags.MOD_ID)) {
             LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
-            PlayerHandlingCustomizerConfig.synchronizeConfig(
-                configDir, String.format("%s.cfg", Tags.MOD_ID));
+            Config.sync();
         }
     }
 
@@ -126,9 +124,8 @@ public class PlayerHandlingCustomizer {
     @SubscribeEvent
     public void onCommand(CommandEvent event) {
         if (event.command.getCommandName().equals("reload")) {
-            LOGGER.info("Synchronizing confiugration for {}...", Tags.MOD_NAME);
-            PlayerHandlingCustomizerConfig.synchronizeConfig(
-                configDir, String.format("%s.cfg", Tags.MOD_ID));
+            LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
+            Config.sync();
         }
     }
 }
