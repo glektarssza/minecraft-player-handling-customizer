@@ -24,6 +24,7 @@ import com.glektarssza.player_handling_customizer.api.IImmunity;
 import com.glektarssza.player_handling_customizer.api.IKnockbackImmunity;
 import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 import com.glektarssza.player_handling_customizer.api.ImmunityType;
+import com.glektarssza.player_handling_customizer.config.PlayerHandlingCustomizerConfig;
 import com.glektarssza.player_handling_customizer.impl.DamageImmunity;
 import com.glektarssza.player_handling_customizer.impl.HurtImmunity;
 import com.glektarssza.player_handling_customizer.impl.KnockbackImmunity;
@@ -47,7 +48,7 @@ public class PlayerUtils {
             : EntityPlayer.func_146094_a(playerProfile);
         return Arrays
             .asList(
-                PlayerHandlingCustomizer.CONFIG.immunePlayers.getStringList())
+                PlayerHandlingCustomizerConfig.immunePlayers)
             .stream()
             .anyMatch((item) -> playerUUID != null
                 && item.equalsIgnoreCase(playerUUID.toString())

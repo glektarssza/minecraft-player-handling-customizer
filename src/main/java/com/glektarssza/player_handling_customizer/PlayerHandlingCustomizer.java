@@ -1,9 +1,12 @@
 package com.glektarssza.player_handling_customizer;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
+
+import net.minecraft.launchwrapper.Launch;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CommandEvent;
@@ -21,6 +24,11 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
  */
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.MOD_VERSION, dependencies = Tags.MOD_DEPENDENCIES, acceptableRemoteVersions = "*")
 public class PlayerHandlingCustomizer {
+    /**
+     * The configuration directory.
+     */
+    private static File configDir;
+
     /**
      * The logger to use for the mod.
      */
@@ -86,6 +94,10 @@ public class PlayerHandlingCustomizer {
     public void onPreInit(FMLPreInitializationEvent event) {
         LOGGER = event.getModLog();
         LOGGER.info("Pre-initializing {}...", Tags.MOD_NAME);
+        configDir = event.getModConfigurationDirectory();
+        LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
+        PlayerHandlingCustomizerConfig.synchronizeConfig(
+            configDir, String.format("%s.cfg", Tags.MOD_ID));
         MinecraftForge.EVENT_BUS.register(this);
         LOGGER.info("Done pre-initializing {}!", Tags.MOD_NAME);
     }
@@ -98,9 +110,6 @@ public class PlayerHandlingCustomizer {
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         LOGGER.info("Initializing {}...", Tags.MOD_NAME);
-        CONFIG = new PlayerHandlingCustomizerConfig();
-        LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
-        CONFIG.sync();
         LOGGER.info("Done Initializing {}!", Tags.MOD_NAME);
     }
 
@@ -113,7 +122,8 @@ public class PlayerHandlingCustomizer {
     public void onConfigChange(OnConfigChangedEvent event) {
         if (event.modID.equals(Tags.MOD_ID)) {
             LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
-            CONFIG.sync();
+            PlayerHandlingCustomizerConfig.synchronizeConfig(
+                configDir, String.format("%s.cfg", Tags.MOD_ID));
         }
     }
 
@@ -126,7 +136,8 @@ public class PlayerHandlingCustomizer {
     public void onCommand(CommandEvent event) {
         if (event.command.getCommandName().equals("reload")) {
             LOGGER.info("Synchronizing confiugration for {}...", Tags.MOD_NAME);
-            CONFIG.sync();
+            PlayerHandlingCustomizerConfig.synchronizeConfig(
+                configDir, String.format("%s.cfg", Tags.MOD_ID));
         }
     }
 }
