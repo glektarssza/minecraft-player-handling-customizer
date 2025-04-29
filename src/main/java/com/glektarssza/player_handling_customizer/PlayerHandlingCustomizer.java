@@ -33,11 +33,6 @@ public class PlayerHandlingCustomizer {
     public static Logger LOGGER;
 
     /**
-     * The main mod configuration.
-     */
-    public static PlayerHandlingCustomizerConfig CONFIG;
-
-    /**
      * The maximum number of times to emit a warning before silencing it.
      */
     public static final int WARNING_EMIT_LIMIT = 20;
