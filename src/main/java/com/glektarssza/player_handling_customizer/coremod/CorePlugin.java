@@ -48,7 +48,7 @@ public class CorePlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
     @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
         List<String> mixins = new ArrayList<String>();
-        // TODO: Define mixins here
+        // -- Currently no mixins defined
         return mixins;
     }
 }
