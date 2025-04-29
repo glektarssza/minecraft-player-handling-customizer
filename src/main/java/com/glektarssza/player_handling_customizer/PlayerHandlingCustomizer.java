@@ -86,8 +86,9 @@ public class PlayerHandlingCustomizer {
         LOGGER = event.getModLog();
         LOGGER.info("Pre-initializing {}...", Tags.MOD_NAME);
         configDir = event.getModConfigurationDirectory();
-        LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
         Config.init(configDir, String.format("%s.cfg", Tags.MOD_ID));
+        LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
+        Config.sync();
         MinecraftForge.EVENT_BUS.register(this);
         LOGGER.info("Done pre-initializing {}!", Tags.MOD_NAME);
     }
