@@ -2,12 +2,12 @@ package com.glektarssza.player_handling_customizer.config;
 
 import java.util.Arrays;
 
-import com.falsepattern.gasstation.Tags;
-
 import net.minecraft.client.gui.GuiScreen;
 
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Property;
+
+import com.glektarssza.player_handling_customizer.Tags;
 
 import cpw.mods.fml.client.config.GuiConfig;
 
@@ -26,9 +26,9 @@ public class ConfigGui extends GuiConfig {
                 ConfigElement.getTypedElement(new Property("immunePlayers",
                     Config.immunePlayers,
                     Property.Type.STRING))),
-            Tags.MODID,
+            Tags.MOD_ID,
             false, false,
-            String.format("%s.cfg", Tags.MODID));
+            String.format("%s.cfg", Tags.MOD_ID));
     }
 
     @Override
