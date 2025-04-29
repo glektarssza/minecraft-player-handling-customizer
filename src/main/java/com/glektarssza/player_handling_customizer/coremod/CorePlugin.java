@@ -48,7 +48,18 @@ public class CorePlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
     @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
         List<String> mixins = new ArrayList<String>();
-        // -- Currently no mixins defined
+        // -- Vanilla mixins
+        mixins.add("vanilla.EntityAIArrowAttackMixin");
+        mixins.add("vanilla.EntityAIAttackOnCollideMixin");
+        mixins.add("vanilla.EntityAICreeperSwellMixin");
+        mixins.add("vanilla.EntityAIHurtByTargetMixin");
+        mixins.add("vanilla.EntityAINearestAttackableTargetMixin");
+        mixins.add("vanilla.EntityAIOwnerHurtByTargetMixin");
+        mixins.add("vanilla.EntityAIOwnerHurtTargetMixin");
+        mixins.add("vanilla.EntityAITargetMixin");
+        mixins.add("vanilla.EntityDragonMixin");
+        mixins.add("vanilla.EntityEndermanMixin");
+        mixins.add("vanilla.EntityWitherMixin");
         return mixins;
     }
 }
