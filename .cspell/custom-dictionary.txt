@@ -15,7 +15,7 @@ deobf
 dfml
 divinerpg
 dmixin
-Enderman
+enderman
 factorypath
 fmlat
 foojay
