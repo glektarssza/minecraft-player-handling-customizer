@@ -84,7 +84,8 @@ public class Config {
                 "player_handling_customizer.config.basic_category")
             .setCategoryRequiresMcRestart(CATEGORY_GENERAL, false);
 
-        configInstance.get(CATEGORY_GENERAL, "immunePlayers", immunePlayers)
+        configInstance
+            .get(CATEGORY_GENERAL, "immunePlayers", new String[0])
             .setLanguageKey("player_handling_customizer.config.immune_players")
             .setShowInGui(true)
             .setRequiresMcRestart(false)
