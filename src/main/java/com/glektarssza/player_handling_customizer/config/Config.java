@@ -59,8 +59,6 @@ public class Config {
             .setShowInGui(true)
             .setRequiresMcRestart(false)
             .setRequiresWorldRestart(false);
-
-        sync();
     }
 
     /**
