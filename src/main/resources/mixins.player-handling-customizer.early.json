@@ -5,5 +5,8 @@
     "package": "com.glektarssza.player_handling_customizer.mixins.early",
     "refmap": "mixins.player-handling-customizer.refmap.json",
     "compatibilityLevel": "JAVA_8",
-    "mixins": []
+    "mixins": [
+        "EntityAITargetMixin",
+        "EntityEnderman"
+    ]
 }

@@ -1,4 +1,4 @@
-package com.glektarssza.player_handling_customizer.mixins.vanilla;
+package com.glektarssza.player_handling_customizer.mixins.early.vanilla;
 
 import java.util.List;
 
