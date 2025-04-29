@@ -70,11 +70,9 @@ public class PlayerHandlingCustomizer {
         WARNING_LIMIT_TRACKER.putIfAbsent(category, WARNING_EMIT_LIMIT);
         int limit = WARNING_LIMIT_TRACKER.compute(category, (_k, v) -> v - 1);
         if (limit <= 0) {
-            LOGGER
-                .warn(
-                    String.format(
-                        "Too many identical warnings logged for category \"%s\"! Silencing further warnings on this issue!",
-                        category));
+            LOGGER.warn(String.format(
+                "Too many identical warnings logged for category \"%s\"! Silencing further warnings on this issue!",
+                category));
         }
     }
 
