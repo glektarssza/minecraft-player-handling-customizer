@@ -103,6 +103,7 @@ public class Config {
                 .error("Configuration has not been initialized yet!");
             return;
         }
+        configInstance.load();
         String[] currentImmunePlayers = new String[immunePlayers.size()];
         immunePlayers.toArray(currentImmunePlayers);
         currentImmunePlayers = configInstance
