@@ -1,15 +1,16 @@
 package com.glektarssza.player_handling_customizer.config;
 
-import java.util.Arrays;
+import java.util.List;
 
 import net.minecraft.client.gui.GuiScreen;
 
+import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.ConfigElement;
-import net.minecraftforge.common.config.Property;
 
 import com.glektarssza.player_handling_customizer.Tags;
 
 import cpw.mods.fml.client.config.GuiConfig;
+import cpw.mods.fml.client.config.IConfigElement;
 
 /**
  * The configuration GUI.
@@ -20,12 +21,15 @@ public class ConfigGui extends GuiConfig {
      *
      * @param parentScreen The parent screen.
      */
+    @SuppressWarnings({
+        "rawtypes", "unchecked"
+    })
     public ConfigGui(GuiScreen parentScreen) {
         super(parentScreen,
-            Arrays.asList(
-                ConfigElement.getTypedElement(new Property("immunePlayers",
-                    Config.getImmunePlayers(),
-                    Property.Type.STRING))),
+            (List<IConfigElement>) (Object) Config.getTopLevelCategories()
+                .stream()
+                .map((category) -> new ConfigElement<ConfigCategory>(category))
+                .toList(),
             Tags.MOD_ID,
             false, false,
             String.format("%s.cfg", Tags.MOD_ID));

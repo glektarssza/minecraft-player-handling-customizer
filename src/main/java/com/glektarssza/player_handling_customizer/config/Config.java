@@ -3,8 +3,10 @@ package com.glektarssza.player_handling_customizer.config;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 
 import com.glektarssza.player_handling_customizer.PlayerHandlingCustomizer;
@@ -59,6 +61,31 @@ public class Config {
      */
     public static void clearImmunePlayers() {
         immunePlayers.clear();
+    }
+
+    /**
+     * Get the main level configuration categories.
+     *
+     * @return A list of the main level configuration categories.
+     */
+    public static List<ConfigCategory> getTopLevelCategories() {
+        if (configInstance == null) {
+            return Collections.emptyList();
+        }
+        List<ConfigCategory> list = new ArrayList<>();
+        List<String> children = new ArrayList<>();
+        for (String name : configInstance.getCategoryNames()) {
+            if (configInstance.getCategory(name).parent == null) {
+                children.add(name);
+            }
+        }
+        for (String category : children) {
+            if (category.contains(Configuration.CATEGORY_SPLITTER)) {
+                continue;
+            }
+            list.add(configInstance.getCategory(category));
+        }
+        return list;
     }
 
     /**
