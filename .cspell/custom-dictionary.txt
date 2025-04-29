@@ -3,6 +3,7 @@ adoptium
 aout
 areobf
 assetmover
+attackable
 autobuild
 binpatched
 cleanroom
@@ -31,6 +32,7 @@ invincibles
 jitpack
 jvmargs
 knockback
+lnet
 mcmeta
 mcmod
 mcversion
