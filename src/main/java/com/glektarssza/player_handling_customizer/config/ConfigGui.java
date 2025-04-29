@@ -24,7 +24,7 @@ public class ConfigGui extends GuiConfig {
         super(parentScreen,
             Arrays.asList(
                 ConfigElement.getTypedElement(new Property("immunePlayers",
-                    Config.immunePlayers,
+                    Config.getImmunePlayers(),
                     Property.Type.STRING))),
             Tags.MOD_ID,
             false, false,
