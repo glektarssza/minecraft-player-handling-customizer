@@ -8,6 +8,13 @@ plugins {
     id("com.gtnewhorizons.retrofuturagradle") version "1.4.1"
 }
 
+/**
+ * Check if a project property is enabled.
+ */
+def isPropEnabled(String id) {
+    return project.hasProperty(id) && project[id].toBoolean()
+}
+
 version = project.mod_version
 group = project.mod_group
 archivesBaseName = project.archive_base_name
