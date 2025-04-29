@@ -6,8 +6,6 @@ import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.launchwrapper.Launch;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CommandEvent;
 
