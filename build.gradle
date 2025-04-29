@@ -149,6 +149,9 @@ dependencies {
     if (isPropEnabled('use_thaumcraft')) {
         devOnlyNonPublishable rfg.deobf('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
     }
+    if (isPropEnabled('use_specialmobs')) {
+        devOnlyNonPublishable rfg.deobf('com.github.GTNewHorizons:specialmobs:3.6.2:dev')
+    }
 
     // Testing
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
@@ -302,6 +305,13 @@ sourceSets {
         main {
             java {
                 exclude('**/player_handling_customizer/mixins/**/thaumcraft/**')
+            }
+        }
+    }
+    if (!isPropEnabled('use_specialmobs')) {
+        main {
+            java {
+                exclude('**/player_handling_customizer/mixins/**/specialmobs/**')
             }
         }
     }
