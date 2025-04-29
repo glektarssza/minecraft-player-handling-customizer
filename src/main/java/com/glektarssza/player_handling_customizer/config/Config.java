@@ -103,9 +103,12 @@ public class Config {
                 .error("Configuration has not been initialized yet!");
             return;
         }
-        immunePlayers = configInstance
-            .get(CATEGORY_GENERAL, "immunePlayers", immunePlayers)
+        String[] currentImmunePlayers = new String[immunePlayers.size()];
+        immunePlayers.toArray(currentImmunePlayers);
+        currentImmunePlayers = configInstance
+            .get(CATEGORY_GENERAL, "immunePlayers", currentImmunePlayers)
             .getStringList();
+        setImmunePlayers(currentImmunePlayers);
     }
 
     /**
