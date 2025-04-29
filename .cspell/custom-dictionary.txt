@@ -35,6 +35,7 @@ mixinextras
 mkdirs
 modid
 nevermine
+rawtypes
 refmap
 reobf
 reobfuscated
