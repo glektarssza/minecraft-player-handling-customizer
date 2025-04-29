@@ -140,13 +140,16 @@ dependencies {
 
     // Runtime-only mods (for testing various mod compatibility)
     if (project.hasProperty('use_advent_of_ascension') && project.use_advent_of_ascension.toBoolean()) {
-		devOnlyNonPublishable rfg.deobf('curse.maven:advent-of-ascension-nevermine-311054:3054253')
+		devOnlyNonPublishable rfg.deobf('curse.maven:advent-of-ascension-nevermine-311054:2973564')
     }
     if (project.hasProperty('use_divine_rpg') && project.use_divine_rpg.toBoolean()) {
-		devOnlyNonPublishable rfg.deobf('curse.maven:official-divinerpg-363543:3081433')
+		devOnlyNonPublishable rfg.deobf('curse.maven:official-divinerpg-363543:6330550')
     }
     if (project.hasProperty('use_aether') && project.use_aether.toBoolean()) {
-	    devOnlyNonPublishable rfg.deobf('curse.maven:aether-255308:5035622')
+	    devOnlyNonPublishable rfg.deobf('curse.maven:aether-255308:5875775')
+    }
+    if (project.hasProperty('use_thaumcraft') && project.use_thaumcraft.toBoolean()) {
+	    devOnlyNonPublishable rfg.deobf('curse.maven:thaumcraft-223628:2227552')
     }
 
     // Testing
@@ -276,17 +279,31 @@ sourceSets {
             srcDir 'src/generator/java'
         }
     }
-    if (!project.use_divine_rpg.toBoolean()) {
+    if (project.hasProperty('use_advent_of_ascension') && !project.use_advent_of_ascension.toBoolean()) {
+        main {
+            java {
+                exclude('**/player_handling_customizer/mixins/**/advent_of_ascension/**')
+            }
+        }
+    }
+    if (project.hasProperty('use_divine_rpg') && !project.use_divine_rpg.toBoolean()) {
         main {
             java {
                 exclude('**/player_handling_customizer/mixins/**/divinerpg/**')
             }
         }
     }
-    if (!project.use_aether.toBoolean()) {
+    if (project.hasProperty('use_aether') && !project.use_aether.toBoolean()) {
         main {
             java {
                 exclude('**/player_handling_customizer/mixins/**/aether/**')
+            }
+        }
+    }
+    if (project.hasProperty('use_thaumcraft') && !project.use_thaumcraft.toBoolean()) {
+        main {
+            java {
+                exclude('**/player_handling_customizer/mixins/**/thaumcraft/**')
             }
         }
     }
