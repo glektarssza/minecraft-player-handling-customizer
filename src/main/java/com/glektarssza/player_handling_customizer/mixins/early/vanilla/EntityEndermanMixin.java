@@ -16,10 +16,16 @@ import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 import com.glektarssza.player_handling_customizer.utils.ImmunityUtils;
 import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
+/**
+ * Mixin for the {@code EntityEnderman} class.
+ */
 @Mixin(EntityEnderman.class)
 public class EntityEndermanMixin {
-    @Inject(method = "Lnet/minecraft/entity/monster/EntityEnderman;findPlayerToAttack()Lnet/minecraft/entity/Entity;", at = @At("TAIL"), cancellable = true)
-    public void shouldExecute(CallbackInfoReturnable<Entity> cir) {
+    /**
+     * Mixin for the {@code shouldExecute} method.
+     */
+    @Inject(method = "findPlayerToAttack", at = @At("TAIL"), cancellable = true)
+    public void findPlayerToAttack(CallbackInfoReturnable<Entity> cir) {
         EntityEnderman self = (EntityEnderman) (Object) this;
         EntityLiving attacker = (EntityLiving) self;
         Entity returnValue = cir.getReturnValue();

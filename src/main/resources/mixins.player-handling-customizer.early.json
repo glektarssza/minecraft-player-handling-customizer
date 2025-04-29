@@ -6,7 +6,16 @@
     "refmap": "mixins.player-handling-customizer.refmap.json",
     "compatibilityLevel": "JAVA_17",
     "mixins": [
+        "vanilla.EntityAIArrowAttackMixin",
+        "vanilla.EntityAIAttackOnCollideMixin",
+        "vanilla.EntityAICreeperSwellMixin",
+        "vanilla.EntityAIHurtByTargetMixin",
+        "vanilla.EntityAINearestAttackableTargetMixin",
+        "vanilla.EntityAIOwnerHurtByTargetMixin",
+        "vanilla.EntityAIOwnerHurtTargetMixin",
         "vanilla.EntityAITargetMixin",
-        "vanilla.EntityEndermanMixin"
+        "vanilla.EntityDragonMixin",
+        "vanilla.EntityEndermanMixin",
+        "vanilla.EntityWitherMixin"
     ]
 }
