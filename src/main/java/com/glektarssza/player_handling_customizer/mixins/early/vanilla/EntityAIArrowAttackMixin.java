@@ -18,7 +18,7 @@ import com.glektarssza.player_handling_customizer.utils.ImmunityUtils;
 import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
 /**
- * Mixin for the {@code EntityAIArrowAttackMixin} class.
+ * Mixin for the {@code EntityAIArrowAttack} class.
  */
 @Mixin(EntityAIArrowAttack.class)
 public class EntityAIArrowAttackMixin {

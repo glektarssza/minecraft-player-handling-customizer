@@ -16,6 +16,9 @@ import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 import com.glektarssza.player_handling_customizer.utils.ImmunityUtils;
 import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
+/**
+ * Mixin for the {@code EntityWither} class.
+ */
 @Mixin(EntityWither.class)
 public class EntityWitherMixin {
     /**

@@ -19,7 +19,7 @@ import com.glektarssza.player_handling_customizer.utils.ImmunityUtils;
 import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
 /**
- * Mixin for the {@code EntityAITargetMixin} class.
+ * Mixin for the {@code EntityAITarget} class.
  */
 @Mixin(EntityAITarget.class)
 public class EntityAITargetMixin {
