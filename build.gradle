@@ -26,8 +26,8 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 configurations {
-	embed
-	implementation.extendsFrom(embed)
+    embed
+    implementation.extendsFrom(embed)
     create("runtimeOnlyNonPublishable") {
         description = "Runtime only dependencies that are not published alongside the jar"
         canBeConsumed = false
@@ -51,7 +51,7 @@ minecraft {
     if (project.use_coremod.toBoolean()) {
         args << '-Dfml.coreMods.load=' + coremod_plugin_class_name
     }
-    if (project.use_mixins.toBoolean()) {
+    if (isPropEnabled('use_mixins')) {
         args << '-Dmixin.hotSwap=true'
         args << '-Dmixin.checks.interfaces=true'
         args << '-Dmixin.debug.export=true'
@@ -82,9 +82,9 @@ repositories {
         }
     }
     maven {
-		name = 'SpongePowered Maven'
-		url = 'https://repo.spongepowered.org/maven'
-	}
+        name = 'SpongePowered Maven'
+        url = 'https://repo.spongepowered.org/maven'
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -103,21 +103,21 @@ repositories {
 }
 
 dependencies {
-    if (project.use_assetmover.toBoolean()) {
+    if (isPropEnabled('use_assetmover')) {
         implementation 'com.cleanroommc:assetmover:2.5'
     }
-    if (project.use_mixins.toBoolean()) {
+    if (isPropEnabled('use_mixins')) {
         def unimixinsVersion = '0.1.19'
-    	def refMapName = 'mixins.' + project.archive_base_name + '.refmap.json'
-    	def mixinProviderSpec = "com.github.LegacyModdingMC.UniMixins:unimixins-all-1.7.10:${unimixinsVersion}:dev"
+        def refMapName = 'mixins.' + project.archive_base_name + '.refmap.json'
+        def mixinProviderSpec = "com.github.LegacyModdingMC.UniMixins:unimixins-all-1.7.10:${unimixinsVersion}:dev"
 
-    	// Common
-    	annotationProcessor('org.ow2.asm:asm-debug-all:5.2')
+        // Common
+        annotationProcessor('org.ow2.asm:asm-debug-all:5.2')
         annotationProcessor('com.google.guava:guava:33.4.0-jre')
         annotationProcessor('com.google.code.gson:gson:2.12.1')
 
         // Mixins
-    	implementation(modUtils.enableMixins(mixinProviderSpec, refMapName))
+        implementation(modUtils.enableMixins(mixinProviderSpec, refMapName))
         api(mixinProviderSpec) { transitive = false }
         annotationProcessor(mixinProviderSpec) { transitive = false }
 
@@ -130,24 +130,24 @@ dependencies {
     }
 
     // Runtime-only mods (things we like for easier testing!)
-    if (project.hasProperty('use_convenience_mods') && project.use_convenience_mods.toBoolean()) {
+    if (isPropEnabled('use_convenience_mods')) {
         runtimeOnlyNonPublishable rfg.deobf('com.github.GTNewHorizons:NotEnoughItems:2.7.40-GTNH:dev')
         runtimeOnlyNonPublishable rfg.deobf('com.github.GTNewHorizons:waila:1.8.2:dev')
         runtimeOnlyNonPublishable rfg.deobf('curse.maven:in-game-account-switcher-232676:3993185')
     }
 
     // Runtime-only mods (for testing various mod compatibility)
-    if (project.hasProperty('use_advent_of_ascension') && project.use_advent_of_ascension.toBoolean()) {
-		devOnlyNonPublishable rfg.deobf('curse.maven:advent-of-ascension-nevermine-311054:2973564')
+    if (isPropEnabled('use_advent_of_ascension')) {
+        devOnlyNonPublishable rfg.deobf('curse.maven:advent-of-ascension-nevermine-311054:2973564')
     }
-    if (project.hasProperty('use_divine_rpg') && project.use_divine_rpg.toBoolean()) {
-		devOnlyNonPublishable rfg.deobf('curse.maven:official-divinerpg-363543:6330550')
+    if (isPropEnabled('use_divinerpg')) {
+        devOnlyNonPublishable rfg.deobf('curse.maven:official-divinerpg-363543:6330550')
     }
-    if (project.hasProperty('use_aether') && project.use_aether.toBoolean()) {
-	    devOnlyNonPublishable rfg.deobf('curse.maven:aether-255308:5875775')
+    if (isPropEnabled('use_aether')) {
+        devOnlyNonPublishable rfg.deobf('curse.maven:aether-255308:5875775')
     }
-    if (project.hasProperty('use_thaumcraft') && project.use_thaumcraft.toBoolean()) {
-	    devOnlyNonPublishable rfg.deobf('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
+    if (isPropEnabled('use_thaumcraft')) {
+        devOnlyNonPublishable rfg.deobf('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
     }
 
     // Testing
@@ -158,7 +158,7 @@ dependencies {
 
 // Exclude conflicting transitive dependencies if using mixins
 configurations.compileOnly.dependencies.each {
-    if (it instanceof ExternalModuleDependency && project.use_mixins.toBoolean()) {
+    if (it instanceof ExternalModuleDependency && isPropEnabled('use_mixins')) {
         it.exclude module: 'SpongeMixins'
         it.exclude module: 'SpongePoweredMixin'
         it.exclude module: '00gasstation-mc1.7.10'
@@ -168,14 +168,14 @@ configurations.compileOnly.dependencies.each {
 
 // Tweak client run settings if using mixins
 runClient {
-    if (project.use_mixins.toBoolean()) {
+    if (isPropEnabled('use_mixins')) {
         args('--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker')
     }
 }
 
 // Tweak server run settings if using mixins
 runServer {
-    if (project.use_mixins.toBoolean()) {
+    if (isPropEnabled('use_mixins')) {
         args('--tweakClass', 'org.spongepowered.asm.launch.MixinTweaker')
     }
 }
@@ -189,7 +189,7 @@ def mixinTmpDir = buildDir.path + File.separator + 'tmp' + File.separator + 'mix
 def refMap = "${mixinTmpDir}" + File.separator + mixinConfigRefMap
 def mixinSrg = "${mixinTmpDir}" + File.separator + "mixins.srg"
 
-if (project.use_mixins.toBoolean()) {
+if (isPropEnabled('use_mixins')) {
     tasks.named("reobfJar", ReobfuscatedJar).configure {
         extraSrgFiles.from(mixinSrg)
     }
@@ -206,7 +206,7 @@ if (project.use_mixins.toBoolean()) {
     }
 }
 
-if (project.use_access_transformer.toBoolean()) {
+if (isPropEnabled('use_access_transformer')) {
     for (File at : sourceSets.getByName("main").resources.files) {
         if (at.name.toLowerCase().endsWith("_at.cfg")) {
             tasks.deobfuscateMergedJarToSrg.accessTransformerFiles.from(at)
@@ -230,11 +230,11 @@ processResources {
         )
     }
 
-    if (project.use_access_transformer.toBoolean()) {
+    if (isPropEnabled('use_access_transformer')) {
         rename '(.+_at.cfg)', 'META-INF/$1'
     }
 
-    if (project.use_mixins.toBoolean()) {
+    if (isPropEnabled('use_mixins')) {
         from refMap
         dependsOn("compileJava")
     }
@@ -242,7 +242,7 @@ processResources {
 jar {
     manifest {
         def attribute_map = [:]
-        if (project.use_mixins.toBoolean()) {
+        if (isPropEnabled('use_mixins')) {
             attribute_map['TweakClass'] = 'org.spongepowered.asm.launch.MixinTweaker'
         }
         if (project.use_coremod.toBoolean()) {
@@ -252,7 +252,7 @@ jar {
                 attribute_map['ForceLoadAsMod'] = project.gradle.startParameter.taskNames[0] == "build"
             }
         }
-        if (project.use_access_transformer.toBoolean()) {
+        if (isPropEnabled('use_access_transformer')) {
             attribute_map['FMLAT'] = project.archive_base_name + '_at.cfg'
         }
         attributes(attribute_map)
@@ -277,28 +277,28 @@ sourceSets {
             srcDir 'src/generator/java'
         }
     }
-    if (project.hasProperty('use_advent_of_ascension') && !project.use_advent_of_ascension.toBoolean()) {
+    if (!isPropEnabled('use_advent_of_ascension')) {
         main {
             java {
                 exclude('**/player_handling_customizer/mixins/**/advent_of_ascension/**')
             }
         }
     }
-    if (project.hasProperty('use_divine_rpg') && !project.use_divine_rpg.toBoolean()) {
+    if (!isPropEnabled('use_divinerpg')) {
         main {
             java {
                 exclude('**/player_handling_customizer/mixins/**/divinerpg/**')
             }
         }
     }
-    if (project.hasProperty('use_aether') && !project.use_aether.toBoolean()) {
+    if (!isPropEnabled('use_aether')) {
         main {
             java {
                 exclude('**/player_handling_customizer/mixins/**/aether/**')
             }
         }
     }
-    if (project.hasProperty('use_thaumcraft') && !project.use_thaumcraft.toBoolean()) {
+    if (!isPropEnabled('use_thaumcraft')) {
         main {
             java {
                 exclude('**/player_handling_customizer/mixins/**/thaumcraft/**')
