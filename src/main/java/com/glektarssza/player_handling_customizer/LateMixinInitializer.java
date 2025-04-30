@@ -30,7 +30,7 @@ public class LateMixinInitializer implements ILateMixinLoader {
         if (loadedMods.contains("SpecialMobs")) {
             mixins.add("specialmobs.Entity_SpecialSpiderMixin");
             mixins.add("specialmobs.Entity_SpecialGhastMixin");
-            mixins.add("specialmobs.EntityWitchSpider");
+            mixins.add("specialmobs.EntityWitchSpiderMixin");
         }
         return mixins;
     }
