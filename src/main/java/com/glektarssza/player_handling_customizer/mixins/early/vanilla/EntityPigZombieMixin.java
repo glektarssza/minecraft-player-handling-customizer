@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
@@ -38,6 +39,28 @@ public class EntityPigZombieMixin {
         if (ImmunityUtils.entityMatchesAnyTargetingImmunity(attacker,
             immunities) || PlayerUtils.getIsPlayerGloballyImmune(player)) {
             cir.setReturnValue(null);
+        }
+    }
+
+    /**
+     * Mixin for the {@code becomeAngryAt} method.
+     */
+    @Inject(method = "becomeAngryAt", at = @At("HEAD"), cancellable = true)
+    public void becomeAngryAt(Entity target, CallbackInfo ci) {
+        EntityPigZombie self = (EntityPigZombie) (Object) this;
+        EntityLiving attacker = self;
+        if (target == null) {
+            return;
+        }
+        if (!(target instanceof EntityPlayer)) {
+            return;
+        }
+        EntityPlayer player = (EntityPlayer) target;
+        List<ITargetingImmunity> immunities = PlayerUtils
+            .getPlayerTargetingImmunities(player);
+        if (ImmunityUtils.entityMatchesAnyTargetingImmunity(attacker,
+            immunities) || PlayerUtils.getIsPlayerGloballyImmune(player)) {
+            ci.cancel();
         }
     }
 }
