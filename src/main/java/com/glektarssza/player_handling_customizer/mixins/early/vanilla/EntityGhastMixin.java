@@ -17,11 +17,17 @@ import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 import com.glektarssza.player_handling_customizer.utils.ImmunityUtils;
 import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
+/**
+ * Mixin for the {@code EntityGhast} class.
+ */
 @Mixin(EntityGhast.class)
 public class EntityGhastMixin {
     @Shadow
     private Entity targetedEntity;
 
+    /**
+     * Mixin for the {@code updateEntityActionState} method.
+     */
     @Inject(method = "updateEntityActionState", at = @At(value = "INVOKE_ASSIGN", target = "net.minecraft.world.World.getClosestVulnerablePlayerToEntity(Lnet/minecraft/entity/Entity;D)Lnet/minecraft/entity/player/EntityPlayer;"), cancellable = false)
     public void overrideTargetedEntity(CallbackInfo ci) {
         EntityGhast self = (EntityGhast) (Object) this;
