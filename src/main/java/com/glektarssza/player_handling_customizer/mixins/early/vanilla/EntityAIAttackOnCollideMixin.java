@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIArrowAttack;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -36,7 +35,7 @@ public class EntityAIAttackOnCollideMixin {
     @SuppressWarnings("unused")
     @Inject(method = "shouldExecute", at = @At("RETURN"), cancellable = true)
     private void shouldExecute(CallbackInfoReturnable<Boolean> cir) {
-        EntityAIArrowAttack self = (EntityAIArrowAttack) (Object) this;
+        EntityAIAttackOnCollide self = (EntityAIAttackOnCollide) (Object) this;
         EntityLiving attacker = this.attacker;
         EntityLivingBase target = this.attacker.getAttackTarget();
         if (!(target instanceof EntityPlayer)) {
