@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,7 +23,7 @@ public class EntityPigZombieMixin {
      */
     @Inject(method = "findPlayerToAttack", at = @At("TAIL"), cancellable = true)
     public void findPlayerToAttack(CallbackInfoReturnable<Entity> cir) {
-        EntitySpider self = (EntitySpider) (Object) this;
+        EntityPigZombie self = (EntityPigZombie) (Object) this;
         EntityLiving attacker = self;
         Entity target = cir.getReturnValue();
         if (target == null) {
