@@ -193,12 +193,15 @@ def mixinTmpDir = buildDir.path + File.separator + 'tmp' + File.separator + 'mix
 def refMap = "${mixinTmpDir}" + File.separator + mixinConfigRefMap
 def mixinSrg = "${mixinTmpDir}" + File.separator + "mixins.srg"
 
-if (isPropEnabled('use_mixins')) {
-    tasks.named("reobfJar", ReobfuscatedJar).configure {
+
+tasks.named("reobfJar", ReobfuscatedJar).configure {
+    if (isPropEnabled('use_mixins')) {
         extraSrgFiles.from(mixinSrg)
     }
+}
 
-    tasks.named("compileJava", JavaCompile).configure {
+tasks.named("compileJava", JavaCompile).configure {
+    if (isPropEnabled('use_mixins')) {
         doFirst {
             new File(mixinTmpDir).mkdirs()
         }
@@ -209,6 +212,7 @@ if (isPropEnabled('use_mixins')) {
         ]
     }
 }
+
 
 if (isPropEnabled('use_access_transformer')) {
     for (File at : sourceSets.getByName("main").resources.files) {
