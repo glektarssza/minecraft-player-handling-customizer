@@ -131,26 +131,27 @@ dependencies {
 
     // Runtime-only mods (things we like for easier testing!)
     if (isPropEnabled('use_convenience_mods')) {
-        runtimeOnlyNonPublishable rfg.deobf('com.github.GTNewHorizons:NotEnoughItems:2.7.40-GTNH:dev')
-        runtimeOnlyNonPublishable rfg.deobf('com.github.GTNewHorizons:waila:1.8.2:dev')
-        runtimeOnlyNonPublishable rfg.deobf('curse.maven:in-game-account-switcher-232676:3993185')
+        runtimeOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.7.40-GTNH:dev')
+        runtimeOnlyNonPublishable('com.github.GTNewHorizons:waila:1.8.2:dev')
     }
 
     // Runtime-only mods (for testing various mod compatibility)
     if (isPropEnabled('use_advent_of_ascension')) {
-        devOnlyNonPublishable rfg.deobf('curse.maven:advent-of-ascension-nevermine-311054:2973564')
+        implementation rfg.deobf('curse.maven:advent-of-ascension-nevermine-311054:2973564')
     }
     if (isPropEnabled('use_divinerpg')) {
-        devOnlyNonPublishable rfg.deobf('curse.maven:official-divinerpg-363543:6330550')
+        implementation rfg.deobf('curse.maven:official-divinerpg-363543:6330550')
     }
     if (isPropEnabled('use_aether')) {
-        devOnlyNonPublishable rfg.deobf('curse.maven:aether-255308:5875775')
+        implementation rfg.deobf('curse.maven:aether-255308:5875775')
     }
     if (isPropEnabled('use_thaumcraft')) {
-        devOnlyNonPublishable rfg.deobf('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
+        implementation('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
     }
     if (isPropEnabled('use_specialmobs')) {
-        devOnlyNonPublishable rfg.deobf('com.github.GTNewHorizons:specialmobs:3.6.2:dev')
+        implementation('com.github.GTNewHorizons:specialmobs:3.6.2:dev') {transitive = false}
+        implementation('com.github.GTNewHorizons:NotEnoughItems:2.7.25-GTNH:dev') {transitive = false}
+        implementation('com.github.GTNewHorizons:CodeChickenCore:1.2.0:dev')
     }
 
     // Testing
