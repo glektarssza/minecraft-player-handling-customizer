@@ -12,7 +12,7 @@ plugins {
  * Check if a project property is enabled.
  */
 def isPropEnabled(String id) {
-    return project.hasProperty(id) && project[id].toBoolean()
+    return project.hasProperty(id) && project.getProperty(id).toBoolean()
 }
 
 version = project.mod_version
