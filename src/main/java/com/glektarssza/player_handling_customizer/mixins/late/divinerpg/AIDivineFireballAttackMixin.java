@@ -23,7 +23,7 @@ public class AIDivineFireballAttackMixin {
     @Shadow(remap = false)
     private EntityLiving parentEntity;
 
-    @Inject(method = "shouldExecute", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "shouldExecute", at = @At("RETURN"), cancellable = true)
     public void shouldExecute(CallbackInfoReturnable<Boolean> cir) {
         EntityLiving attacker = this.parentEntity;
         EntityLivingBase target = (EntityLivingBase) this.parentEntity

@@ -49,7 +49,7 @@ public class EntityMobMixin {
     /**
      * Mixin for the {@code attackEntityFrom} method.
      */
-    @Inject(method = "attackEntityFrom", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "attackEntityFrom", at = @At("RETURN"), cancellable = true)
     public void attackEntityFrom(DamageSource damageSource, float amount,
         CallbackInfoReturnable<Boolean> cir) {
         EntityMob self = (EntityMob) (Object) this;

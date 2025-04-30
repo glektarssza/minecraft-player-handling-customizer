@@ -34,7 +34,7 @@ public class EntityAIAttackOnCollideMixin {
      * Mixin for the {@code shouldExecute} method.
      */
     @SuppressWarnings("unused")
-    @Inject(method = "shouldExecute", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "shouldExecute", at = @At("RETURN"), cancellable = true)
     private void shouldExecute(CallbackInfoReturnable<Boolean> cir) {
         EntityAIArrowAttack self = (EntityAIArrowAttack) (Object) this;
         EntityLiving attacker = this.attacker;

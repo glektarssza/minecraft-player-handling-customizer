@@ -47,7 +47,7 @@ public class EntityEndermanMixin {
     /**
      * Mixin for the {@code shouldAttackPlayer} method.
      */
-    @Inject(method = "shouldAttackPlayer", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "shouldAttackPlayer", at = @At("RETURN"), cancellable = true)
     public void shouldAttackPlayer(EntityPlayer player,
         CallbackInfoReturnable<Boolean> cir) {
         EntityEnderman self = (EntityEnderman) (Object) this;

@@ -33,7 +33,7 @@ public class EntityAITargetMixin {
      * Mixin for the {@code isSuitableTarget} method.
      */
     @SuppressWarnings("unused")
-    @Inject(method = "isSuitableTarget", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "isSuitableTarget", at = @At("RETURN"), cancellable = true)
     private void isSuitableTarget(EntityLivingBase target,
         boolean includeInvincibles,
         CallbackInfoReturnable<Boolean> cir) {
