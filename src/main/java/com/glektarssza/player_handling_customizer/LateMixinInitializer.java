@@ -31,6 +31,7 @@ public class LateMixinInitializer implements ILateMixinLoader {
             mixins.add("specialmobs.Entity_SpecialGhastMixin");
             mixins.add("specialmobs.Entity_SpecialCaveSpiderMixin");
             mixins.add("specialmobs.Entity_SpecialSpiderMixin");
+            mixins.add("specialmobs.EntityEnderCreeperMixin");
         }
         return mixins;
     }
