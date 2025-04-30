@@ -19,7 +19,7 @@ import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
 import toast.specialMobs.entity.ghast.Entity_SpecialGhast;
 
-@Mixin(Entity_SpecialGhast.class)
+@Mixin(value = Entity_SpecialGhast.class, remap = false)
 public class Entity_SpecialGhastMixin {
     @Shadow(remap = false)
     private Entity targetedEntity;

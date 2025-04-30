@@ -13,7 +13,7 @@ import toast.specialMobs.entity.spider.Entity_SpecialSpider;
 /**
  * Mixin for the {@code Entity_SpecialSpider} class.
  */
-@Mixin(Entity_SpecialSpider.class)
+@Mixin(value = Entity_SpecialSpider.class, remap = false)
 public class Entity_SpecialSpiderMixin {
     /**
      * A shadow of the {@code fakeDarkness} field.
