@@ -26,7 +26,7 @@ public class Entity_SpecialCaveSpiderMixin {
     /**
      * Mixin for the {@code findPlayerToAttack} method.
      */
-    @Inject(method = "findPlayerToAttack", at = @At("TAIL"), cancellable = true, remap = false)
+    @Inject(method = "findPlayerToAttack", at = @At("RETURN"), cancellable = true, remap = false)
     public void findPlayerToAttack(CallbackInfoReturnable<Entity> cir) {
         Entity_SpecialCaveSpider self = (Entity_SpecialCaveSpider) (Object) this;
         EntityLiving attacker = self;

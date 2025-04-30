@@ -24,7 +24,7 @@ public class EntityEndermanMixin {
     /**
      * Mixin for the {@code findPlayerToAttack} method.
      */
-    @Inject(method = "findPlayerToAttack", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "findPlayerToAttack", at = @At("RETURN"), cancellable = true)
     public void findPlayerToAttack(CallbackInfoReturnable<Entity> cir) {
         EntityEnderman self = (EntityEnderman) (Object) this;
         EntityLiving attacker = (EntityLiving) self;

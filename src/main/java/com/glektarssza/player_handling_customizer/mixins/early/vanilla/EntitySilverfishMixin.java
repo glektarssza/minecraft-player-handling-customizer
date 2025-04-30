@@ -25,7 +25,7 @@ public class EntitySilverfishMixin {
     /**
      * Mixin for the {@code findPlayerToAttack} method.
      */
-    @Inject(method = "findPlayerToAttack", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "findPlayerToAttack", at = @At("RETURN"), cancellable = true)
     public void findPlayerToAttack(CallbackInfoReturnable<Entity> cir) {
         EntitySpider self = (EntitySpider) (Object) this;
         EntityLiving attacker = self;

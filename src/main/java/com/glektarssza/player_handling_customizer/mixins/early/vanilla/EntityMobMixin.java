@@ -26,7 +26,7 @@ public class EntityMobMixin {
     /**
      * Mixin for the {@code findPlayerToAttack} method.
      */
-    @Inject(method = "findPlayerToAttack", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "findPlayerToAttack", at = @At("RETURN"), cancellable = true)
     public void findPlayerToAttack(CallbackInfoReturnable<Entity> cir) {
         EntityMob self = (EntityMob) (Object) this;
         EntityLiving attacker = self;
