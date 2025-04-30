@@ -1,21 +1,8 @@
 {
     "required": true,
     "target": "@env(DEFAULT)",
-    "minVersion": "0.8",
+    "minVersion": "0.8.3-GTNH",
     "package": "com.glektarssza.player_handling_customizer.mixins.early",
     "refmap": "mixins.player-handling-customizer.refmap.json",
-    "compatibilityLevel": "JAVA_8",
-    "mixins": [
-        "vanilla.EntityAIArrowAttackMixin",
-        "vanilla.EntityAIAttackOnCollideMixin",
-        "vanilla.EntityAICreeperSwellMixin",
-        "vanilla.EntityAIHurtByTargetMixin",
-        "vanilla.EntityAINearestAttackableTargetMixin",
-        "vanilla.EntityAIOwnerHurtByTargetMixin",
-        "vanilla.EntityAIOwnerHurtTargetMixin",
-        "vanilla.EntityAITargetMixin",
-        "vanilla.EntityDragonMixin",
-        "vanilla.EntityEndermanMixin",
-        "vanilla.EntityWitherMixin"
-    ]
+    "compatibilityLevel": "JAVA_8"
 }
