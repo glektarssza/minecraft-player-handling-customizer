@@ -1,6 +1,7 @@
 package com.glektarssza.player_handling_customizer.config;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import net.minecraft.client.gui.GuiScreen;
 
@@ -29,7 +30,7 @@ public class ConfigGui extends GuiConfig {
             (List<IConfigElement>) (Object) Config.getTopLevelCategories()
                 .stream()
                 .map((category) -> new ConfigElement<ConfigCategory>(category))
-                .toList(),
+                .collect(Collectors.toList()),
             Tags.MOD_ID,
             false, false,
             String.format("%s.cfg", Tags.MOD_ID));
