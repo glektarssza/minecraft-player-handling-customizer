@@ -16,16 +16,11 @@ import toast.specialMobs.entity.spider.Entity_SpecialSpider;
 @Mixin(value = Entity_SpecialSpider.class, remap = false)
 public class Entity_SpecialSpiderMixin {
     /**
-     * A shadow of the {@code fakeDarkness} field.
-     */
-    @Shadow(remap = false)
-    private boolean fakeDarkness;
-
-    /**
      * Mixin for the {@code findPlayerToAttack} method.
      */
     @Inject(method = "findPlayerToAttack", at = @At(value = "INVOKE", target = "net.minecraft.entity.monster.EntitySpider.findPlayerToAttack()Lnet/minecraft/entity/Entity;"), cancellable = false, remap = false)
     public void findPlayerToAttack(CallbackInfoReturnable<Entity> cir) {
-        this.fakeDarkness = false;
+        Entity_SpecialSpider self = (Entity_SpecialSpider) (Object) this;
+        self.fakeDarkness = false;
     }
 }
