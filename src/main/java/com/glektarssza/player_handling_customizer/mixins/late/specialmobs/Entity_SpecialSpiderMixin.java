@@ -1,9 +1,9 @@
 package com.glektarssza.player_handling_customizer.mixins.late.specialmobs;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -14,13 +14,12 @@ import toast.specialMobs.entity.spider.Entity_SpecialSpider;
  * Mixin for the {@code Entity_SpecialSpider} class.
  */
 @Mixin(Entity_SpecialSpider.class)
-public abstract class Entity_SpecialSpiderMixin extends Entity_SpecialSpider {
+public class Entity_SpecialSpiderMixin {
     /**
-     * Constructor to shut Java up.
+     * A shadow of the {@code fakeDarkness} field.
      */
-    public Entity_SpecialSpiderMixin(World world) {
-        super(world);
-    }
+    @Shadow(remap = false)
+    private boolean fakeDarkness;
 
     /**
      * Mixin for the {@code findPlayerToAttack} method.
