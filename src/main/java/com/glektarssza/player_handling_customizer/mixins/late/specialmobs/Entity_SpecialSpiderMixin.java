@@ -18,7 +18,7 @@ public class Entity_SpecialSpiderMixin {
     /**
      * A shadow of the {@code fakeDarkness} field.
      */
-    @Shadow
+    @Shadow(remap = false)
     private boolean fakeDarkness;
 
     /**

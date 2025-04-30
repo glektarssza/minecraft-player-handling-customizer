@@ -21,7 +21,7 @@ import toast.specialMobs.entity.ghast.Entity_SpecialGhast;
 
 @Mixin(Entity_SpecialGhast.class)
 public class Entity_SpecialGhastMixin {
-    @Shadow
+    @Shadow(remap = false)
     private Entity targetedEntity;
 
     @Inject(method = "updateEntityTarget", at = @At("TAIL"), cancellable = true, remap = false)
