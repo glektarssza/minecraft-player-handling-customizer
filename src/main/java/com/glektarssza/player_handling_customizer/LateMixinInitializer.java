@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Set;
 
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
+import com.gtnewhorizon.gtnhmixins.LateMixin;
 
 /**
  * The late-stage mixin initializer.
  */
+@LateMixin
 public class LateMixinInitializer implements ILateMixinLoader {
     @Override
     public String getMixinConfig() {
