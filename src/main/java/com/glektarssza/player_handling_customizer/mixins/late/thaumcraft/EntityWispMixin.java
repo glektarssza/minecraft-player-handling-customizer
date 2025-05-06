@@ -31,13 +31,13 @@ public class EntityWispMixin {
     /**
      * A shadow of the {@code targetedEntity} field.
      */
-    @Shadow(remap = false)
+    @Shadow
     private Entity targetedEntity;
 
     /**
      * Mixin for the {@code attackEntityFrom} method.
      */
-    @Inject(method = "attackEntityFrom", at = @At(value = "FIELD", target = "Lthaumcraft/common/entities/monster/EntityWisp;targetedEntity:Lnet/minecraft/entity/Entity;", opcode = Opcodes.PUTFIELD, shift = Shift.AFTER, remap = false), cancellable = true, remap = false)
+    @Inject(method = "attackEntityFrom", at = @At(value = "FIELD", target = "Lthaumcraft/common/entities/monster/EntityWisp;targetedEntity:Lnet/minecraft/entity/Entity;", opcode = Opcodes.PUTFIELD, shift = Shift.AFTER), cancellable = true)
     public void overrideTargetedEntity(DamageSource damageSource, float amount,
         CallbackInfoReturnable<Boolean> cir) {
         EntityWisp self = (EntityWisp) (Object) this;
@@ -64,7 +64,7 @@ public class EntityWispMixin {
     /**
      * Mixin for the {@code updateEntityActionState} method.
      */
-    @Inject(method = "updateEntityActionState", at = @At(value = "FIELD", target = "Lthaumcraft/common/entities/monster/EntityWisp;targetedEntity:Lnet/minecraft/entity/Entity;", opcode = Opcodes.PUTFIELD, shift = Shift.AFTER, remap = false, args = "log=true"), cancellable = true, remap = false)
+    @Inject(method = "updateEntityActionState", at = @At(value = "FIELD", target = "Lthaumcraft/common/entities/monster/EntityWisp;targetedEntity:Lnet/minecraft/entity/Entity;", opcode = Opcodes.PUTFIELD, shift = Shift.AFTER), cancellable = true)
     public void overrideTargetedEntity(CallbackInfo ci) {
         EntityWisp self = (EntityWisp) (Object) this;
         EntityLiving attacker = self;
