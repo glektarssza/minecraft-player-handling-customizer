@@ -40,7 +40,7 @@ public class EntityWispMixin {
     @Inject(method = {
         "attackEntityFrom",
         "updateEntityActionState"
-    }, at = @At(value = "FIELD", target = "targetedEntity", opcode = Opcodes.PUTFIELD, shift = Shift.AFTER, remap = false), cancellable = true, remap = false)
+    }, at = @At(value = "FIELD", target = "Lthaumcraft/common/entities/monster/EntityWisp;targetedEntity:Lnet/minecraft/entity/Entity;", opcode = Opcodes.PUTFIELD, shift = Shift.AFTER, remap = false), cancellable = true, remap = false)
     public void overrideTargetedEntity(DamageSource damageSource, float amount,
         CallbackInfoReturnable<Boolean> cir) {
         EntityWisp self = (EntityWisp) (Object) this;
