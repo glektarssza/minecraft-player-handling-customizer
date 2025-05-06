@@ -21,6 +21,9 @@ import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
 import divinerpg.objects.entities.entity.vanilla.EntityFrost;
 
+/**
+ * Mixin for the {@code EntityFrost} class.
+ */
 @Mixin(EntityFrost.class)
 public class EntityFrostMixin {
     /**
@@ -105,6 +108,9 @@ public class EntityFrostMixin {
         }
     }
 
+    /**
+     * Mixin for the {@code initEntityAI} method.
+     */
     @Inject(method = "initEntityAI", at = @At("TAIL"))
     public void initEntityAI(CallbackInfo ci) {
         EntityFrost self = (EntityFrost) (Object) this;
@@ -130,6 +136,9 @@ public class EntityFrostMixin {
         }
     }
 
+    /**
+     * Mixin for the {@code onLivingUpdate} method.
+     */
     @Inject(method = "onLivingUpdate", at = @At("HEAD"))
     public void onLivingUpdate(CallbackInfo ci) {
         EntityFrost self = (EntityFrost) (Object) this;

@@ -19,11 +19,20 @@ import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 import com.glektarssza.player_handling_customizer.utils.ImmunityUtils;
 import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
+/**
+ * Mixin for the {@code ZephyrAIShootTarget} class.
+ */
 @Mixin(ZephyrAIShootTarget.class)
 public class ZephyrAIShootTargetMixin {
+    /**
+     * A shadow of the {@code zephyr} field.
+     */
     @Shadow(remap = false)
     private EntityZephyr zephyr;
 
+    /**
+     * Mixin for the {@code shouldExecute} method.
+     */
     @Inject(method = "shouldExecute", at = @At("HEAD"), cancellable = true)
     public void shouldExecute(CallbackInfoReturnable<Boolean> cir) {
         EntityLiving attacker = (EntityLiving) this.zephyr;

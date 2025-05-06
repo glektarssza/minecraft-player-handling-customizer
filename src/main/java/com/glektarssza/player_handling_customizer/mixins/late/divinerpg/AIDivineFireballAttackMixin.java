@@ -18,11 +18,20 @@ import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
 import com.glektarssza.player_handling_customizer.utils.ImmunityUtils;
 import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
+/**
+ * Mixin for the {@code AIDivineFireballAttack} class.
+ */
 @Mixin(AIDivineFireballAttack.class)
 public class AIDivineFireballAttackMixin {
+    /**
+     * A shadow of the {@code parentEntity} field.
+     */
     @Shadow(remap = false)
     private EntityLiving parentEntity;
 
+    /**
+     * Mixin for the {@code shouldExecute} method.
+     */
     @Inject(method = "shouldExecute", at = @At("RETURN"), cancellable = true)
     public void shouldExecute(CallbackInfoReturnable<Boolean> cir) {
         EntityLiving attacker = this.parentEntity;

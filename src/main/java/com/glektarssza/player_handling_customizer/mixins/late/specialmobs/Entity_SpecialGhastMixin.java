@@ -17,8 +17,14 @@ import com.glektarssza.player_handling_customizer.utils.PlayerUtils;
 
 import toast.specialMobs.entity.ghast.Entity_SpecialGhast;
 
+/**
+ * Mixin for the {@code Entity_SpecialGhast} class.
+ */
 @Mixin(value = Entity_SpecialGhast.class, remap = false)
 public class Entity_SpecialGhastMixin {
+    /**
+     * Mixin for the {@code updateEntityTarget} method.
+     */
     @Inject(method = "updateEntityTarget", at = @At("TAIL"), cancellable = true, remap = false)
     public void updateEntityTarget(CallbackInfo ci) {
         Entity_SpecialGhast self = (Entity_SpecialGhast) (Object) this;
