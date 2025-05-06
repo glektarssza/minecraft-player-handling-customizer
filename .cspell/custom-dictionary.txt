@@ -57,3 +57,4 @@ thaumcraft
 tweaker
 unimixins
 waila
+xaeros
