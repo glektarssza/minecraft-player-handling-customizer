@@ -26,7 +26,7 @@ import thaumcraft.common.entities.monster.EntityWisp;
 /**
  * Mixin for the {@code EntityWisp} class.
  */
-@Mixin(value = EntityWisp.class, remap = false)
+@Mixin(value = EntityWisp.class)
 public class EntityWispMixin {
     /**
      * A shadow of the {@code targetedEntity} field.
