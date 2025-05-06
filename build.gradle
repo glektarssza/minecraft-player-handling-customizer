@@ -265,6 +265,7 @@ jar {
         def attribute_map = [:]
         if (isPropEnabled('use_mixins')) {
             attribute_map['TweakClass'] = 'org.spongepowered.asm.launch.MixinTweaker'
+            attribute_map['MixinConfigs'] = "mixins.${archive_base_name}.json"
         }
         if (project.use_coremod.toBoolean()) {
             attribute_map['FMLCorePlugin'] = project.coremod_plugin_class_name
