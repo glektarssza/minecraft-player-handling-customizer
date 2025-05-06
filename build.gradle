@@ -267,9 +267,9 @@ jar {
             attribute_map['TweakClass'] = 'org.spongepowered.asm.launch.MixinTweaker'
             attribute_map['MixinConfigs'] = "mixins.${archive_base_name}.json"
         }
-        if (project.use_coremod.toBoolean()) {
+        if (isPropEnabled('use_coremod')) {
             attribute_map['FMLCorePlugin'] = project.coremod_plugin_class_name
-            if (project.include_mod.toBoolean()) {
+            if (isPropEnabled('include_mod')) {
                 attribute_map['FMLCorePluginContainsFMLMod'] = true
                 attribute_map['ForceLoadAsMod'] = project.gradle.startParameter.taskNames[0] == "build"
             }
