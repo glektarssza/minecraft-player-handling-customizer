@@ -33,6 +33,7 @@ jitpack
 jvmargs
 knockback
 lnet
+Lthaumcraft
 mcmeta
 mcmod
 mcversion
