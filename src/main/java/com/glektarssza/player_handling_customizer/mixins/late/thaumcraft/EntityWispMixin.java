@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.At.Shift;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.glektarssza.player_handling_customizer.api.ITargetingImmunity;
@@ -34,15 +35,37 @@ public class EntityWispMixin {
     private Entity targetedEntity;
 
     /**
-     * Mixin for the {@code attackEntityFrom} and
-     * {@code updateEntityActionState} methods.
+     * Mixin for the {@code attackEntityFrom} method.
      */
-    @Inject(method = {
-        "attackEntityFrom",
-        "updateEntityActionState"
-    }, at = @At(value = "FIELD", target = "Lthaumcraft/common/entities/monster/EntityWisp;targetedEntity:Lnet/minecraft/entity/Entity;", opcode = Opcodes.PUTFIELD, shift = Shift.AFTER, remap = false), cancellable = true, remap = false)
+    @Inject(method = "attackEntityFrom", at = @At(value = "FIELD", target = "Lthaumcraft/common/entities/monster/EntityWisp;targetedEntity:Lnet/minecraft/entity/Entity;", opcode = Opcodes.PUTFIELD, shift = Shift.AFTER, remap = false), cancellable = true, remap = false)
     public void overrideTargetedEntity(DamageSource damageSource, float amount,
         CallbackInfoReturnable<Boolean> cir) {
+        EntityWisp self = (EntityWisp) (Object) this;
+        EntityLiving attacker = self;
+        if (this.targetedEntity == null) {
+            return;
+        }
+        if (!(targetedEntity instanceof EntityLivingBase)) {
+            return;
+        }
+        EntityLivingBase target = (EntityLivingBase) targetedEntity;
+        if (!(target instanceof EntityPlayer)) {
+            return;
+        }
+        EntityPlayer player = (EntityPlayer) target;
+        List<ITargetingImmunity> immunities = PlayerUtils
+            .getPlayerTargetingImmunities(player);
+        if (ImmunityUtils.entityMatchesAnyTargetingImmunity(attacker,
+            immunities) || PlayerUtils.getIsPlayerGloballyImmune(player)) {
+            this.targetedEntity = null;
+        }
+    }
+
+    /**
+     * Mixin for the {@code updateEntityActionState} method.
+     */
+    @Inject(method = "updateEntityActionState", at = @At(value = "FIELD", target = "Lthaumcraft/common/entities/monster/EntityWisp;targetedEntity:Lnet/minecraft/entity/Entity;", opcode = Opcodes.PUTFIELD, shift = Shift.AFTER, remap = false, args = "log=true"), cancellable = true, remap = false)
+    public void overrideTargetedEntity(CallbackInfo ci) {
         EntityWisp self = (EntityWisp) (Object) this;
         EntityLiving attacker = self;
         if (this.targetedEntity == null) {
