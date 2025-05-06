@@ -33,6 +33,9 @@ public class LateMixinInitializer implements ILateMixinLoader {
             mixins.add("specialmobs.Entity_SpecialSpiderMixin");
             mixins.add("specialmobs.EntityEnderCreeperMixin");
         }
+        if (loadedMods.contains("Thaumcraft")) {
+            mixins.add("thaumcraft.EntityWispMixin");
+        }
         return mixins;
     }
 }
