@@ -74,6 +74,17 @@ repositories {
     exclusiveContent {
         forRepository {
             maven {
+                name = "GTNH Maven"
+                url = "https://nexus.gtnewhorizons.com/repository/public/"
+            }
+        }
+        filter {
+            includeGroup('io.github.legacymoddingmc')
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
                 name = 'CurseMaven'
                 url = 'https://cursemaven.com'
             }
@@ -120,9 +131,9 @@ dependencies {
         implementation 'com.cleanroommc:assetmover:2.5'
     }
     if (isPropEnabled('use_mixins')) {
-        def unimixinsVersion = '0.1.19'
+        def unimixinsVersion = '0.1.20'
         def refMapName = 'mixins.' + project.archive_base_name + '.refmap.json'
-        def mixinProviderSpec = "com.github.LegacyModdingMC.UniMixins:unimixins-all-1.7.10:${unimixinsVersion}:dev"
+        def mixinProviderSpec = "io.github.legacymoddingmc:unimixins:${unimixinsVersion}"
 
         // Common
         annotationProcessor('org.ow2.asm:asm-debug-all:5.2')
@@ -133,13 +144,6 @@ dependencies {
         implementation(modUtils.enableMixins(mixinProviderSpec, refMapName))
         api(mixinProviderSpec) { transitive = false }
         annotationProcessor(mixinProviderSpec) { transitive = false }
-
-        // Specific mixin modules from UniMixins
-        implementation("com.github.LegacyModdingMC.UniMixins:unimixins-compat-1.7.10:$unimixinsVersion:dev")
-        implementation("com.github.LegacyModdingMC.UniMixins:unimixins-spongemixins-1.7.10:$unimixinsVersion:dev")
-        implementation("com.github.LegacyModdingMC.UniMixins:unimixins-mixinbooterlegacy-1.7.10:$unimixinsVersion:dev")
-        implementation("com.github.LegacyModdingMC.UniMixins:unimixins-mixinextras-1.7.10:$unimixinsVersion:dev")
-        implementation("com.github.LegacyModdingMC.UniMixins:unimixins-gtnhmixins-1.7.10:$unimixinsVersion:dev")
     }
 
     // Runtime-only mods (things we like for easier testing!)
@@ -175,11 +179,13 @@ dependencies {
 
 // Exclude conflicting transitive dependencies if using mixins
 configurations.compileOnly.dependencies.each {
-    if (it instanceof ExternalModuleDependency && isPropEnabled('use_mixins')) {
-        it.exclude module: 'SpongeMixins'
-        it.exclude module: 'SpongePoweredMixin'
-        it.exclude module: '00gasstation-mc1.7.10'
-        it.exclude module: 'gtnhmixins'
+    if (isPropEnabled('use_mixins')) {\
+        if (it instanceof ExternalModuleDependency) {
+            it.exclude module: 'SpongeMixins'
+            it.exclude module: 'SpongePoweredMixin'
+            it.exclude module: '00gasstation-mc1.7.10'
+            it.exclude module: 'gtnhmixins'
+        }
     }
 }
 
