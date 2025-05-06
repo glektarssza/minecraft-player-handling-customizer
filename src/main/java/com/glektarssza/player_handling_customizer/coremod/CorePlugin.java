@@ -66,6 +66,7 @@ public class CorePlugin implements IFMLLoadingPlugin, IEarlyMixinLoader {
         mixins.add("vanilla.EntitySilverfishMixin");
         mixins.add("vanilla.EntitySpiderMixin");
         mixins.add("vanilla.EntityWitherMixin");
+        mixins.add("vanilla.WorldMixin");
         return mixins;
     }
 }
