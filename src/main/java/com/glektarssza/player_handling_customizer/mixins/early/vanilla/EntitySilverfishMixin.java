@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.EntitySilverfish;
-import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,7 +26,7 @@ public class EntitySilverfishMixin {
      */
     @Inject(method = "findPlayerToAttack", at = @At("RETURN"), cancellable = true)
     public void findPlayerToAttack(CallbackInfoReturnable<Entity> cir) {
-        EntitySpider self = (EntitySpider) (Object) this;
+        EntitySilverfish self = (EntitySilverfish) (Object) this;
         EntityLiving attacker = self;
         Entity target = cir.getReturnValue();
         if (target == null) {
