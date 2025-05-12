@@ -26,16 +26,15 @@ jobs:
         with:
           token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
           distribution: temurin
-          java-package: jdk
-          java-version: 8
+          java-version-file: .java-version
       - id: setup-gradle
         name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-      - id: setup-decomp-workspace
-        name: Setup Decomp Workspace
-        run: ./gradlew setupDecompWorkspace
+      - id: setup-ci-workspace
+        name: Setup CI Workspace
+        run: ./gradlew setupCIWorkspace
       - id: build
         name: Build
         run: ./gradlew build
