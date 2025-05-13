@@ -148,8 +148,10 @@ dependencies {
 
     // Runtime-only mods (things we like for easier testing!)
     if (isPropEnabled('use_convenience_mods')) {
-        runtimeOnlyNonPublishable('com.github.GTNewHorizons:NotEnoughItems:2.7.40-GTNH:dev')
-        runtimeOnlyNonPublishable('com.github.GTNewHorizons:waila:1.8.2:dev')
+        runtimeOnlyNonPublishable('com.github.glektarssza:GTNHLib:ee0589f230')
+        runtimeOnlyNonPublishable('com.github.glektarssza:CodeChickenCore:3b723a7f92')
+        runtimeOnlyNonPublishable('com.github.glektarssza:NotEnoughItems:ad5ba09b1e')
+        runtimeOnlyNonPublishable('com.github.glektarssza:waila:9639721fd4')
     }
 
     // Runtime-only mods (for testing various mod compatibility)
@@ -163,12 +165,12 @@ dependencies {
         implementation rfg.deobf('curse.maven:aether-255308:5875775')
     }
     if (isPropEnabled('use_thaumcraft')) {
-        implementation('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
+        api('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
     }
     if (isPropEnabled('use_specialmobs')) {
         implementation('com.github.GTNewHorizons:specialmobs:3.6.2:dev') {transitive = false}
-        implementation('com.github.GTNewHorizons:NotEnoughItems:2.7.25-GTNH:dev') {transitive = false}
-        implementation('com.github.GTNewHorizons:CodeChickenCore:1.2.0:dev')
+        implementation('com.github.glektarssza:NotEnoughItems:ad5ba09b1e:dev') {transitive = false}
+        implementation('com.github.glektarssza:CodeChickenCore:3b723a7f92:dev')
     }
 
     // Testing
