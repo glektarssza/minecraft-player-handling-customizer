@@ -10,10 +10,6 @@ import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
-import net.minecraftforge.common.DimensionManager;
-
-import org.spongepowered.include.com.google.common.base.Throwables;
-
 import com.glektarssza.player_handling_customizer.utils.CommandUtils;
 
 /**
