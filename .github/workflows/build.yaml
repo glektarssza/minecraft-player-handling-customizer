@@ -22,7 +22,7 @@ jobs:
           token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
       - id: setup-java
         name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
           distribution: temurin
