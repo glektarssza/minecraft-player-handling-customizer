@@ -27,7 +27,7 @@ jobs:
           token: ${{secrets.github-token || secrets.GITHUB_TOKEN}}
           distribution: temurin
           java-package: jdk
-          java-version: 8
+          java-version: 25
       - id: setup-gradle
         name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
