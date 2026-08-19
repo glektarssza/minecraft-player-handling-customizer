@@ -10,7 +10,9 @@ plugins {
 
 version = project.mod_version
 group = project.mod_group
-archivesBaseName = project.archive_base_name
+base {
+    archivesName = project.archive_base_name
+}
 
 java {}
 
