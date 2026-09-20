@@ -20,7 +20,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 /**
  * The root mod class.
  */
-@Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.MOD_VERSION, dependencies = Tags.MOD_DEPENDENCIES, acceptableRemoteVersions = "*")
+@Mod(
+    modid = Tags.MOD_ID,
+    name = Tags.MOD_NAME,
+    version = Tags.MOD_VERSION,
+    dependencies = Tags.MOD_DEPENDENCIES,
+    acceptableRemoteVersions = "*"
+)
 public class PlayerHandlingCustomizer {
     /**
      * The logger to use for the mod.
@@ -35,7 +41,8 @@ public class PlayerHandlingCustomizer {
     /**
      * A map for tracking how many times a particular warning has been emitted.
      */
-    public static final Map<String, Integer> WARNING_LIMIT_TRACKER = new HashMap<>();
+    public static final Map<String, Integer> WARNING_LIMIT_TRACKER =
+        new HashMap<>();
 
     /**
      * The mod singleton instance.
@@ -67,9 +74,12 @@ public class PlayerHandlingCustomizer {
         if (limit <= 0) {
             PlayerHandlingCustomizer.LOGGER
                 .warn(
-                    String.format(
-                        "Too many identical warnings logged for category \"%s\"! Silencing further warnings on this issue!",
-                        category));
+                    String
+                        .format(
+                            "Too many identical warnings logged for category \"%s\"! Silencing further warnings on this issue!",
+                            category
+                        )
+                );
         }
     }
 

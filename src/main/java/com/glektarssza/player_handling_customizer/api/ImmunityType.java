@@ -14,20 +14,20 @@ public enum ImmunityType {
      */
     Damage,
 
-    /**
-     * Immunity to hurt events.
-     */
-    Hurt,
+        /**
+         * Immunity to hurt events.
+         */
+        Hurt,
 
-    /**
-     * Immunity to knockback events.
-     */
-    Knockback,
+        /**
+         * Immunity to knockback events.
+         */
+        Knockback,
 
-    /**
-     * Immunity to being targeted by entities.
-     */
-    Targeting;
+        /**
+         * Immunity to being targeted by entities.
+         */
+        Targeting;
 
     /**
      * Parse a NBT string tag into an enumeration value.

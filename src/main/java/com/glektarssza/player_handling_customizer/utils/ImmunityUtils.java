@@ -23,7 +23,9 @@ public class ImmunityUtils {
      *         targeted by the entity; {@code false} otherwise.
      */
     public static boolean entityMatchesTargetingImmunity(
-        EntityLivingBase entity, ITargetingImmunity immunity) {
+        EntityLivingBase entity,
+        ITargetingImmunity immunity
+    ) {
         String immunityId = immunity.getEntityType();
         ResourceLocation entityRL = EntityList.getKey(entity);
         if (entityRL == null) {
@@ -36,8 +38,11 @@ public class ImmunityUtils {
             return true;
         }
         if (immunityId.contains("*")) {
-            return Pattern.matches(immunityId.replace("*", "[a-zA-Z0-9_-/]+"),
-                entityRL.toString().toLowerCase());
+            return Pattern
+                .matches(
+                    immunityId.replace("*", "[a-zA-Z0-9_-/]+"),
+                    entityRL.toString().toLowerCase()
+                );
         }
         return entityRL.toString().toLowerCase().equals(immunityId);
     }
@@ -53,8 +58,14 @@ public class ImmunityUtils {
      *         immune to being targeted by the entity; {@code false} otherwise.
      */
     public static boolean entityMatchesAnyTargetingImmunity(
-        EntityLivingBase entity, List<ITargetingImmunity> immunityList) {
-        return immunityList.stream().anyMatch((immunity) -> ImmunityUtils
-            .entityMatchesTargetingImmunity(entity, immunity));
+        EntityLivingBase entity,
+        List<ITargetingImmunity> immunityList
+    ) {
+        return immunityList
+            .stream()
+            .anyMatch(
+                (immunity) -> ImmunityUtils
+                    .entityMatchesTargetingImmunity(entity, immunity)
+            );
     }
 }

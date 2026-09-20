@@ -10,7 +10,11 @@ import com.glektarssza.player_handling_customizer.Tags;
 /**
  * The main configuration for the mod.
  */
-@Config(modid = Tags.MOD_ID, name = Tags.MOD_ID, type = Type.INSTANCE)
+@Config(
+    modid = Tags.MOD_ID,
+    name = Tags.MOD_ID,
+    type = Type.INSTANCE
+)
 public class PlayerHandlingCustomizerConfig {
     /**
      * A list of players, by UUID of username, who are immune to being targeted.

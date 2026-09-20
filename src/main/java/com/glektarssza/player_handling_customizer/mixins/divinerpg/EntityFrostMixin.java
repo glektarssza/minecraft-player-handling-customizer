@@ -50,34 +50,45 @@ public class EntityFrostMixin {
         public boolean shouldExecute() {
             try {
                 EntityFrost self = getEntityFrost();
-                EntityLiving attacker = (EntityLiving) self;
-                EntityLivingBase target = (EntityLivingBase) self
-                    .getAttackTarget();
+                EntityLiving attacker = (EntityLiving)self;
+                EntityLivingBase target =
+                    (EntityLivingBase)self.getAttackTarget();
                 if (target instanceof EntityPlayer) {
-                    EntityPlayer player = (EntityPlayer) target;
-                    List<ITargetingImmunity> immunities = PlayerUtils
-                        .getPlayerTargetingImmunities(player);
-                    if (ImmunityUtils.entityMatchesAnyTargetingImmunity(
-                        attacker,
-                        immunities)
-                        || PlayerUtils.getIsPlayerGloballyImmune(player)) {
+                    EntityPlayer player = (EntityPlayer)target;
+                    List<ITargetingImmunity> immunities =
+                        PlayerUtils.getPlayerTargetingImmunities(player);
+                    if (
+                        ImmunityUtils
+                            .entityMatchesAnyTargetingImmunity(
+                                attacker,
+                                immunities
+                            ) || PlayerUtils.getIsPlayerGloballyImmune(player)
+                    ) {
                         return false;
                     }
                 }
 
             } catch (Exception ex) {
-                if (PlayerHandlingCustomizer
-                    .shouldEmitWarning(
-                        "entityFrostAIFrostShotAttackShouldExecute")) {
-                    PlayerHandlingCustomizer.LOGGER.warn(
-                        String.format(
-                            "Failed to execute shim \"%s\" for class \"%s\"!",
-                            "com.glektarssza.player_handling_customizer.mixins.divinerpg.EntityFrostMixin$AIFrostShotAttackShim#shouldExecute",
-                            "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack"),
-                        ex);
+                if (
+                    PlayerHandlingCustomizer
+                        .shouldEmitWarning(
+                            "entityFrostAIFrostShotAttackShouldExecute"
+                        )
+                ) {
+                    PlayerHandlingCustomizer.LOGGER
+                        .warn(
+                            String
+                                .format(
+                                    "Failed to execute shim \"%s\" for class \"%s\"!",
+                                    "com.glektarssza.player_handling_customizer.mixins.divinerpg.EntityFrostMixin$AIFrostShotAttackShim#shouldExecute",
+                                    "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack"
+                                ),
+                            ex
+                        );
                     PlayerHandlingCustomizer
                         .trackEmitWarning(
-                            "entityFrostAIFrostShotAttackShouldExecute");
+                            "entityFrostAIFrostShotAttackShouldExecute"
+                        );
                 }
             }
             return wrapped.shouldExecute();
@@ -99,58 +110,80 @@ public class EntityFrostMixin {
                     continue;
                 }
                 field.setAccessible(true);
-                return (EntityFrost) field.get(this.wrapped);
+                return (EntityFrost)field.get(this.wrapped);
             }
             throw new NoSuchFieldException();
         }
     }
 
-    @Inject(method = "initEntityAI", at = @At("TAIL"))
+    @Inject(
+        method = "initEntityAI",
+        at = @At("TAIL")
+    )
     public void initEntityAI(CallbackInfo ci) {
-        EntityFrost self = (EntityFrost) (Object) this;
+        EntityFrost self = (EntityFrost)(Object)this;
         try {
             if (shouldReplaceAIFrostShotAttack(self)) {
                 replaceAIFrostShotAttack(self);
             }
         } catch (Exception ex) {
-            if (PlayerHandlingCustomizer
-                .shouldEmitWarning(
-                    "shimEntityFrostAIFrostShotAttackInitEntityAI")) {
-                PlayerHandlingCustomizer.LOGGER.warn(
-                    String.format(
-                        "Failed to shim \"%s\" for class \"%s\" from within \"%s\"!",
-                        "divinerpg.objects.entities.entity.vanilla.EntityFrost.AIFrostShotAttack",
-                        "divinerpg.objects.entities.entity.vanilla.EntityFrost",
-                        "com.glektarssza.player_handling_customizer.mixins.divinerpg.EntityFrostMixin#initEntityAI"),
-                    ex);
+            if (
+                PlayerHandlingCustomizer
+                    .shouldEmitWarning(
+                        "shimEntityFrostAIFrostShotAttackInitEntityAI"
+                    )
+            ) {
+                PlayerHandlingCustomizer.LOGGER
+                    .warn(
+                        String
+                            .format(
+                                "Failed to shim \"%s\" for class \"%s\" from within \"%s\"!",
+                                "divinerpg.objects.entities.entity.vanilla.EntityFrost.AIFrostShotAttack",
+                                "divinerpg.objects.entities.entity.vanilla.EntityFrost",
+                                "com.glektarssza.player_handling_customizer.mixins.divinerpg.EntityFrostMixin#initEntityAI"
+                            ),
+                        ex
+                    );
                 PlayerHandlingCustomizer
                     .trackEmitWarning(
-                        "shimEntityFrostAIFrostShotAttackInitEntityAI");
+                        "shimEntityFrostAIFrostShotAttackInitEntityAI"
+                    );
             }
         }
     }
 
-    @Inject(method = "onLivingUpdate", at = @At("HEAD"))
+    @Inject(
+        method = "onLivingUpdate",
+        at = @At("HEAD")
+    )
     public void onLivingUpdate(CallbackInfo ci) {
-        EntityFrost self = (EntityFrost) (Object) this;
+        EntityFrost self = (EntityFrost)(Object)this;
         try {
             if (shouldReplaceAIFrostShotAttack(self)) {
                 replaceAIFrostShotAttack(self);
             }
         } catch (Exception ex) {
-            if (PlayerHandlingCustomizer
-                .shouldEmitWarning(
-                    "shimEntityFrostAIFrostShotAttackOnLivingUpdate")) {
-                PlayerHandlingCustomizer.LOGGER.warn(
-                    String.format(
-                        "Failed to shim \"%s\" for class \"%s\" from within \"%s\"!",
-                        "divinerpg.objects.entities.entity.vanilla.EntityFrost.AIFrostShotAttack",
-                        "divinerpg.objects.entities.entity.vanilla.EntityFrost",
-                        "com.glektarssza.player_handling_customizer.mixins.divinerpg.EntityFrostMixin#onLivingUpdate"),
-                    ex);
+            if (
+                PlayerHandlingCustomizer
+                    .shouldEmitWarning(
+                        "shimEntityFrostAIFrostShotAttackOnLivingUpdate"
+                    )
+            ) {
+                PlayerHandlingCustomizer.LOGGER
+                    .warn(
+                        String
+                            .format(
+                                "Failed to shim \"%s\" for class \"%s\" from within \"%s\"!",
+                                "divinerpg.objects.entities.entity.vanilla.EntityFrost.AIFrostShotAttack",
+                                "divinerpg.objects.entities.entity.vanilla.EntityFrost",
+                                "com.glektarssza.player_handling_customizer.mixins.divinerpg.EntityFrostMixin#onLivingUpdate"
+                            ),
+                        ex
+                    );
                 PlayerHandlingCustomizer
                     .trackEmitWarning(
-                        "shimEntityFrostAIFrostShotAttackOnLivingUpdate");
+                        "shimEntityFrostAIFrostShotAttackOnLivingUpdate"
+                    );
             }
         }
     }
@@ -165,22 +198,33 @@ public class EntityFrostMixin {
      */
     private boolean shouldReplaceAIFrostShotAttack(EntityFrost entityFrost) {
         try {
-            Class<?> clazz = Class.forName(
-                "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack");
-            return entityFrost.tasks.taskEntries.stream()
+            Class<?> clazz = Class
+                .forName(
+                    "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack"
+                );
+            return entityFrost.tasks.taskEntries
+                .stream()
                 .anyMatch((task) -> clazz.isInstance(task.action));
         } catch (ClassNotFoundException ex) {
-            if (PlayerHandlingCustomizer
-                .shouldEmitWarning(
-                    "shouldReplaceAIFrostShotAttackClassNotFound")) {
-                PlayerHandlingCustomizer.LOGGER.warn(
-                    String.format(
-                        "Failed to find class \"%s\"!",
-                        "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack"),
-                    ex);
+            if (
+                PlayerHandlingCustomizer
+                    .shouldEmitWarning(
+                        "shouldReplaceAIFrostShotAttackClassNotFound"
+                    )
+            ) {
+                PlayerHandlingCustomizer.LOGGER
+                    .warn(
+                        String
+                            .format(
+                                "Failed to find class \"%s\"!",
+                                "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack"
+                            ),
+                        ex
+                    );
                 PlayerHandlingCustomizer
                     .trackEmitWarning(
-                        "shouldReplaceAIFrostShotAttackClassNotFound");
+                        "shouldReplaceAIFrostShotAttackClassNotFound"
+                    );
             }
         }
         return false;
@@ -193,30 +237,40 @@ public class EntityFrostMixin {
      */
     private void replaceAIFrostShotAttack(EntityFrost entityFrost) {
         try {
-            Class<?> clazz = Class.forName(
-                "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack");
+            Class<?> clazz = Class
+                .forName(
+                    "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack"
+                );
             for (EntityAITaskEntry task : entityFrost.tasks.taskEntries) {
                 if (!clazz.isInstance(task.action)) {
                     continue;
                 }
-                AIFrostShotAttackShim shimmed = new AIFrostShotAttackShim(
-                    task.action);
+                AIFrostShotAttackShim shimmed =
+                    new AIFrostShotAttackShim(task.action);
                 entityFrost.tasks.removeTask(task.action);
                 entityFrost.tasks.addTask(task.priority, shimmed);
                 return;
             }
         } catch (ClassNotFoundException ex) {
-            if (PlayerHandlingCustomizer
-                .shouldEmitWarning(
-                    "replaceReplaceAIFrostShotAttackClassNotFound")) {
-                PlayerHandlingCustomizer.LOGGER.warn(
-                    String.format(
-                        "Failed to find class \"%s\"!",
-                        "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack"),
-                    ex);
+            if (
+                PlayerHandlingCustomizer
+                    .shouldEmitWarning(
+                        "replaceReplaceAIFrostShotAttackClassNotFound"
+                    )
+            ) {
+                PlayerHandlingCustomizer.LOGGER
+                    .warn(
+                        String
+                            .format(
+                                "Failed to find class \"%s\"!",
+                                "divinerpg.objects.entities.entity.vanilla.EntityFrost$AIFrostShotAttack"
+                            ),
+                        ex
+                    );
                 PlayerHandlingCustomizer
                     .trackEmitWarning(
-                        "replaceReplaceAIFrostShotAttackClassNotFound");
+                        "replaceReplaceAIFrostShotAttackClassNotFound"
+                    );
             }
         }
     }

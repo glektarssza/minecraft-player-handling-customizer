@@ -1,14 +1,14 @@
 [
     {
-        "modid": "${mod_id}",
-        "name": "${mod_name}",
-        "description": "${mod_description}",
-        "version": "${mod_version}",
-        "mcversion": "${minecraft_version}",
-        "url": "https://github.com/glektarssza/minecraft-player-handling-customizer",
+        "modid": "${mod.id}",
+        "name": "${mod.name}",
+        "description": "${mod.description}",
+        "version": "${mod.version}",
+        "mcversion": "${minecraft.version}",
+        "url": "${mod.homepage}",
         "updateUrl": "",
         "authorList": [
-            "${mod_author}"
+            "${mod.author}"
         ],
         "credits": "",
         "logoFile": "assets/player_handling_customizer/textures/logo.png",
