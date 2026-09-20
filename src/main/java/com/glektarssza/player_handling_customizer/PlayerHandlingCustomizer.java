@@ -130,7 +130,7 @@ public class PlayerHandlingCustomizer {
     @SubscribeEvent
     public void onCommand(CommandEvent event) {
         if (event.getCommand() instanceof CommandReload) {
-            LOGGER.info("Synchronizing confiugration for {}...", Tags.MOD_NAME);
+            LOGGER.info("Synchronizing configuration for {}...", Tags.MOD_NAME);
             ConfigManager.sync(Tags.MOD_ID, Type.INSTANCE);
         }
     }
